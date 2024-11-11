@@ -13,8 +13,6 @@
 Player::Player()
 	: m_pTex(nullptr)
 	, _speed(1.5)
-	, _nextMoveTime(0.1f)
-	, _lastMoveTime(0)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
 	this->AddComponent<Collider>();
@@ -31,15 +29,31 @@ void Player::Update()
 {
 	Vec2 vPos = GetPos();
 	
-	//if(GET_KEY(KEY_TYPE::LEFT))
 	if (GET_KEY(KEY_TYPE::A))
+	{
 		vPos.x -= 100.f * fDT * _speed;
+		_playerDir = Direction::LEFT;
+	}
 	else if (GET_KEY(KEY_TYPE::D))
+	{
 		vPos.x += 100.f * fDT * _speed;
+		_playerDir = Direction::RIGHT;
+	}
 	else if (GET_KEY(KEY_TYPE::S))
+	{
 		vPos.y += 100.f * fDT * _speed;
+		_playerDir = Direction::DOWN;
+	}
 	else if (GET_KEY(KEY_TYPE::W))
+	{
 		vPos.y -= 100.f * fDT * _speed;
+		_playerDir = Direction::UP;
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::E))
+	{
+
+	}
 
 	/*if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		CreateProjectile();*/
@@ -55,6 +69,11 @@ void Player::Render(HDC _hdc)
 	int height = m_pTex->GetHeight();
 	
 	ComponentRender(_hdc);
+}
+
+void Player::Interact()
+{
+
 }
 
 //void Player::CreateProjectile()
