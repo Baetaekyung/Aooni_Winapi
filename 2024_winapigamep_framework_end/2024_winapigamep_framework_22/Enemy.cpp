@@ -2,8 +2,8 @@
 #include "Enemy.h"
 #include "Collider.h"
 #include "EventManager.h"
+
 Enemy::Enemy()
-	: m_hp(5)
 {
 	this->AddComponent<Collider>();
 }
@@ -33,12 +33,9 @@ void Enemy::EnterCollision(Collider* _other)
 {
 	std::cout << "Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
-	wstring str = pOtherObj->GetName();
-	if (pOtherObj->GetName() == L"PlayerBullet")
+	if (pOtherObj->GetName() == L"Player")
 	{
-		m_hp -= 1;
-		if(m_hp <=0)
-			GET_SINGLE(EventManager)->DeleteObject(this);
+			GET_SINGLE(EventManager)->DeleteObject(pOtherObj);
 	}
 }
 

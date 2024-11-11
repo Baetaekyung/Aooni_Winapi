@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+class Texture;
 class Enemy :
     public Object
 {
@@ -14,6 +15,6 @@ public:
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 private:
-	int m_hp;
+	Texture* tex;
 };
 
