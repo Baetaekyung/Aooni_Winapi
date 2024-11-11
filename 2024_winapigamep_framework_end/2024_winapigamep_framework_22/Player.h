@@ -10,7 +10,10 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 private:
-	void CreateProjectile();
+	/*void CreateProjectile();*/
 	Texture* m_pTex;
+	float _speed;
+	float _nextMoveTime;
+	float _lastMoveTime;
 };
 
