@@ -33,17 +33,21 @@ void SceneManager::Update()
 				m_fadeState = FadeState::FadeIn;
 				m_fadeTimer = 0.0f;
 
-				// 페이드 아웃 완료 후에만 다음 씬 로드
-				auto iter = m_mapScenes.find(m_nextScene);
-				if (iter != m_mapScenes.end())
+				// 페이드 아웃이 완료된 후에 씬 전환 수행
+				if (m_isSceneChangePending)
 				{
-					// 현재 씬을 해제하고 새 씬으로 전환
-					if (m_pCurrentScene != nullptr)
+					auto iter = m_mapScenes.find(m_nextScene);
+					if (iter != m_mapScenes.end())
 					{
-						m_pCurrentScene->Release();
+						// 현재 씬을 해제하고 새 씬으로 전환
+						if (m_pCurrentScene != nullptr)
+						{
+							m_pCurrentScene->Release();
+						}
+						m_pCurrentScene = iter->second;
+						m_pCurrentScene->Init();
 					}
-					m_pCurrentScene = iter->second;
-					m_pCurrentScene->Init();
+					m_isSceneChangePending = false; // 씬 전환 완료
 				}
 			}
 		}
@@ -89,12 +93,13 @@ void SceneManager::RegisterScene(const std::wstring& _sceneName, std::shared_ptr
 
 void SceneManager::LoadScene(const std::wstring& _sceneName)
 {
-	// 현재 페이드 아웃 중이 아닐 때만 씬 전환 요청을 받음
-	if (m_fadeState == FadeState::None)  // 페이드 상태가 아무것도 없을 때만 새로운 씬 전환
+	// 씬 전환 요청이 발생하면 대기 상태로 설정하고 페이드 아웃 시작
+	if (m_fadeState == FadeState::None && !m_isSceneChangePending)
 	{
 		m_fadeState = FadeState::FadeOut;
 		m_fadeTimer = 0.0f;
 		m_nextScene = _sceneName;
+		m_isSceneChangePending = true;  // 씬 전환 대기 중임을 표시
 	}
 }
 
