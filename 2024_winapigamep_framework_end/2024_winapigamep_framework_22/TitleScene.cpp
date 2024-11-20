@@ -4,7 +4,7 @@
 #include "TitleScene.h"
 #include "GameScene.h"
 
-void SceneManager::Init()
+void TitleScene::Init()
 {
 	
 }

@@ -46,32 +46,48 @@ void Enemy::Update()
 	_player = dynamic_cast<Player*>(playerVec[0]);
 
 	Vec2 vPos = GetPos();
-	currentAnimation = animation[_enemeyDir];
+	Vec2 playerPos = _player->GetPos();
+	int speed = 120;
 	
-	if (_player->GetPos().y < GetPos().y)
+	if (abs(playerPos.y - vPos.y) < 4)
 	{
-		vPos.y -= 100 * fDT;
-		_enemeyDir = Direction::UP;
+		if (playerPos.x > vPos.x)
+		{
+			vPos.x += speed * fDT;
+			_enemeyDir = Direction::RIGHT;
+		}
+		else if (playerPos.x < vPos.x)
+		{
+			vPos.x -= speed * fDT;
+			_enemeyDir = Direction::LEFT;
+		}
 	}
-	else if (_player->GetPos().y > GetPos().y)
+	else
 	{
-		vPos.y += 100 * fDT;
-		_enemeyDir = Direction::DOWN;
+		if (playerPos.y < vPos.y)
+		{
+			vPos.y -= speed * fDT;
+			_enemeyDir = Direction::UP;
+
+		}
+		else if (playerPos.y > vPos.y)
+		{
+			vPos.y += speed * fDT;
+			_enemeyDir = Direction::DOWN;
+		}
 	}
 
-	else if (_player->GetPos().x > GetPos().x) 
-	{
-		vPos.x += 100 * fDT;
-		_enemeyDir = Direction::RIGHT;
-	}
-	else if (_player->GetPos().x < GetPos().x)
-	{
-		vPos.x -= 100 * fDT;
-		_enemeyDir = Direction::LEFT;
-	}
+	
+	//cout << _player->GetPos().x << endl;
+	
 
-	GetComponent<Animator>()->PlayAnimation(currentAnimation, false);
-	GetComponent<Animator>()->PlayAnimation(animation[_enemeyDir], true);
+	if (currentAnimation != animation[_enemeyDir])
+	{
+		GetComponent<Animator>()->StopAnimation();
+
+		GetComponent<Animator>()->PlayAnimation(animation[_enemeyDir], true);
+		currentAnimation = animation[_enemeyDir];
+	}
 
 	SetPos(vPos);
 

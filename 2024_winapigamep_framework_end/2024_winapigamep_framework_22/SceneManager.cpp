@@ -4,6 +4,7 @@
 #include "TitleScene.h"
 #include "GameScene.h"
 #include "MapScene.h"
+#include "BGDScene.h"
 
 void SceneManager::Init()
 {
@@ -13,9 +14,10 @@ void SceneManager::Init()
 	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
 	RegisterScene(L"GameScene", std::make_shared<GameScene>());
 	RegisterScene(L"MapScene", std::make_shared<MapScene>());
+	RegisterScene(L"BGD", std::make_shared<BGDScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"TitleScene");
+	LoadScene(L"BGD");
 }
 
 void SceneManager::Update()
@@ -78,7 +80,7 @@ void SceneManager::Render(HDC _hdc)
 	if (m_fadeState != FadeState::None)
 	{
 		int alpha = static_cast<int>(m_fadeAlpha * 255);
-		FillRectWithAlpha(_hdc, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), RGB(0, 0, 0), alpha);
+		//FillRectWithAlpha(_hdc, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), RGB(0, 0, 0), alpha);
 	}
 }
 
