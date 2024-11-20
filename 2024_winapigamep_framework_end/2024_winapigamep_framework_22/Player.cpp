@@ -49,8 +49,7 @@ Player::Player()
 	GetComponent<Animator>()->PlayAnimation(L"HiroshiDownIdle", true);
 #pragma endregion
 	//Collision Check
-	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::INTERACTABLE);
-	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
+	//GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::INTERACTABLE);
 }
 
 Player::~Player()
@@ -86,7 +85,7 @@ void Player::EnterCollision(Collider* other)
 	Interact(other);
 	if (other->GetOwner()->GetName() == L"Enemy")
 	{
-		SetDead();
+		//SetDead();
 		//GameOverScene Load
 	}
 }

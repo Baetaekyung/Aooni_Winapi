@@ -11,6 +11,8 @@
 
 Enemy::Enemy()
 {
+	
+
 	this->AddComponent<Collider>();
 	_m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"aooni", L"Texture\\Aooni.bmp");
 	AddComponent<Animator>();
@@ -30,6 +32,11 @@ Enemy::Enemy()
 
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
 	currentAnimation = L"JiwooFront";
+	std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
+	const vector<Object*>& playerVec = pCurrentScene->GetLayerObjects(LAYER::PLAYER);
+	if (playerVec.size() > 0)
+		_player = dynamic_cast<Player*>(playerVec[0]);
+
 
 	//std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
 	//const vector<Object*>& vecLeftLayer = pCurrentScene->GetLayerObjects(_left);
@@ -41,9 +48,11 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
-	const vector<Object*>& playerVec = pCurrentScene->GetLayerObjects(LAYER::PLAYER);
-	_player = dynamic_cast<Player*>(playerVec[0]);
+	
+	bool isPlayer = _player != nullptr;
+
+	if (!isPlayer)
+		return;
 
 	Vec2 vPos = GetPos();
 	Vec2 playerPos = _player->GetPos();
