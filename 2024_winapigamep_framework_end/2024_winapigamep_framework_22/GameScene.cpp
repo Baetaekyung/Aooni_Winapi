@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "GameScene.h"
 #include "Enemy.h"
+#include "Key.h"
 void GameScene::Init()
 {
 	for (size_t i = 0; i < 100; i++)
