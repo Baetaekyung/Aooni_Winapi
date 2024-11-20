@@ -4,6 +4,7 @@ class Texture;
 
 enum class Direction
 {
+	NONE,
 	LEFT,
 	RIGHT,
 	UP,
@@ -18,12 +19,18 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
+	void StayCollision(Collider* _other) override;
+	void EnterCollision(Collider* other) override;
+	bool DirectionChanged(Direction direction);
+	Direction GetPlayerDirection();
 private:
-	void Interact();
+	void Interact(Collider* other);
+	void PlayerMove();
 private:
 	/*void CreateProjectile();*/
 	Texture* m_pTex;
 	float _speed;
 	Direction _playerDir;
+	int keyCount = 0;
 };
 

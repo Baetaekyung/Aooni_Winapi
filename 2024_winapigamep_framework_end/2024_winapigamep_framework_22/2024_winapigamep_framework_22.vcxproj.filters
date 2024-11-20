@@ -127,6 +127,7 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
+    <ClInclude Include="Key.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -211,5 +212,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
+    <ClCompile Include="Key.cpp" />
   </ItemGroup>
 </Project>
