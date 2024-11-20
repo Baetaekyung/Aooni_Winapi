@@ -10,8 +10,8 @@ public:
     void Update() override;
     void Render(HDC hdc) override;
 public:
-    virtual void EnterCollision(Collider* other);
-    virtual void StayCollision(Collider* other);
-    virtual void ExitCollision(Collider* other);
+    void EnterCollision(Collider* other) override;
+    void StayCollision(Collider* other) override;
+    void ExitCollision(Collider* other) override;
 };
 

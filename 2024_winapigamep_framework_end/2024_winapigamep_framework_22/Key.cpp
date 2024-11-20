@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Key.h"
-#include "SceneManager.h"
 #include "Collider.h"
-#include "CollisionManager.h"
 #include "EventManager.h"
 
 Key::Key()
@@ -14,7 +12,6 @@ Key::Key()
 
 Key::~Key()
 {
-	GET_SINGLE(CollisionManager)->GetInst()->CheckReset();
 }
 
 void Key::Update()

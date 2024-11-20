@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "Enemy.h"
 #include "Key.h"
+#include "Door.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 void TitleScene::Init()
@@ -20,6 +21,12 @@ void TitleScene::Init()
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
 	pPlayer->SetSize({ 100.f,100.f });
 	AddObject(pPlayer, LAYER::PLAYER);
+
+	Object* pDoor = new Door;
+	pDoor->SetPos({ SCREEN_WIDTH % rand(),
+		SCREEN_HEIGHT % rand() });
+	pDoor->SetSize({ 20.f, 50.f });
+	AddObject(pDoor, LAYER::INTERACTABLE);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
