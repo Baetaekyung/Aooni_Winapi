@@ -10,6 +10,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+
 Player::Player()
 	: m_pTex(nullptr)
 	, _speed(1.5)

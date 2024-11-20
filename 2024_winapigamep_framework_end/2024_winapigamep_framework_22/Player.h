@@ -25,5 +25,6 @@ private:
 	Texture* m_pTex;
 	float _speed;
 	Direction _playerDir;
+
 };
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "Player.h"
 class Texture;
 class Enemy :
     public Object
@@ -15,6 +16,10 @@ public:
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 private:
-	Texture* tex;
+	Texture* _m_pTex;
+	Player* _player;
+	Direction _enemeyDir;
+	wstring currentAnimation;
+	std::unordered_map<Direction, wstring> animation;
 };
 
