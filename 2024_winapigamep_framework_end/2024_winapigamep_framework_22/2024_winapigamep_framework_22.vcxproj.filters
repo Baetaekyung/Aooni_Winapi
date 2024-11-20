@@ -127,8 +127,8 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Aooni.h">
-      <Filter>Engine\03. Object</Filter>
+    <ClInclude Include="MapScene.h">
+      <Filter>Engine\04. Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -214,8 +214,8 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Aooni.cpp">
-      <Filter>Engine\03. Object</Filter>
+    <ClCompile Include="MapScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
