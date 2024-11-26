@@ -6,7 +6,7 @@
 TitleImage::TitleImage()
 {
 	m_TTex = GET_SINGLE(ResourceManager)
-		->TextureLoad(L"TItleImage", L"aooni.bmp");
+		->TextureLoad(L"TitleImage", L"aooni.bmp");
 
 	std::cout << "Start";
 }
