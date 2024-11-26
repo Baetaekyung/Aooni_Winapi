@@ -50,7 +50,6 @@ Player::Player()
 #pragma endregion
 	//Collision Check
 	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::INTERACTABLE);
-	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 }
 
 Player::~Player()
@@ -173,22 +172,18 @@ void Player::PlayerMove()
 		case Direction::LEFT:
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiLeftIdle", true);
-			_playerDir = Direction::NONE;
 			break;
 		case Direction::RIGHT:
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiRightIdle", true);
-			_playerDir = Direction::NONE;
 			break;
 		case Direction::UP:
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiUpIdle", true);
-			_playerDir = Direction::NONE;
 			break;
 		case Direction::DOWN:
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiDownIdle", true);
-			_playerDir = Direction::NONE;
 			break;
 		default:
 			break;

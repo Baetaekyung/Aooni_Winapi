@@ -23,10 +23,14 @@ void TitleScene::Init()
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Object* pDoor = new Door;
-	pDoor->SetPos({ SCREEN_WIDTH % rand(),
-		SCREEN_HEIGHT % rand() });
-	pDoor->SetSize({ 20.f, 50.f });
+	pDoor->SetPos({ SCREEN_WIDTH - 100, SCREEN_HEIGHT / 2 });
+	pDoor->SetSize({ 30.f, 50.f });
 	AddObject(pDoor, LAYER::INTERACTABLE);
+
+	Object* pKey = new Key;
+	pKey->SetPos({ 100, SCREEN_HEIGHT / 2 });
+	pKey->SetSize({ 10.f, 10.f });
+	AddObject(pKey, LAYER::INTERACTABLE);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);

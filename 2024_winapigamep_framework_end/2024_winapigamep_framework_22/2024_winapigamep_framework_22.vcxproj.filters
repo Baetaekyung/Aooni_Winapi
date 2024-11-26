@@ -127,7 +127,12 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Key.h" />
+    <ClInclude Include="Door.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -212,6 +217,11 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Key.cpp" />
+    <ClCompile Include="Door.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
