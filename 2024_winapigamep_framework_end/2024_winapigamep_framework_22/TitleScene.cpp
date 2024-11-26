@@ -46,8 +46,3 @@ void TitleScene::Update()
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
 }
-
-void TitleScene::Render(HDC _hdc)
-{
-	Scene::Render(_hdc);
-}
