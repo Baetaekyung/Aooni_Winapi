@@ -133,6 +133,12 @@
     <ClInclude Include="Key.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="TileMom.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleImage.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -221,6 +227,12 @@
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Key.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMom.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleImage.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>
