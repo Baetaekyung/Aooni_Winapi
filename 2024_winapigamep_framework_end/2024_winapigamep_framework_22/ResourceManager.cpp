@@ -2,6 +2,7 @@
 #include "ResourceManager.h"
 #include "Core.h"
 #include "Texture.h"
+
 void ResourceManager::Init()
 {
 	::GetCurrentDirectory(255, m_resourcePath);
