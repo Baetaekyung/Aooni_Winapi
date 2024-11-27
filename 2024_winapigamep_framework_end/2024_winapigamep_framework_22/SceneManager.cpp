@@ -17,7 +17,7 @@ void SceneManager::Init()
 	RegisterScene(L"BGDScene", std::make_shared<BGDScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"TitleScene");
+	LoadScene(L"BGDScene");
 }
 
 void SceneManager::Update()

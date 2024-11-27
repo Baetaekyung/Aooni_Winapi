@@ -19,11 +19,11 @@ void BGDScene::Init()
 	pObj->SetName(L"Enemy");
 	AddObject(pObj, LAYER::ENEMY);
 
-	//Object* pObj2 = new Projectile;
-	//pObj2->SetPos({ SCREEN_WIDTH / 2.f,400.f });
-	//pObj2->SetSize({ 64.f,128.f });
-	//pObj2->SetName(L"BackGround");
-	//AddObject(pObj2, LAYER::BACKGROUND);
+	Object* pObj2 = new Projectile;
+	pObj2->SetPos({ SCREEN_WIDTH / 2.f,400.f });
+	pObj2->SetSize({ 64.f,128.f });
+	pObj2->SetName(L"BackGround");
+	AddObject(pObj2, LAYER::PROJECTILE);
 
 
 

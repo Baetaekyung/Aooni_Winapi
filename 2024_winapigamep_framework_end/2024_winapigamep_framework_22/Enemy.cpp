@@ -53,6 +53,7 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	return;
 	if (_isWallBumpInto)
 		return;
 
@@ -204,10 +205,10 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
+	cout << "Enemy Enter " << endl;
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")	
 	{
-		cout << "Enemy Enter " << endl;
 		//cout << "Enter" << endl;
 		_isWallBumpInto = true;
 		//GET_SINGLE(EventManager)->DeleteObject(pOtherObj);
@@ -223,7 +224,7 @@ void Enemy::StayCollision(Collider* _other)
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	cout << "Enemy Exit " << endl;
+	//cout << "Enemy Exit " << endl;
 	//cout << "Exit" << endl;
 	//_isWallBumpInto = false;
 	//std::cout << "Exit" << std::endl;
