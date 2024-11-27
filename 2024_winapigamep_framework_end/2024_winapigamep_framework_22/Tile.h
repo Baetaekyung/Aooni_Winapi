@@ -19,6 +19,8 @@ public:
 public:
     void ChangeTile(TileMap NewTileMap);
 
+    std::vector<std::vector<char>> m_WallArr[100];
+
 private:
     Texture* FloorTex;
     Texture* WallTex;
@@ -28,5 +30,6 @@ private:
         = TileMap::_1F_MAINHOLE;
 
     std::vector<Texture*> m_TexArr;
+
 };
 
