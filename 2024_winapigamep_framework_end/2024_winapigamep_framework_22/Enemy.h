@@ -10,6 +10,7 @@ public:
 	~Enemy();
 public:
 	void Update() override;
+	void Move();
 	void Render(HDC _hdc) override;
 public:
 	virtual void EnterCollision(Collider* _other);
@@ -18,7 +19,11 @@ public:
 private:
 	Texture* _m_pTex;
 	Player* _player;
-	Direction _enemeyDir;
+	Direction _enemeyCurrentDir;
+	Direction _enemeyLastDir;
+	bool _isWallBumpInto;
+	int _speed;
+	//Direction _playerDir;
 	wstring currentAnimation;
 	std::unordered_map<Direction, wstring> animation;
 };

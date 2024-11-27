@@ -10,33 +10,38 @@
 #include "Scene.h"
 
 Enemy::Enemy()
+	:_speed(1.2)
+	, _enemeyCurrentDir(Direction::DOWN)
+	, _enemeyLastDir(Direction::DOWN)
 {
 	
 
 	this->AddComponent<Collider>();
+	GetComponent<Collider>()->SetSize(Vec2(35.f, 40.f));
+	GetComponent<Collider>()->SetOffSetPos(Vec2(0.f, 35.f));
+
 	_m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"aooni", L"Texture\\Aooni.bmp");
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", _m_pTex, Vec2(0.f, 0.f),
+	GetComponent<Animator>()->CreateAnimation(L"AooniFront", _m_pTex, Vec2(0.f, 0.f),
 		Vec2(64.f, 128.f), Vec2(64.f, 0.f), 4, 0.1f);
-	GetComponent<Animator>()->CreateAnimation(L"JiwooLeft", _m_pTex, Vec2(0.f, 128.f),
+	GetComponent<Animator>()->CreateAnimation(L"AooniLeft", _m_pTex, Vec2(0.f, 128.f),
 		Vec2(64.f, 128.f), Vec2(64.f, 0.f), 4, 0.1f);
-	GetComponent<Animator>()->CreateAnimation(L"JiwooRight", _m_pTex, Vec2(0.f, 256.f),
+	GetComponent<Animator>()->CreateAnimation(L"AooniRight", _m_pTex, Vec2(0.f, 256.f),
 		Vec2(64.f, 128.f), Vec2(64.f, 0.f), 4, 0.1f);
-	GetComponent<Animator>()->CreateAnimation(L"JiwooBack", _m_pTex, Vec2(0.f, 384.f),
+	GetComponent<Animator>()->CreateAnimation(L"AooniBack", _m_pTex, Vec2(0.f, 384.f),
 		Vec2(64.f, 128.f), Vec2(64.f, 0.f), 4, 0.1f);
 
-	animation[Direction::DOWN] = L"JiwooFront";
-	animation[Direction::UP] = L"JiwooBack";
-	animation[Direction::RIGHT] = L"JiwooRight";
-	animation[Direction::LEFT] = L"JiwooLeft";
+	animation[Direction::DOWN] = L"AooniFront";
+	animation[Direction::UP] = L"AooniBack";
+	animation[Direction::RIGHT] = L"AooniRight";
+	animation[Direction::LEFT] = L"AooniLeft";
 
-	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
-	currentAnimation = L"JiwooFront";
+	GetComponent<Animator>()->PlayAnimation(L"AooniFront", true);
+	currentAnimation = L"AooniFront";
 	std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
 	const vector<Object*>& playerVec = pCurrentScene->GetLayerObjects(LAYER::PLAYER);
 	if (playerVec.size() > 0)
 		_player = dynamic_cast<Player*>(playerVec[0]);
-
 
 	//std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
 	//const vector<Object*>& vecLeftLayer = pCurrentScene->GetLayerObjects(_left);
@@ -48,7 +53,49 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	if (_isWallBumpInto)
+	{
+		Vec2 vPos = GetPos();
+		switch (_enemeyLastDir)
+		{
+		case Direction::LEFT:
+			vPos.x -= 100 * _speed * fDT;
+			break;
+		case Direction::RIGHT:
+			vPos.x += 100 * _speed * fDT;
+			break;
+		case Direction::UP:
+			vPos.y -= 100 * _speed * fDT;
+			break;
+		case Direction::DOWN:
+			vPos.y += 100 * _speed * fDT;
+			break;
+		default:
+			break;
+		}
+
+		if (currentAnimation != animation[_enemeyLastDir])
+		{
+			GetComponent<Animator>()->StopAnimation();
+
+			GetComponent<Animator>()->PlayAnimation(animation[_enemeyLastDir], true);
+			currentAnimation = animation[_enemeyLastDir];
+		}
+
+		SetPos(vPos);
+	}
+	else
+		Move();
+
+
+
+
 	
+}
+
+
+void Enemy::Move()
+{
 	bool isPlayer = _player != nullptr;
 
 	if (!isPlayer)
@@ -56,50 +103,48 @@ void Enemy::Update()
 
 	Vec2 vPos = GetPos();
 	Vec2 playerPos = _player->GetPos();
-	int speed = 120;
-	
-	if (abs(playerPos.y - vPos.y) < 4)
+	_enemeyLastDir = _enemeyCurrentDir;
+
+
+	//if (abs((vPos.y -20) - (playerPos.y -10)) > 0.1f)
+	if (abs((vPos.y +40) - playerPos.y ) > 1.f)
+	{
+		//cout << vPos.y << endl;
+		//cout << playerPos.y << endl;
+		if (playerPos.y < (vPos.y + 40))
+		{
+			vPos.y -= 100 * _speed * fDT;
+			_enemeyCurrentDir = Direction::UP;
+		}
+		if (playerPos.y > (vPos.y + 40))
+		{
+			vPos.y += 100 * _speed * fDT;
+			_enemeyCurrentDir = Direction::DOWN;
+		}
+	}
+	else if (abs(playerPos.x - vPos.x) > 0.1f)
 	{
 		if (playerPos.x > vPos.x)
 		{
-			vPos.x += speed * fDT;
-			_enemeyDir = Direction::RIGHT;
+			vPos.x += 100 * _speed * fDT;
+			_enemeyCurrentDir = Direction::RIGHT;
 		}
 		else if (playerPos.x < vPos.x)
 		{
-			vPos.x -= speed * fDT;
-			_enemeyDir = Direction::LEFT;
-		}
-	}
-	else
-	{
-		if (playerPos.y < vPos.y)
-		{
-			vPos.y -= speed * fDT;
-			_enemeyDir = Direction::UP;
-
-		}
-		else if (playerPos.y > vPos.y)
-		{
-			vPos.y += speed * fDT;
-			_enemeyDir = Direction::DOWN;
+			vPos.x -= 100 * _speed * fDT;
+			_enemeyCurrentDir = Direction::LEFT;
 		}
 	}
 
-	
-	//cout << _player->GetPos().x << endl;
-	
-
-	if (currentAnimation != animation[_enemeyDir])
+	if (currentAnimation != animation[_enemeyCurrentDir])
 	{
 		GetComponent<Animator>()->StopAnimation();
 
-		GetComponent<Animator>()->PlayAnimation(animation[_enemeyDir], true);
-		currentAnimation = animation[_enemeyDir];
+		GetComponent<Animator>()->PlayAnimation(animation[_enemeyCurrentDir], true);
+		currentAnimation = animation[_enemeyCurrentDir];
 	}
 
 	SetPos(vPos);
-
 }
 
 void Enemy::Render(HDC _hdc)
@@ -121,13 +166,15 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	std::cout << "Enter" << std::endl;
+	//std::cout << "Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
-	if (pOtherObj->GetName() == L"Player")
+	if (pOtherObj->GetName() == L"Player")	
 	{
-			GET_SINGLE(EventManager)->DeleteObject(pOtherObj);
+		//_isWallBumpInto = true;
+		//GET_SINGLE(EventManager)->DeleteObject(pOtherObj);
 	}
 }
+
 
 void Enemy::StayCollision(Collider* _other)
 {
@@ -136,5 +183,6 @@ void Enemy::StayCollision(Collider* _other)
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	std::cout << "Exit" << std::endl;
+	_isWallBumpInto = false;
+	//std::cout << "Exit" << std::endl;
 }

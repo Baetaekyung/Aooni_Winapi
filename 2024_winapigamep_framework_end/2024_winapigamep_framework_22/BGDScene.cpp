@@ -2,6 +2,8 @@
 #include "BGDScene.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "Projectile.h"
+#include "CollisionManager.h"
 
 void BGDScene::Init()
 {
@@ -13,8 +15,17 @@ void BGDScene::Init()
 
 	Object* pObj = new Enemy;
 	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
-	pObj->SetSize({ 100.f,100.f });
-	pObj->SetName(L"Enemy");
+	pObj->SetSize({ 64.f,128.f });
+	//pObj->SetName(L"Enemy");
 	AddObject(pObj, LAYER::ENEMY);
+
+	Object* pObj2 = new Projectile;
+	pObj2->SetPos({ SCREEN_WIDTH / 2.f,150.f });
+	pObj2->SetSize({ 64.f,128.f });
+	pObj2->SetName(L"BackGround");
+	AddObject(pObj2, LAYER::BACKGROUND);
+
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::BACKGROUND);
 
 }
