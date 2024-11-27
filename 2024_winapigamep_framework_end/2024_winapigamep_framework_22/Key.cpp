@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "EventManager.h"
 #include "GDISelector.h"
+#include "ResourceManager.h"
 
 Key::Key()
 	:currentBrushType(BRUSH_TYPE::YELLOW)

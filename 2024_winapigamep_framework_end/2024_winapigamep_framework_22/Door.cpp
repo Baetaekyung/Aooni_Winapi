@@ -3,8 +3,10 @@
 #include "Collider.h"
 #include "Player.h"
 #include "GDISelector.h"
+#include "ResourceManager.h"
 
 Door::Door()
+	: _isEntering(false)
 {
 	SetName(L"Door");
 	this->AddComponent<Collider>();
@@ -32,10 +34,13 @@ void Door::Render(HDC hdc)
 
 void Door::EnterCollision(Collider* other)
 {
-	if (other->GetOwner()->GetName() == L"Player")
+	if (other->GetOwner()->GetName() == L"Player" && _isEntering == false)
 	{
+		_isEntering = true;
+
 		Player* pPlayer = 
 			dynamic_cast<Player*>(other->GetOwner());
+		GET_SINGLE(ResourceManager)->Play(L"Door");
 		if (pPlayer->keyCount > 0)
 		{
 			cout << "Scene Changed";
@@ -53,4 +58,8 @@ void Door::StayCollision(Collider* other)
 
 void Door::ExitCollision(Collider* other)
 {
+	if (other->GetOwner()->GetName() == L"Player" && _isEntering == true)
+	{
+		_isEntering = false;
+	}
 }

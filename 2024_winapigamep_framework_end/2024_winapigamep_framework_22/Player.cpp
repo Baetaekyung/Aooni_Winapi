@@ -108,7 +108,7 @@ void Player::Interact(Collider* other)
 {
 	if (other->GetOwner()->GetName() == L"Key")
 	{
-		//Getkey
+		GET_SINGLE(ResourceManager)->Play(L"GetKey");
 		keyCount++;
 		cout << keyCount << '\n';
 	}
@@ -191,6 +191,7 @@ void Player::PlayerMove()
 	}
 	SetPos(vPos);
 }
+
 
 //void Player::CreateProjectile()
 //{
