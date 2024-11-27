@@ -3,7 +3,7 @@ enum class LAYER
 {
 	DEFAULT,
 	BACKGROUND,
-	TILE,
+	WALL,
 	PLAYER,
 	PROJECTILE,
 	ENEMY,

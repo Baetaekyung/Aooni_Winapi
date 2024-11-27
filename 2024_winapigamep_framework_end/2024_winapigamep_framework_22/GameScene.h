@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 class Tile;
+class Wall;
 class GameScene :
     public Scene
 {
@@ -14,5 +15,5 @@ public:
 
 public:
     Tile* tile;
+    Wall* wall;
 };
-
