@@ -133,11 +133,17 @@
     <ClInclude Include="Key.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="TileMom.h">
+    <ClInclude Include="Tile.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="TitleImage.h">
       <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MapScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Engine\99. Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,11 +235,14 @@
     <ClCompile Include="Key.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="TileMom.cpp">
+    <ClCompile Include="Tile.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="TitleImage.cpp">
       <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MapScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

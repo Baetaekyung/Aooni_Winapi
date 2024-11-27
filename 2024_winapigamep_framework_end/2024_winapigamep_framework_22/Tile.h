@@ -1,12 +1,7 @@
 #pragma once
 
 #include "Object.h"
-
-enum class TileMap {
-    FLOOR,
-    WALL,
-    DOOR,
-};
+#include "TileMap.h"
 
 class Texture;
 
@@ -22,15 +17,16 @@ public:
     void Render(HDC _hdc) override;
 
 public:
-    void ChangeTile();
+    void ChangeTile(TileMap NewTileMap);
 
 private:
     Texture* FloorTex;
     Texture* WallTex;
     Texture* DoorTex;
 
-    TileMap CurrentTileMap;
+    TileMap CurrentTileMap
+        = TileMap::_1F_MAINHOLE;
 
-    std::vector<Texture*> m_pTex;
+    std::vector<Texture*> m_TexArr;
 };
 

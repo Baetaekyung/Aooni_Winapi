@@ -193,7 +193,8 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="TileMom.h" />
+    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleImage.h" />
     <ClInclude Include="TitleScene.h" />
@@ -224,7 +225,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TileMom.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleImage.cpp" />
     <ClCompile Include="TitleScene.cpp" />
