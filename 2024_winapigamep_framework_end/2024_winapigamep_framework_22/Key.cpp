@@ -1,20 +1,20 @@
 #include "pch.h"
 #include "Key.h"
-#include "SceneManager.h"
 #include "Collider.h"
-#include "CollisionManager.h"
 #include "EventManager.h"
+#include "GDISelector.h"
+#include "ResourceManager.h"
 
 Key::Key()
+	:currentBrushType(BRUSH_TYPE::YELLOW)
 {
 	SetName(L"Key");
 	this->AddComponent<Collider>();
-	GetComponent<Collider>()->SetSize({ 20, 20 });
+	GetComponent<Collider>()->SetSize({ 10, 10 });
 }
 
 Key::~Key()
 {
-	GET_SINGLE(CollisionManager)->GetInst()->CheckReset();
 }
 
 void Key::Update()
@@ -25,8 +25,12 @@ void Key::Render(HDC hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
-	RECT_RENDER(hdc, vPos.x, vPos.y,
+
+	GDISelector* pBrush = new GDISelector(hdc, BRUSH_TYPE::YELLOW);
+	ELLIPSE_RENDER(hdc, vPos.x, vPos.y,
 		vSize.x, vSize.y);
+	pBrush->~GDISelector();
+
 	ComponentRender(hdc);
 }
 

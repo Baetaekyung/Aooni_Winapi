@@ -18,6 +18,10 @@ Player::Player()
 	, _speed(1.5)
 	, _playerDir(Direction::DOWN)
 	, keyCount(0)
+	, canGoUpward(true)
+	, canGoDownward(true)
+	, canGoLeftword(true)
+	, canGoRightword(true)
 {
 	SetName(L"Player");
 
@@ -49,7 +53,7 @@ Player::Player()
 	GetComponent<Animator>()->PlayAnimation(L"HiroshiDownIdle", true);
 #pragma endregion
 	//Collision Check
-	//GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::INTERACTABLE);
+	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::INTERACTABLE);
 }
 
 Player::~Player()
@@ -77,7 +81,25 @@ void Player::Render(HDC _hdc)
 
 void Player::StayCollision(Collider* _other)
 {
-	
+	if (_other->GetOwner()->GetName() == L"Wall")
+	{
+		if (GetPlayerDirection() == Direction::LEFT)
+		{
+			canGoLeftword = false;
+		}
+		if (GetPlayerDirection() == Direction::RIGHT)
+		{
+			canGoRightword = false;
+		}
+		if (GetPlayerDirection() == Direction::UP)
+		{
+			canGoUpward = false;
+		}
+		if (GetPlayerDirection() == Direction::DOWN)
+		{
+			canGoDownward = false;
+		}
+	}
 }
 
 void Player::EnterCollision(Collider* other)
@@ -85,8 +107,38 @@ void Player::EnterCollision(Collider* other)
 	Interact(other);
 	if (other->GetOwner()->GetName() == L"Enemy")
 	{
-		//SetDead();
+		SetDead();
 		//GameOverScene Load
+	}
+	if (other->GetOwner()->GetName() == L"Wall")
+	{
+		if (GetPlayerDirection() == Direction::LEFT)
+		{
+			canGoLeftword = false;
+		}
+		if (GetPlayerDirection() == Direction::RIGHT)
+		{
+			canGoRightword = false;
+		}
+		if (GetPlayerDirection() == Direction::UP)
+		{
+			canGoUpward = false;
+		}
+		if (GetPlayerDirection() == Direction::DOWN)
+		{
+			canGoDownward = false;
+		}
+	}
+}
+
+void Player::ExitCollision(Collider* other)
+{
+	if (other->GetOwner()->GetName() == L"Wall")
+	{
+		canGoDownward = true;
+		canGoLeftword = true;
+		canGoRightword = true;
+		canGoUpward = true;
 	}
 }
 
@@ -108,7 +160,7 @@ void Player::Interact(Collider* other)
 {
 	if (other->GetOwner()->GetName() == L"Key")
 	{
-		//Getkey
+		GET_SINGLE(ResourceManager)->Play(L"GetKey");
 		keyCount++;
 		cout << keyCount << '\n';
 	}
@@ -125,43 +177,47 @@ void Player::PlayerMove()
 
 	if (GET_KEY(KEY_TYPE::A))
 	{
-		vPos.x -= 100.f * fDT * _speed;
 		if (_playerDir != Direction::LEFT)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiLeft", true);
 			DirectionChanged(Direction::LEFT);
 		}
+		if (canGoLeftword) 
+			vPos.x -= 100.f * fDT * _speed;
 	}
 	else if (GET_KEY(KEY_TYPE::D))
 	{
-		vPos.x += 100.f * fDT * _speed;
 		if (_playerDir != Direction::RIGHT)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiRight", true);
 			DirectionChanged(Direction::RIGHT);
 		}
+		if(canGoRightword)
+			vPos.x += 100.f * fDT * _speed;
 	}
 	else if (GET_KEY(KEY_TYPE::S))
 	{
-		vPos.y += 100.f * fDT * _speed;
 		if (_playerDir != Direction::DOWN)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiDown", true);
 			DirectionChanged(Direction::DOWN);
 		}
+		if(canGoDownward)
+			vPos.y += 100.f * fDT * _speed;
 	}
 	else if (GET_KEY(KEY_TYPE::W))
 	{
-		vPos.y -= 100.f * fDT * _speed;
 		if (_playerDir != Direction::UP)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiUp", true);
 			DirectionChanged(Direction::UP);
 		}
+		if(canGoUpward)
+			vPos.y -= 100.f * fDT * _speed;
 	}
 	else
 	{
@@ -172,22 +228,18 @@ void Player::PlayerMove()
 		case Direction::LEFT:
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiLeftIdle", true);
-			_playerDir = Direction::NONE;
 			break;
 		case Direction::RIGHT:
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiRightIdle", true);
-			_playerDir = Direction::NONE;
 			break;
 		case Direction::UP:
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiUpIdle", true);
-			_playerDir = Direction::NONE;
 			break;
 		case Direction::DOWN:
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiDownIdle", true);
-			_playerDir = Direction::NONE;
 			break;
 		default:
 			break;
@@ -195,6 +247,7 @@ void Player::PlayerMove()
 	}
 	SetPos(vPos);
 }
+
 
 //void Player::CreateProjectile()
 //{
