@@ -20,7 +20,7 @@ Tile::Tile()
 		= GET_SINGLE(ResourceManager);
 
 	std::map<std::wstring, std::wstring> textures = {
-		{L"Floor", L"AAoni_FloorTile.bmp"},
+		{L"Map_Hole", L"aooniMap_Hole.bmp"},
 		{L"Wall", L"AAoni_WallTile"},
 		{L"Door", L"AAoni_DoorTile.bmp"}
 	};
