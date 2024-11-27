@@ -31,14 +31,14 @@ void Projectile::Update()
 	//vPos.x += cosf(m_angle) * 500.f * fDT;
 	//vPos.y += sinf(m_angle) * 500.f * fDT;
 
-	vPos.x += m_vDir.x * 500.f * fDT;
-	vPos.y += m_vDir.y * 500.f * fDT;
-	SetPos(vPos);
-	Vec2 vSize = GetSize();
-	if (vPos.y < -vSize.y)
-	{
-		GET_SINGLE(EventManager)->DeleteObject(this);
-	}
+	//vPos.x += m_vDir.x * 500.f * fDT;
+	//vPos.y += m_vDir.y * 500.f * fDT;
+	//SetPos(vPos);
+	//Vec2 vSize = GetSize();
+	//if (vPos.y < -vSize.y)
+	//{
+	//	GET_SINGLE(EventManager)->DeleteObject(this);
+	//}
 }
 
 void Projectile::Render(HDC _hdc)
@@ -60,11 +60,12 @@ void Projectile::Render(HDC _hdc)
 
 void Projectile::EnterCollision(Collider* _other)
 {
-	Object* pOtherObj = _other->GetOwner();
-	if (pOtherObj->GetName() == L"Enemy")
-	{
-		GET_SINGLE(EventManager)->DeleteObject(this);
-	}
+	//cout << "ENTER" << endl;
+	//Object* pOtherObj = _other->GetOwner();
+	//if (pOtherObj->GetName() == L"Enemy")
+	//{
+	//	GET_SINGLE(EventManager)->DeleteObject(this);
+	//}
 }
 
 void Projectile::StayCollision(Collider* _other)
@@ -73,4 +74,5 @@ void Projectile::StayCollision(Collider* _other)
 
 void Projectile::ExitCollision(Collider* _other)
 {
+	//cout << "EXIT" << endl;
 }

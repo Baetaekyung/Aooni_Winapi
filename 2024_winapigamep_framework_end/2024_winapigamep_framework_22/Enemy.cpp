@@ -12,7 +12,7 @@
 Enemy::Enemy()
 	:_speed(1.2)
 	, _enemeyCurrentDir(Direction::DOWN)
-	, _enemeyLastDir(Direction::DOWN)
+	, _enemeyLastDir(Direction::RIGHT)
 {
 	
 
@@ -54,9 +54,13 @@ Enemy::~Enemy()
 void Enemy::Update()
 {
 	if (_isWallBumpInto)
+		return;
+
+	if (_isWallBumpInto)
 	{
 		Vec2 vPos = GetPos();
-		switch (_enemeyLastDir)
+		Vec2 playerPos = _player->GetPos();
+		/*switch (_enemeyLastDir)
 		{
 		case Direction::LEFT:
 			vPos.x -= 100 * _speed * fDT;
@@ -72,6 +76,46 @@ void Enemy::Update()
 			break;
 		default:
 			break;
+		}*/
+
+		switch (_enemeyCurrentDir)
+		{
+		case Direction::LEFT:
+		case Direction::RIGHT:
+			if (abs((vPos.y + 40) - playerPos.y) > 1.f)
+			{
+				//cout << vPos.y << endl;
+				//cout << playerPos.y << endl;
+				if (playerPos.y < (vPos.y + 40))
+				{
+					vPos.y -= 100 * _speed * fDT;
+					_enemeyCurrentDir = Direction::UP;
+				}
+				if (playerPos.y > (vPos.y + 40))
+				{
+					vPos.y += 100 * _speed * fDT;
+					_enemeyCurrentDir = Direction::DOWN;
+				}
+			}
+			break;
+		case Direction::UP:
+		case Direction::DOWN:
+			if (abs(playerPos.x - vPos.x) > 0.1f)
+			{
+				if (playerPos.x > vPos.x)
+				{
+					vPos.x += 100 * _speed * fDT;
+					_enemeyCurrentDir = Direction::RIGHT;
+				}
+				else if (playerPos.x < vPos.x)
+				{
+					vPos.x -= 100 * _speed * fDT;
+					_enemeyCurrentDir = Direction::LEFT;
+				}
+			}
+			break;
+		default:
+			break;
 		}
 
 		if (currentAnimation != animation[_enemeyLastDir])
@@ -82,15 +126,10 @@ void Enemy::Update()
 			currentAnimation = animation[_enemeyLastDir];
 		}
 
-		SetPos(vPos);
+		//SetPos(vPos);
 	}
 	else
 		Move();
-
-
-
-
-	
 }
 
 
@@ -105,9 +144,8 @@ void Enemy::Move()
 	Vec2 playerPos = _player->GetPos();
 	_enemeyLastDir = _enemeyCurrentDir;
 
-
 	//if (abs((vPos.y -20) - (playerPos.y -10)) > 0.1f)
-	if (abs((vPos.y +40) - playerPos.y ) > 1.f)
+	if (abs((vPos.y +40) - playerPos.y ) > 2.f)
 	{
 		//cout << vPos.y << endl;
 		//cout << playerPos.y << endl;
@@ -122,7 +160,7 @@ void Enemy::Move()
 			_enemeyCurrentDir = Direction::DOWN;
 		}
 	}
-	else if (abs(playerPos.x - vPos.x) > 0.1f)
+	else if (abs(playerPos.x - vPos.x) > 2.f)
 	{
 		if (playerPos.x > vPos.x)
 		{
@@ -166,11 +204,12 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	//std::cout << "Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")	
 	{
-		//_isWallBumpInto = true;
+		cout << "Enemy Enter " << endl;
+		//cout << "Enter" << endl;
+		_isWallBumpInto = true;
 		//GET_SINGLE(EventManager)->DeleteObject(pOtherObj);
 	}
 }
@@ -178,11 +217,14 @@ void Enemy::EnterCollision(Collider* _other)
 
 void Enemy::StayCollision(Collider* _other)
 {
+	cout << "Enemy Stay " << endl;
 	//std::cout << "Stay" << std::endl;
 }
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	_isWallBumpInto = false;
+	cout << "Enemy Exit " << endl;
+	//cout << "Exit" << endl;
+	//_isWallBumpInto = false;
 	//std::cout << "Exit" << std::endl;
 }
