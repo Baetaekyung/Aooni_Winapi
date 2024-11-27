@@ -32,10 +32,12 @@ void TitleScene::Init()
 	pKey->SetSize({ 10.f, 10.f });
 	AddObject(pKey, LAYER::INTERACTABLE);
 
+	GET_SINGLE(ResourceManager)->LoadSound(L"Door", L"Sound\\doorOpen.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"GetKey", L"Sound\\GetKeySound.wav", false);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
-	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
-	GET_SINGLE(ResourceManager)->Play(L"BGM");
+	//GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
+	//GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
 void TitleScene::Update()
@@ -43,9 +45,4 @@ void TitleScene::Update()
 	Scene::Update();
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
-}
-
-void TitleScene::Render(HDC _hdc)
-{
-	Scene::Render(_hdc);
 }
