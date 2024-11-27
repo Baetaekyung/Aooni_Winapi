@@ -9,6 +9,7 @@
 #include "Door.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
+#include "TileMap.h"
 void TitleScene::Init()
 {
 	Object* pObj = new Enemy;
@@ -22,9 +23,10 @@ void TitleScene::Init()
 	pPlayer->SetSize({ 100.f,100.f });
 	AddObject(pPlayer, LAYER::PLAYER);
 
-	Object* pDoor = new Door;
+	Door* pDoor = new Door;
 	pDoor->SetPos({ SCREEN_WIDTH - 100, SCREEN_HEIGHT / 2 });
 	pDoor->SetSize({ 30.f, 50.f });
+	pDoor->SetNextMap(TileMap::_1F_MAINHOLE);
 	AddObject(pDoor, LAYER::INTERACTABLE);
 
 	Object* pKey = new Key;
@@ -32,10 +34,12 @@ void TitleScene::Init()
 	pKey->SetSize({ 10.f, 10.f });
 	AddObject(pKey, LAYER::INTERACTABLE);
 
+	GET_SINGLE(ResourceManager)->LoadSound(L"Door", L"Sound\\doorOpen.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"GetKey", L"Sound\\GetKeySound.wav", false);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
-	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
-	GET_SINGLE(ResourceManager)->Play(L"BGM");
+	//GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
+	//GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
 void TitleScene::Update()
