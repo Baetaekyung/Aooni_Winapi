@@ -9,6 +9,7 @@
 #include "Door.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
+#include "TileMap.h"
 void TitleScene::Init()
 {
 	Object* pObj = new Enemy;
@@ -22,9 +23,10 @@ void TitleScene::Init()
 	pPlayer->SetSize({ 100.f,100.f });
 	AddObject(pPlayer, LAYER::PLAYER);
 
-	Object* pDoor = new Door;
+	Door* pDoor = new Door;
 	pDoor->SetPos({ SCREEN_WIDTH - 100, SCREEN_HEIGHT / 2 });
 	pDoor->SetSize({ 30.f, 50.f });
+	pDoor->SetNextMap(TileMap::_1F_MAINHOLE);
 	AddObject(pDoor, LAYER::INTERACTABLE);
 
 	Object* pKey = new Key;
@@ -45,4 +47,9 @@ void TitleScene::Update()
 	Scene::Update();
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
+}
+
+void TitleScene::Render(HDC _hdc)
+{
+	Scene::Render(_hdc);
 }

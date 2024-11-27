@@ -4,9 +4,11 @@
 #include "Player.h"
 #include "GDISelector.h"
 #include "ResourceManager.h"
+#include "SceneManager.h"
 
 Door::Door()
 	: _isEntering(false)
+	, nextSceneName(L"")
 {
 	SetName(L"Door");
 	this->AddComponent<Collider>();
@@ -45,7 +47,7 @@ void Door::EnterCollision(Collider* other)
 		GET_SINGLE(ResourceManager)->Play(L"Door");
 		if (pPlayer->keyCount > 0)
 		{
-			cout << "Scene Changed";
+			GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
 		}
 		else
 		{
@@ -63,5 +65,19 @@ void Door::ExitCollision(Collider* other)
 	if (other->GetOwner()->GetName() == L"Player" && _isEntering == true)
 	{
 		_isEntering = false;
+	}
+}
+
+void Door::SetNextMap(TileMap nextTileMap)
+{
+	switch (nextTileMap)
+	{
+	case TileMap::_1F_MAINHOLE:
+		nextSceneName = L"GameScene";
+		break;
+	case TileMap::_1F_MAINHOLE_RIGHT_CORRIDOR:
+		break;
+	default:
+		break;
 	}
 }
