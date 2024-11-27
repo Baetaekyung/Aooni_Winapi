@@ -21,6 +21,7 @@ public:
 	void Render(HDC _hdc) override;
 	void StayCollision(Collider* _other) override;
 	void EnterCollision(Collider* other) override;
+	void ExitCollision(Collider* other) override;
 	bool DirectionChanged(Direction direction);
 	Direction GetPlayerDirection();
 private:
@@ -33,5 +34,10 @@ private:
 	Direction _playerDir;
 public:
 	int keyCount = 0;
+private:
+	bool canGoUpward;
+	bool canGoDownward;
+	bool canGoRightword;
+	bool canGoLeftword;
 };
 

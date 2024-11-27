@@ -18,6 +18,10 @@ Player::Player()
 	, _speed(1.5)
 	, _playerDir(Direction::DOWN)
 	, keyCount(0)
+	, canGoUpward(true)
+	, canGoDownward(true)
+	, canGoLeftword(true)
+	, canGoRightword(true)
 {
 	SetName(L"Player");
 
@@ -77,7 +81,25 @@ void Player::Render(HDC _hdc)
 
 void Player::StayCollision(Collider* _other)
 {
-	
+	if (_other->GetOwner()->GetName() == L"Wall")
+	{
+		if (GetPlayerDirection() == Direction::LEFT)
+		{
+			canGoLeftword = false;
+		}
+		if (GetPlayerDirection() == Direction::RIGHT)
+		{
+			canGoRightword = false;
+		}
+		if (GetPlayerDirection() == Direction::UP)
+		{
+			canGoUpward = false;
+		}
+		if (GetPlayerDirection() == Direction::DOWN)
+		{
+			canGoDownward = false;
+		}
+	}
 }
 
 void Player::EnterCollision(Collider* other)
@@ -87,6 +109,36 @@ void Player::EnterCollision(Collider* other)
 	{
 		SetDead();
 		//GameOverScene Load
+	}
+	if (other->GetOwner()->GetName() == L"Wall")
+	{
+		if (GetPlayerDirection() == Direction::LEFT)
+		{
+			canGoLeftword = false;
+		}
+		if (GetPlayerDirection() == Direction::RIGHT)
+		{
+			canGoRightword = false;
+		}
+		if (GetPlayerDirection() == Direction::UP)
+		{
+			canGoUpward = false;
+		}
+		if (GetPlayerDirection() == Direction::DOWN)
+		{
+			canGoDownward = false;
+		}
+	}
+}
+
+void Player::ExitCollision(Collider* other)
+{
+	if (other->GetOwner()->GetName() == L"Wall")
+	{
+		canGoDownward = true;
+		canGoLeftword = true;
+		canGoRightword = true;
+		canGoUpward = true;
 	}
 }
 
@@ -125,43 +177,47 @@ void Player::PlayerMove()
 
 	if (GET_KEY(KEY_TYPE::A))
 	{
-		vPos.x -= 100.f * fDT * _speed;
 		if (_playerDir != Direction::LEFT)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiLeft", true);
 			DirectionChanged(Direction::LEFT);
 		}
+		if (canGoLeftword) 
+			vPos.x -= 100.f * fDT * _speed;
 	}
 	else if (GET_KEY(KEY_TYPE::D))
 	{
-		vPos.x += 100.f * fDT * _speed;
 		if (_playerDir != Direction::RIGHT)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiRight", true);
 			DirectionChanged(Direction::RIGHT);
 		}
+		if(canGoRightword)
+			vPos.x += 100.f * fDT * _speed;
 	}
 	else if (GET_KEY(KEY_TYPE::S))
 	{
-		vPos.y += 100.f * fDT * _speed;
 		if (_playerDir != Direction::DOWN)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiDown", true);
 			DirectionChanged(Direction::DOWN);
 		}
+		if(canGoDownward)
+			vPos.y += 100.f * fDT * _speed;
 	}
 	else if (GET_KEY(KEY_TYPE::W))
 	{
-		vPos.y -= 100.f * fDT * _speed;
 		if (_playerDir != Direction::UP)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiUp", true);
 			DirectionChanged(Direction::UP);
 		}
+		if(canGoUpward)
+			vPos.y -= 100.f * fDT * _speed;
 	}
 	else
 	{

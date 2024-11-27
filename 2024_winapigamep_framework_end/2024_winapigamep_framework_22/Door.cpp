@@ -25,9 +25,11 @@ void Door::Render(HDC hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
+	GDISelector* pPen = new GDISelector(hdc, PEN_TYPE::BLUE);
 	GDISelector* pBrush = new GDISelector(hdc, BRUSH_TYPE::BLUE);
 	RECT_RENDER(hdc, vPos.x, vPos.y, vSize.x, vSize.y);
 	pBrush->~GDISelector();
+	pPen->~GDISelector();
 
 	ComponentRender(hdc);
 }
