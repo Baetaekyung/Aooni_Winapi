@@ -22,6 +22,7 @@ private:
 	Direction _enemeyCurrentDir;
 	Direction _enemeyLastDir;
 	bool _isWallBumpInto;
+	bool _isEnter;
 	int _speed;
 	//Direction _playerDir;
 	wstring currentAnimation;

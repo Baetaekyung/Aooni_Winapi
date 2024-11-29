@@ -27,9 +27,7 @@ void BGDScene::Init()
 
 
 
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::PROJECTILE);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::BACKGROUND);
+	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PROJECTILE);
 
 }

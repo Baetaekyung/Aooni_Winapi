@@ -60,7 +60,6 @@ void Projectile::Render(HDC _hdc)
 
 void Projectile::EnterCollision(Collider* _other)
 {
-	cout << "Enter" << endl;
 	//cout << "ENTER" << endl;
 	//Object* pOtherObj = _other->GetOwner();
 	//if (pOtherObj->GetName() == L"Enemy")

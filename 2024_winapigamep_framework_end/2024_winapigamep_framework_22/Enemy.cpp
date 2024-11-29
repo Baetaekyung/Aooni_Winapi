@@ -53,31 +53,12 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	return;
-	if (_isWallBumpInto)
-		return;
+
 
 	if (_isWallBumpInto)
 	{
 		Vec2 vPos = GetPos();
 		Vec2 playerPos = _player->GetPos();
-		/*switch (_enemeyLastDir)
-		{
-		case Direction::LEFT:
-			vPos.x -= 100 * _speed * fDT;
-			break;
-		case Direction::RIGHT:
-			vPos.x += 100 * _speed * fDT;
-			break;
-		case Direction::UP:
-			vPos.y -= 100 * _speed * fDT;
-			break;
-		case Direction::DOWN:
-			vPos.y += 100 * _speed * fDT;
-			break;
-		default:
-			break;
-		}*/
 
 		switch (_enemeyCurrentDir)
 		{
@@ -160,6 +141,7 @@ void Enemy::Move()
 			vPos.y += 100 * _speed * fDT;
 			_enemeyCurrentDir = Direction::DOWN;
 		}
+		cout << vPos.y << endl;
 	}
 	else if (abs(playerPos.x - vPos.x) > 2.f)
 	{
@@ -173,6 +155,7 @@ void Enemy::Move()
 			vPos.x -= 100 * _speed * fDT;
 			_enemeyCurrentDir = Direction::LEFT;
 		}
+		cout << vPos.x << endl;
 	}
 
 	if (currentAnimation != animation[_enemeyCurrentDir])
@@ -205,20 +188,19 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	cout << "Enemy Enter " << endl;
 	Object* pOtherObj = _other->GetOwner();
-	if (pOtherObj->GetName() == L"Player")	
+	if (pOtherObj->GetName() == L"Player")
 	{
-		//cout << "Enter" << endl;
+		//cout << "Enemy Enter " << endl;
 		_isWallBumpInto = true;
-		//GET_SINGLE(EventManager)->DeleteObject(pOtherObj);
+		
 	}
 }
 
 
 void Enemy::StayCollision(Collider* _other)
 {
-	cout << "Enemy Stay " << endl;
+	//cout << "Enemy Stay " << endl;
 	//std::cout << "Stay" << std::endl;
 }
 
