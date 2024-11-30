@@ -6,6 +6,9 @@
 #include "InputManager.h"
 #include "Player.h"
 #include "Door.h"
+#include "QuestionPuzzle.h"
+#include "Object.h"
+
 void GameScene::Init()
 {
 	tile = new Tile;
@@ -27,6 +30,14 @@ void GameScene::Init()
 	door->SetPos({ 610, 190 });
 	door->SetName(L"Door");
 	AddObject(door, LAYER::INTERACTABLE);
+
+	QuestionPuzzle* pObj = new QuestionPuzzle;
+	pObj->SetPuzzleQuestion(L"Who is GGM's GAMP TEACHER?");
+	pObj->SetPuzzleAnswer(L"joonyongteacher");
+	pObj->SetErrorMessage(L"반말하지 마세요~");
+	pObj->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
+	pObj->SetName(L"Question");
+	AddObject(pObj, LAYER::INTERACTABLE);
 }
 
 void GameScene::Update()

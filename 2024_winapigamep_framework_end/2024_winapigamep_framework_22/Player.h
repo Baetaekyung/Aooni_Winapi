@@ -24,6 +24,11 @@ public:
 	void ExitCollision(Collider* other) override;
 	bool DirectionChanged(Direction direction);
 	Direction GetPlayerDirection();
+public:
+	void SetMove(bool isActive)
+	{
+		canMove = isActive;
+	}
 private:
 	void Interact(Collider* other);
 	void PlayerMove();
@@ -35,6 +40,7 @@ private:
 public:
 	int keyCount = 0;
 private:
+	bool canMove;
 	bool canGoUpward;
 	bool canGoDownward;
 	bool canGoRightword;

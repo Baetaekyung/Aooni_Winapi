@@ -22,6 +22,7 @@ Player::Player()
 	, canGoDownward(true)
 	, canGoLeftword(true)
 	, canGoRightword(true)
+	, canMove(true)
 {
 	SetName(L"Player");
 
@@ -174,6 +175,8 @@ void Player::PlayerMove()
 {
 	Vec2 vPos = GetPos();
 	Vec2 colliderSize = GetComponent<Collider>()->GetSize();
+
+	if (!canMove) return;
 
 	if (GET_KEY(KEY_TYPE::A))
 	{
