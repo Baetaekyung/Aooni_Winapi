@@ -17,8 +17,11 @@ public:
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 private:
+
+private:
 	Texture* _m_pTex;
 	Player* _player;
+	Object* _listCollistionObj;
 	Direction _enemeyCurrentDir;
 	Direction _enemeyLastDir;
 	bool _isWallBumpInto;

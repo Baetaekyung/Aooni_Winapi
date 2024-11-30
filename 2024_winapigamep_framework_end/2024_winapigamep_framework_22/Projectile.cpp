@@ -16,7 +16,7 @@ Projectile::Projectile()
 	//m_pTex->Load(path);
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Bullet.bmp");
 	this->AddComponent<Collider>();
-	GetComponent<Collider>()->SetSize({ 20.f,20.f });
+	GetComponent<Collider>()->SetSize({ 100.f,100.f });
 }
 
 Projectile::~Projectile()
@@ -60,7 +60,13 @@ void Projectile::Render(HDC _hdc)
 
 void Projectile::EnterCollision(Collider* _other)
 {
-	//cout << "ENTER" << endl;
+	wstring name = _other->GetOwner()->GetName();
+	/*if (_other->GetOwner()->GetName() == L"Enemy")
+	{
+		cout << 1 << endl;
+	}
+	else
+		cout << 2 << endl;*/
 	//Object* pOtherObj = _other->GetOwner();
 	//if (pOtherObj->GetName() == L"Enemy")
 	//{
@@ -74,5 +80,8 @@ void Projectile::StayCollision(Collider* _other)
 
 void Projectile::ExitCollision(Collider* _other)
 {
-	//cout << "EXIT" << endl;
+	if (_other->GetOwner()->GetName() == L"Enemy")
+	{
+		cout << 2 << endl;
+	}
 }

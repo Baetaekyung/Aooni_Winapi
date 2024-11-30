@@ -22,12 +22,18 @@ void BGDScene::Init()
 	Object* pObj2 = new Projectile;
 	pObj2->SetPos({ SCREEN_WIDTH / 2.f,400.f });
 	pObj2->SetSize({ 64.f,128.f });
-	pObj2->SetName(L"BackGround");
+	pObj2->SetName(L"BackGround1");
 	AddObject(pObj2, LAYER::PROJECTILE);
 
+	//Object* pObj3 = new Projectile;
+	//pObj3->SetPos({ SCREEN_WIDTH / 2.f,550.f });
+	//pObj3->SetSize({ 64.f,128.f });
+	//pObj3->SetName(L"BackGround2");
+	//AddObject(pObj3, LAYER::PROJECTILE);
 
-
-	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
+	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PLAYER);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PROJECTILE);
+	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 
 }
