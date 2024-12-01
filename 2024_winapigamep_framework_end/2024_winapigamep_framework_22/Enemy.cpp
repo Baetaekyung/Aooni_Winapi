@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "Animator.h"
 #include "SceneManager.h"
+#include "EnemyWallCast.h"
 #include "Scene.h"
 
 Enemy::Enemy()
@@ -16,9 +17,9 @@ Enemy::Enemy()
 {
 	
 
-	this->AddComponent<Collider>();
-	GetComponent<Collider>()->SetSize(Vec2(35.f, 40.f));
-	GetComponent<Collider>()->SetOffSetPos(Vec2(0.f, 35.f));
+	//this->AddComponent<Collider>();
+	//GetComponent<Collider>()->SetSize(Vec2(35.f, 40.f));
+	//GetComponent<Collider>()->SetOffSetPos(Vec2(0.f, 35.f));
 
 	_m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"aooni", L"Texture\\Aooni.bmp");
 	AddComponent<Animator>();
@@ -53,13 +54,19 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-
-
-	if (_isWallBumpInto)
+	if (_wallcast == nullptr)
 	{
+		std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
+		const vector<Object*>& castVec = pCurrentScene->GetLayerObjects(LAYER::ENEMYCAST);
+		if (castVec.size() > 0)
+			_wallcast = dynamic_cast<EnemyWallCast*>(castVec[0]);
+		else
+			return;
+	}
 
+	if (_wallcast->GetWallCast())
+	{
 		Vec2 vPos = GetPos();
-		Vec2 playerPos = _player->GetPos();
 		
 		switch (_enemeyLastDir)
 		{
@@ -162,53 +169,6 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	if (_other->GetOwner()->GetName() == L"Player")
-		cout << 11 << endl;
-	else if (_other->GetOwner()->GetName() == L"BackGround1")
-		cout << 22 << endl;
-	//_isWallBumpInto = true;
-	if (_other->GetOwner()->GetName() == L"BackGround1")
-	{
-		//cout << "Enter" << endl;
-
-		_isWallBumpInto = true;
-		_listCollistionObj = _other->GetOwner();
-		Vec2 vPos = GetPos();
-		Vec2 playerPos = _player->GetPos();
-
-		switch (_enemeyCurrentDir)
-		{
-		case Direction::LEFT:
-		case Direction::RIGHT:
-			if (_player->GetPos().y < (vPos.y + 40))
-			{
-				_enemeyLastDir = Direction::UP;
-			}
-			else
-			{
-				_enemeyLastDir = Direction::DOWN;
-			}
-			break;
-		case Direction::UP:
-		case Direction::DOWN:
-			if (_player->GetPos().x > vPos.x)
-			{
-				_enemeyLastDir = Direction::RIGHT;
-			}
-			else
-			{
-				_enemeyLastDir = Direction::LEFT;
-			}
-			break;
-		default:
-			break;
-		}
-		
-	}
-	else
-	{
-		return;
-	}
 
 
 }
@@ -216,25 +176,44 @@ void Enemy::EnterCollision(Collider* _other)
 
 void Enemy::StayCollision(Collider* _other)
 {
-	//cout << "Enemy Stay " << endl;
-	//std::cout << "Stay" << std::endl;
+
 }
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	Object* pOtherObj = _other->GetOwner();
-	wstring str = pOtherObj->GetName();
-	//cout << (_listCollistionObj->GetName() == str) << endl;
-	if (str == L"Player")
+	
+}
+
+void Enemy::WallDirection()
+{
+
+	Vec2 vPos = GetPos();
+	Vec2 playerPos = _player->GetPos();
+
+	switch (_enemeyCurrentDir)
 	{
-		cout << 33 << endl;
-		return;
-	}
-	else if (str == L"BackGround1")
-	{
-		cout << 44 << endl;
-		_isWallBumpInto = false;
+	case Direction::LEFT:
+	case Direction::RIGHT:
+		if (_player->GetPos().y <= (vPos.y + 40))
+		{
+			_enemeyLastDir = Direction::UP;
+		}
+		else
+		{
+			_enemeyLastDir = Direction::DOWN;
+		}
+		break;
+	case Direction::UP:
+	case Direction::DOWN:
+		if (_player->GetPos().x >= vPos.x)
+		{
+			_enemeyLastDir = Direction::RIGHT;
+		}
+		else
+		{
+			_enemeyLastDir = Direction::LEFT;
+		}
+		break;
 	}
 
-	//std::cout << "Exit" << std::endl;
 }

@@ -2,8 +2,9 @@
 #include "Object.h"
 #include "Player.h"
 class Texture;
-class Enemy :
-    public Object
+class EnemyWallCast;
+class Enemy
+	:public Object
 {
 public:
 	Enemy();
@@ -16,12 +17,12 @@ public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
-private:
-
+public:
+	void WallDirection();
 private:
 	Texture* _m_pTex;
 	Player* _player;
-	Object* _listCollistionObj;
+	EnemyWallCast* _wallcast;
 	Direction _enemeyCurrentDir;
 	Direction _enemeyLastDir;
 	bool _isWallBumpInto;

@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Projectile.h"
+#include "EnemyWallCast.h"
 #include "CollisionManager.h"
 
 void BGDScene::Init()
@@ -13,11 +14,17 @@ void BGDScene::Init()
 	pPlayer->SetSize({ 100.f,500.f });
 	AddObject(pPlayer, LAYER::PLAYER);
 
-	Object* pObj = new Enemy;
-	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
-	pObj->SetSize({ 100.f,500.f });
-	pObj->SetName(L"Enemy");
-	AddObject(pObj, LAYER::ENEMY);
+	Object* pEnemy = new Enemy;
+	pEnemy->SetPos({ SCREEN_WIDTH / 2.f,150.f });
+	pEnemy->SetSize({ 100.f,500.f });
+	pEnemy->SetName(L"Enemy");
+	AddObject(pEnemy, LAYER::ENEMY);
+
+	Object* pEnemyCast = new EnemyWallCast;
+	pEnemyCast->SetPos({ SCREEN_WIDTH / 2.f,150.f });
+	pEnemyCast->SetSize({ 100.f,500.f });
+	pEnemyCast->SetName(L"EnemyCast");
+	AddObject(pEnemyCast, LAYER::ENEMYCAST);
 
 	Object* pObj2 = new Projectile;
 	pObj2->SetPos({ SCREEN_WIDTH / 2.f,400.f });
@@ -33,7 +40,8 @@ void BGDScene::Init()
 
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PLAYER);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PROJECTILE);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PLAYER);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMYCAST, LAYER::PROJECTILE);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 
 }

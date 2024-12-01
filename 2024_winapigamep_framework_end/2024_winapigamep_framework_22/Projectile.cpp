@@ -80,8 +80,4 @@ void Projectile::StayCollision(Collider* _other)
 
 void Projectile::ExitCollision(Collider* _other)
 {
-	if (_other->GetOwner()->GetName() == L"Enemy")
-	{
-		cout << 2 << endl;
-	}
 }

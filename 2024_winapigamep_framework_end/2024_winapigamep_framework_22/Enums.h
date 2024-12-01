@@ -8,6 +8,7 @@ enum class LAYER
 	PROJECTILE,
 	ENEMY,
 	INTERACTABLE,
+	ENEMYCAST,
 	// UI
 	END = 30
 };
