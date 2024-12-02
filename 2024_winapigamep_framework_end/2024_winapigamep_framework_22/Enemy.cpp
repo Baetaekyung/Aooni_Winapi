@@ -17,9 +17,9 @@ Enemy::Enemy()
 {
 	
 
-	//this->AddComponent<Collider>();
-	//GetComponent<Collider>()->SetSize(Vec2(35.f, 40.f));
-	//GetComponent<Collider>()->SetOffSetPos(Vec2(0.f, 35.f));
+	this->AddComponent<Collider>();
+	GetComponent<Collider>()->SetSize(Vec2(35.f, 40.f));
+	GetComponent<Collider>()->SetOffSetPos(Vec2(0.f, 35.f));
 
 	_m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"aooni", L"Texture\\Aooni.bmp");
 	AddComponent<Animator>();
@@ -169,7 +169,7 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-
+	cout << "EenmyEnter" << endl;
 
 }
 

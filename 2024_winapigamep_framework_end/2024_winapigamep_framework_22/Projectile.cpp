@@ -16,7 +16,7 @@ Projectile::Projectile()
 	//m_pTex->Load(path);
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Bullet.bmp");
 	this->AddComponent<Collider>();
-	GetComponent<Collider>()->SetSize({ 100.f,100.f });
+	GetComponent<Collider>()->SetSize({ 100.f,40.f });
 }
 
 Projectile::~Projectile()

@@ -108,7 +108,7 @@ void Player::EnterCollision(Collider* other)
 	Interact(other);
 	if (other->GetOwner()->GetName() == L"Enemy")
 	{
-		SetDead();
+		//SetDead();
 		//GameOverScene Load
 	}
 	if (other->GetOwner()->GetName() == L"Wall")
