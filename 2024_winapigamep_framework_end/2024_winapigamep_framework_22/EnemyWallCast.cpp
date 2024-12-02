@@ -33,12 +33,20 @@ void EnemyWallCast::Update()
 
 void EnemyWallCast::Render(HDC _hdc)
 {
-	//Vec2 vPos = GetPos();
-	//Vec2 vSize = GetSize();
+	Vec2 vPos = GetPos();
+	Vec2 vSize = GetSize();
 
 	////int width = _m_pTex->GetWidth();
 	////int height = _m_pTex->GetHeight();
 	//ComponentRender(_hdc);
+
+	//일단 바꾸기 전에 써본 코드
+	/*if (GetPixel(_hdc, vPos.x, vPos.y + 40) == RGB(0, 0, 5))
+	{
+		_isWallCast = true;
+	}
+	else
+		_isWallCast = false;*/
 }
 
 void EnemyWallCast::EnterCollision(Collider* _other)
