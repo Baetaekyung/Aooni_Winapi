@@ -13,12 +13,6 @@ void GameScene::Init()
 	AddObject(tile, LAYER::BACKGROUND);
 
 	tile->ChangeTile(TileMap::_1F_MAINHOLE);
-
-	wall = new Wall;
-	wall->SetPos({SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
-	wall->SetSize({ 100, 100 });
-	wall->SetName(L"Wall");
-	AddObject(wall, LAYER::WALL);
 }
 
 void GameScene::Update()

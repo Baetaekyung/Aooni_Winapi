@@ -183,7 +183,7 @@
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Key.h" />
-    <ClInclude Include="MapScene.h" />
+    <ClInclude Include="MainHole_1F.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
@@ -223,7 +223,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapScene.cpp" />
+    <ClCompile Include="MainHole_1F.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />

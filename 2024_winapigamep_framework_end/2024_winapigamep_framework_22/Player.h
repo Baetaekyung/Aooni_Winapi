@@ -34,6 +34,7 @@ public:
 private:
 	void Interact(Collider* other);
 	void PlayerMove();
+	bool IsBlockedByColor(COLORREF color);
 private:
 	/*void CreateProjectile();*/
 	Texture* m_pTex;

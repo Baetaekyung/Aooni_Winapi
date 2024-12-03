@@ -1,8 +1,9 @@
 #pragma once
+
 #include "Scene.h"
 class Tile;
 class Wall;
-class GameScene :
+class MainHole_1F :
     public Scene
 {
 public:

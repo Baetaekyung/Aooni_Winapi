@@ -16,6 +16,7 @@ public:
     void Update() override;
     void Render(HDC _hdc) override;
 
+
 public:
     void ChangeTile(TileMap NewTileMap);
 
