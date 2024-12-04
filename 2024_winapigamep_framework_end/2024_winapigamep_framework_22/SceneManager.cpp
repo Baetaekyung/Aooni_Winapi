@@ -4,6 +4,8 @@
 #include "TitleScene.h"
 #include "GameScene.h"
 #include "MapScene.h"
+#include "GameOverScene.h"
+#include "EndingScene.h"
 
 void SceneManager::Init()
 {
@@ -13,7 +15,8 @@ void SceneManager::Init()
 	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
 	RegisterScene(L"GameScene", std::make_shared<GameScene>());
 	RegisterScene(L"MapScene", std::make_shared<MapScene>());
-
+	RegisterScene(L"GameOverScene", std::make_shared<GameOverScene>());
+	RegisterScene(L"EndingScene", std::make_shared<EndingScene>());
 	// ¾À ·Îµå
 	LoadScene(L"TitleScene");
 }

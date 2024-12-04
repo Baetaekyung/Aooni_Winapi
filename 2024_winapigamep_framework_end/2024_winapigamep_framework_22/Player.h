@@ -2,6 +2,8 @@
 #include "Object.h"
 class Texture;
 
+static int g_playerkeyCount = 0;
+
 enum class Direction
 {
 	NONE,
@@ -37,8 +39,6 @@ private:
 	Texture* m_pTex;
 	float _speed;
 	Direction _playerDir;
-public:
-	int keyCount = 0;
 private:
 	bool canMove;
 	bool canGoUpward;

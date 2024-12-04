@@ -1,6 +1,8 @@
 #pragma once
 #include "Object.h"
+#include "QuizData.h"
 class Player;
+class Texture;
 class QuestionPuzzle
 	: public Object
 {
@@ -17,10 +19,13 @@ public:
 	void SetPuzzleQuestion(wstring question);
 	void SetPuzzleAnswer(wstring answer);
 	void SetErrorMessage(wstring errorMsg);
+	void SetQuiz(QuizEnum quiz);
 private:
 	bool isTriggered;
 	bool isDrawed;
 	bool isAnswerCheck;
+public:
+	Texture* m_pTex;
 private:
 	wstring question;
 	wstring answer;

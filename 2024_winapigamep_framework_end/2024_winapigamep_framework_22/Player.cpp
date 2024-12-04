@@ -17,7 +17,6 @@ Player::Player()
 	: m_pTex(nullptr)
 	, _speed(1.5)
 	, _playerDir(Direction::DOWN)
-	, keyCount(0)
 	, canGoUpward(true)
 	, canGoDownward(true)
 	, canGoLeftword(true)
@@ -162,8 +161,8 @@ void Player::Interact(Collider* other)
 	if (other->GetOwner()->GetName() == L"Key")
 	{
 		GET_SINGLE(ResourceManager)->Play(L"GetKey");
-		keyCount++;
-		cout << keyCount << '\n';
+		g_playerkeyCount++;
+		cout << g_playerkeyCount << '\n';
 	}
 	if (other->GetOwner()->GetName() == L"Door")
 	{

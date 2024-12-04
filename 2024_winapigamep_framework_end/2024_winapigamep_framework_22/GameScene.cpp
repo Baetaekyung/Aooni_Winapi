@@ -32,9 +32,9 @@ void GameScene::Init()
 	AddObject(door, LAYER::INTERACTABLE);
 
 	QuestionPuzzle* pObj = new QuestionPuzzle;
-	pObj->SetPuzzleQuestion(L"Who is GGM's GAMP TEACHER?");
-	pObj->SetPuzzleAnswer(L"joonyongteacher");
-	pObj->SetErrorMessage(L"반말하지 마세요~");
+	pObj->SetPuzzleQuestion(L"English only, What is our school?");
+	pObj->SetPuzzleAnswer(L"ggm");
+	pObj->SetErrorMessage(L"Answer is ggm");
 	pObj->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
 	pObj->SetName(L"Question");
 	AddObject(pObj, LAYER::INTERACTABLE);

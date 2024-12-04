@@ -12,7 +12,7 @@ public:
 
 public:
     virtual void Render(HDC _hdc) override;
-private:
+public:
     Texture* m_TTex;
 };
 
