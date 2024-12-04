@@ -22,11 +22,11 @@ void BGDScene::Init()
 	//pEnemy->SetName(L"Enemy");
 	//AddObject(pEnemy, LAYER::ENEMY);
 
-	Object* pEnemyCast = new EnemyWallCast;
-	pEnemyCast->SetPos({ SCREEN_WIDTH / 2.f,150.f });
-	pEnemyCast->SetSize({ 100.f,500.f });
-	pEnemyCast->SetName(L"EnemyCast");
-	AddObject(pEnemyCast, LAYER::ENEMYCAST);
+	//Object* pEnemyCast = new EnemyWallCast;
+	//pEnemyCast->SetPos({ SCREEN_WIDTH / 2.f,150.f });
+	//pEnemyCast->SetSize({ 100.f,500.f });
+	//pEnemyCast->SetName(L"EnemyCast");
+	//AddObject(pEnemyCast, LAYER::ENEMYCAST);
 
 	//Object* pObj2 = new Projectile;
 	//pObj2->SetPos({ SCREEN_WIDTH / 2.f,400.f });

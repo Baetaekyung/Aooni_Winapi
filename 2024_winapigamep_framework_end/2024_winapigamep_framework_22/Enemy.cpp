@@ -99,7 +99,6 @@ void Enemy::Update()
 		if (currentAnimation != animation[_enemeyLastDir])
 		{
 			GetComponent<Animator>()->StopAnimation();
-
 			GetComponent<Animator>()->PlayAnimation(animation[_enemeyLastDir], true);
 			currentAnimation = animation[_enemeyLastDir];
 		}
@@ -123,8 +122,6 @@ void Enemy::Move()
 
 	if (abs((vPos.y +40) - playerPos.y ) > 2.f)
 	{
-		//cout << vPos.y << endl;
-		//cout << playerPos.y << endl;
 		if (playerPos.y < (vPos.y + 40))
 		{
 			vPos.y -= 100 * _speed * fDT;
@@ -154,7 +151,6 @@ void Enemy::Move()
 	if (currentAnimation != animation[_enemeyCurrentDir])
 	{
 		GetComponent<Animator>()->StopAnimation();
-
 		GetComponent<Animator>()->PlayAnimation(animation[_enemeyCurrentDir], true);
 		currentAnimation = animation[_enemeyCurrentDir];
 	}
@@ -184,7 +180,7 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	cout << "EenmyEnter" << endl;
+	//cout << "EenmyEnter" << endl;
 
 }
 
@@ -196,7 +192,7 @@ void Enemy::StayCollision(Collider* _other)
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	
+	//cout << "EenmyExit" << endl;
 }
 
 void Enemy::WallDirection()
