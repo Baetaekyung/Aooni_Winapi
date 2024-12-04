@@ -162,8 +162,8 @@ void Player::Interact(Collider* other)
 	if (other->GetOwner()->GetName() == L"Key")
 	{
 		GET_SINGLE(ResourceManager)->Play(L"GetKey");
-		g_playerkeyCount++;
-		cout << g_playerkeyCount << '\n';
+		keyCount++;
+		cout << keyCount << '\n';
 	}
 	if (other->GetOwner()->GetName() == L"Door")
 	{
