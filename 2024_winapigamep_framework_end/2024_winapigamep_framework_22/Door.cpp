@@ -45,7 +45,7 @@ void Door::EnterCollision(Collider* other)
 		Player* pPlayer = 
 			dynamic_cast<Player*>(other->GetOwner());
 		GET_SINGLE(ResourceManager)->Play(L"Door");
-		if (g_playerkeyCount > 0)
+		if (pPlayer->keyCount > 0)
 		{
 			GET_SINGLE(SceneManager)->LoadScene(nextSceneName);
 		}
