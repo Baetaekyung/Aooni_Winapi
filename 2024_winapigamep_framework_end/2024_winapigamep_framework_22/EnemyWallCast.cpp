@@ -41,19 +41,20 @@ void EnemyWallCast::Render(HDC _hdc)
 	//ComponentRender(_hdc);
 
 	//일단 바꾸기 전에 써본 코드
-	/*if (GetPixel(_hdc, vPos.x, vPos.y + 40) == RGB(0, 0, 5))
+	//cout << (GetPixel(_hdc, vPos.x, vPos.y + 40) == RGB(0, 0, 0)) << endl;
+	if (GetPixel(_hdc, vPos.x, vPos.y + 40) == RGB(0, 0,0))
 	{
 		_isWallCast = true;
 	}
 	else
-		_isWallCast = false;*/
+		_isWallCast = false;
 }
 
 void EnemyWallCast::EnterCollision(Collider* _other)
 {
-	cout << "CASTENTER" << endl;
+	/*cout << "CASTENTER" << endl;
 	_owner->WallDirection();
-	_isWallCast = true;
+	_isWallCast = true;*/
 }
 
 void EnemyWallCast::StayCollision(Collider* _other)
@@ -62,9 +63,9 @@ void EnemyWallCast::StayCollision(Collider* _other)
 
 void EnemyWallCast::ExitCollision(Collider* _other)
 {
-	Object* obj = _other->GetOwner();
-	_isWallCast = false;
-	cout << "CASTEXIT" << endl;
+	//Object* obj = _other->GetOwner();
+	//_isWallCast = false;
+	//cout << "CASTEXIT" << endl;
 }
 
 

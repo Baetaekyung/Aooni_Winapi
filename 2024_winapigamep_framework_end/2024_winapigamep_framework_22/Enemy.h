@@ -20,6 +20,7 @@ public:
 public:
 	void WallDirection();
 private:
+	float _textTIme;
 	Texture* _m_pTex;
 	Player* _player;
 	EnemyWallCast* _wallcast;

@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "CollisionManager.h"
+#include "SpawnManger.h"
 #include "EventManager.h"
 bool Core::Init(HWND _hwnd)
 {
@@ -77,6 +78,7 @@ void Core::MainUpdate()
 	GET_SINGLE(TimeManager)->Update();
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
+	GET_SINGLE(SpawnManger)->Update();
 	GET_SINGLE(CollisionManager)->Update();
 
 }

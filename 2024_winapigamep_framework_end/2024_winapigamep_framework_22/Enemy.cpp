@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Enemy.h"
 #include "Collider.h"
+#include "TextUI.h"
 #include "EventManager.h"
 #include "ResourceManager.h"
 #include "TimeManager.h"
@@ -8,6 +9,7 @@
 #include "Animator.h"
 #include "SceneManager.h"
 #include "EnemyWallCast.h"
+#include "InputManager.h"
 #include "Scene.h"
 
 Enemy::Enemy()
@@ -18,6 +20,7 @@ Enemy::Enemy()
 	
 
 	this->AddComponent<Collider>();
+	this->AddComponent<TextUI>();
 	GetComponent<Collider>()->SetSize(Vec2(35.f, 40.f));
 	GetComponent<Collider>()->SetOffSetPos(Vec2(0.f, 35.f));
 
@@ -54,6 +57,15 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	if (GET_KEYDOWN(KEY_TYPE::E))
+	{
+		LPCWSTR str = TEXT("TEXT");
+		GetComponent<TextUI>()->TextBoxOpen(str);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::Q))
+	{
+		GetComponent<TextUI>()->TextBoxClose();
+	}
 	if (_wallcast == nullptr)
 	{
 		std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
@@ -152,6 +164,9 @@ void Enemy::Move()
 
 void Enemy::Render(HDC _hdc)
 {	
+
+
+
 	//HBRUSH brush = CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256));
 	//HBRUSH oldbrush = (HBRUSH)SelectObject(_hdc, brush);
 	Vec2 vPos = GetPos();
