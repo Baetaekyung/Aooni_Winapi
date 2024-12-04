@@ -9,9 +9,6 @@
 #include <iostream> // 콘솔 출력
 
 Tile::Tile()
-    : FloorTex(nullptr)
-    , WallTex(nullptr)
-    , DoorTex(nullptr)
 {
     // 텍스처 배열 초기화
     m_TexArr.clear();
@@ -42,9 +39,6 @@ Tile::Tile()
                 mapData.push_back(row);
             }
             mapFile.close();
-
-            // `m_WallArr`에 저장
-            m_WallArr[i] = mapData; // 현재 맵 데이터를 m_WallArr에 저장
             ++i;
         }
         else {

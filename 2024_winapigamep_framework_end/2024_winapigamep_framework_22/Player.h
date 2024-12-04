@@ -38,6 +38,9 @@ private:
 	Texture* m_pTex;
 	float _speed;
 	Direction _playerDir;
+	float checkblackLength = 10.f;
+	float vSize = 30.f;
+	Vec2 blockdistance = {15, 23};
 public:
 	int keyCount = 0;
 private:
@@ -46,5 +49,9 @@ private:
 	bool canGoDownward;
 	bool canGoRightword;
 	bool canGoLeftword;
+
+//Debug
+private:
+	COLORREF color; // = RGB(10, 10, 10);
 };
 
