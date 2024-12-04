@@ -2,8 +2,6 @@
 #include "Object.h"
 class Texture;
 
-static int g_playerkeyCount = 0;
-
 enum class Direction
 {
 	NONE,
@@ -40,11 +38,20 @@ private:
 	Texture* m_pTex;
 	float _speed;
 	Direction _playerDir;
+	float checkblackLength = 10.f;
+	float vSize = 30.f;
+	Vec2 blockdistance = {15, 23};
+public:
+	int keyCount = 0;
 private:
 	bool canMove;
 	bool canGoUpward;
 	bool canGoDownward;
 	bool canGoRightword;
 	bool canGoLeftword;
+
+//Debug
+private:
+	COLORREF color; // = RGB(10, 10, 10);
 };
 

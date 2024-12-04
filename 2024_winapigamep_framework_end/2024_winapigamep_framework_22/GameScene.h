@@ -2,6 +2,8 @@
 #include "Scene.h"
 class Tile;
 class Wall;
+class Object;
+class Player;
 class GameScene :
     public Scene
 {
@@ -15,4 +17,6 @@ public:
 
 public:
     Tile* tile;
+
+    Player* pPlayer;
 };

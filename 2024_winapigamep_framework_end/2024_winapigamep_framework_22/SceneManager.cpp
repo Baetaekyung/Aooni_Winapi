@@ -12,8 +12,6 @@ void SceneManager::Init()
 	// ¾À µî·Ï
 	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
 	RegisterScene(L"GameScene", std::make_shared<GameScene>());
-	RegisterScene(L"MainHole_1F", std::make_shared<MainHole_1F>());
-
 
 	// ¾À ·Îµå
 	LoadScene(L"TitleScene");

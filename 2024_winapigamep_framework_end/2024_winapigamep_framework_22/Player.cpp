@@ -12,7 +12,7 @@
 #include "Animation.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
-
+#include "Core.h"
 Player::Player()
 	: m_pTex(nullptr)
 	, _speed(1.5)
@@ -25,7 +25,7 @@ Player::Player()
 {
 	SetName(L"Player");
 
-	#pragma region Animation Init
+#pragma region Animation Init
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Hiroshi", L"Texture\\Hiroshi.bmp");
 	this->AddComponent<Collider>();
 
@@ -54,6 +54,7 @@ Player::Player()
 #pragma endregion
 	//Collision Check
 	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::INTERACTABLE);
+	GetComponent<Collider>()->SetSize({20.f, 35.f});
 }
 
 Player::~Player()
@@ -72,10 +73,10 @@ void Player::Render(HDC _hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
-	
+
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
-	
+
 	ComponentRender(_hdc);
 }
 
@@ -170,94 +171,105 @@ void Player::Interact(Collider* other)
 	}
 }
 
-#include <windows.h>
-
 void Player::PlayerMove()
 {
 	Vec2 vPos = GetPos();
+	Vec2 vSize = GetSize();
+	Vec2 colliderSize = GetComponent<Collider>()->GetSize();
+	//HDC _hdc = GetDC(nullptr);
+	HDC _hdc = GET_SINGLE(Core)->GetMainDC();
 
 	if (!canMove) return;
 
-	// HDC 가져오기 (현재 화면)
-	HDC hdcScreen = GetDC(nullptr); // 전체 화면의 HDC
-
-	if (GET_KEY(KEY_TYPE::A)) // 왼쪽 이동
+	if (GET_KEY(KEY_TYPE::A))
 	{
-		int newX = static_cast<int>(vPos.x - 100.f * fDT * _speed);
-		int newY = static_cast<int>(vPos.y);
-
-		COLORREF color = GetPixel(hdcScreen, newX, newY); // 해당 좌표의 색상 가져오기
-		if (IsBlockedByColor(color))
+		color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y);
+		if (_playerDir != Direction::LEFT)
 		{
-			canGoLeftword = false;
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(L"HiroshiLeft", true);
+			DirectionChanged(Direction::LEFT);
 		}
-		else
-		{
-			canGoLeftword = true;
+		if (canGoLeftword) {
 			vPos.x -= 100.f * fDT * _speed;
 		}
 	}
-	else if (GET_KEY(KEY_TYPE::D)) // 오른쪽 이동
+	else if (GET_KEY(KEY_TYPE::D))
 	{
-		int newX = static_cast<int>(vPos.x + 100.f * fDT * _speed);
-		int newY = static_cast<int>(vPos.y);
-
-		COLORREF color = GetPixel(hdcScreen, newX, newY);
-		if (IsBlockedByColor(color))
+		color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y);
+		if (_playerDir != Direction::RIGHT)
 		{
-			canGoRightword = false;
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(L"HiroshiRight", true);
+			DirectionChanged(Direction::RIGHT);
 		}
-		else
-		{
-			canGoRightword = true;
+		if (canGoRightword)
 			vPos.x += 100.f * fDT * _speed;
-		}
 	}
-	else if (GET_KEY(KEY_TYPE::W)) // 위쪽 이동
+	else if (GET_KEY(KEY_TYPE::S))
 	{
-		int newX = static_cast<int>(vPos.x);
-		int newY = static_cast<int>(vPos.y - 100.f * fDT * _speed);
-
-		COLORREF color = GetPixel(hdcScreen, newX, newY);
-		if (IsBlockedByColor(color))
+		color = GetPixel(_hdc, vPos.x, vPos.y + blockdistance.y);
+		if (_playerDir != Direction::DOWN)
 		{
-			canGoUpward = false;
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(L"HiroshiDown", true);
+			DirectionChanged(Direction::DOWN);
 		}
-		else
-		{
-			canGoUpward = true;
-			vPos.y -= 100.f * fDT * _speed;
-		}
-	}
-	else if (GET_KEY(KEY_TYPE::S)) // 아래쪽 이동
-	{
-		int newX = static_cast<int>(vPos.x);
-		int newY = static_cast<int>(vPos.y + 100.f * fDT * _speed);
-
-		COLORREF color = GetPixel(hdcScreen, newX, newY);
-		if (IsBlockedByColor(color))
-		{
-			canGoDownward = false;
-		}
-		else
-		{
-			canGoDownward = true;
+		if (canGoDownward)
 			vPos.y += 100.f * fDT * _speed;
+	}
+	else if (GET_KEY(KEY_TYPE::W))
+	{
+		color = GetPixel(_hdc, vPos.x, vPos.y - blockdistance.y);
+		if (_playerDir != Direction::UP)
+		{
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(L"HiroshiUp", true);
+			DirectionChanged(Direction::UP);
+		}
+		if (canGoUpward)
+			vPos.y -= 100.f * fDT * _speed;
+	}
+	else
+	{
+		switch (_playerDir)
+		{
+		case Direction::NONE:
+			break;
+		case Direction::LEFT:
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(L"HiroshiLeftIdle", true);
+			break;
+		case Direction::RIGHT:
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(L"HiroshiRightIdle", true);
+			break;
+		case Direction::UP:
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(L"HiroshiUpIdle", true);
+			break;
+		case Direction::DOWN:
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(L"HiroshiDownIdle", true);
+			break;
+		default:
+			break;
 		}
 	}
-
-	// HDC 해제
-	ReleaseDC(nullptr, hdcScreen);
-
-	SetPos(vPos);
+	if (!IsBlockedByColor(color)) {
+		SetPos(vPos);
+	}
 }
+
+
 
 bool Player::IsBlockedByColor(COLORREF color)
 {
-	// 검정색 여부 확인 (RGB 0, 0, 0)
-	return (GetRValue(color) == 0 && GetGValue(color) == 0 && GetBValue(color) == 0);
-}
+	return (GetRValue(color) == 0 && GetGValue(color) == 0 && GetBValue(color) == 0)
+		|| (GetRValue(color) == 159 && GetGValue(color) == 158 && GetBValue(color) == 152)
+		|| (GetRValue(color) == 105 && GetGValue(color) == 54 && GetBValue(color) == 0);
 
+}
 
 
 //void Player::CreateProjectile()

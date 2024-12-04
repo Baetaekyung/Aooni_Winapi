@@ -20,13 +20,7 @@ public:
 public:
     void ChangeTile(TileMap NewTileMap);
 
-    std::vector<std::vector<char>> m_WallArr[100];
-
 private:
-    Texture* FloorTex;
-    Texture* WallTex;
-    Texture* DoorTex;
-
     TileMap CurrentTileMap
         = TileMap::_1F_MAINHOLE;
 
