@@ -2,7 +2,7 @@
 
 #include "Scene.h"
 
-class TitleImage;
+class Texture;
 
 class TitleScene : public Scene
 {
@@ -12,8 +12,7 @@ public:
 	virtual void Update() override;
 
 	virtual void Render(HDC _hdc) override;
-
-private:
-	
+public:
+	Texture* m_pTex;
 };
 

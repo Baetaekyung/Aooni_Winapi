@@ -8,19 +8,22 @@
 #include "Key.h"
 #include "Player.h"
 #include "EventManager.h"
+#include "ResourceManager.h"
+#include "Texture.h"
 
 QuestionPuzzle::QuestionPuzzle()
 	: question(L"")
-	, isTriggered(false)
 	, answer(L"")
+	, isTriggered(false)
 	, isDrawed(false)
-	, playerAnswer()
-	, currentLen(0)
-	, player(nullptr)
-	, currentChecked(3)
 	, isAnswerCheck(false)
+	, player(nullptr)
+	, currentLen(0)
+	, currentChecked(3)
+	, playerAnswer()
 {
-	SetSize({ 50, 50 });
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Cavinet", L"Texture\\Cavinet.bmp");
+	SetSize({ 40, 45 });
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize(GetSize());
 }
@@ -31,7 +34,6 @@ QuestionPuzzle::~QuestionPuzzle()
 
 void QuestionPuzzle::Update()
 {
-
 	//Input check
 	if (isTriggered)
 	{
@@ -39,6 +41,56 @@ void QuestionPuzzle::Update()
 		{
 			playerAnswer[0] = NULL;
 			currentLen = 0;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_1))
+		{
+			playerAnswer[currentLen++] = '1';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_2))
+		{
+			playerAnswer[currentLen++] = '2';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_3))
+		{
+			playerAnswer[currentLen++] = '3';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_4))
+		{
+			playerAnswer[currentLen++] = '4';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_5))
+		{
+			playerAnswer[currentLen++] = '5';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_6))
+		{
+			playerAnswer[currentLen++] = '6';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_7))
+		{
+			playerAnswer[currentLen++] = '7';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_8))
+		{
+			playerAnswer[currentLen++] = '8';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_9))
+		{
+			playerAnswer[currentLen++] = '9';
+			playerAnswer[currentLen] = NULL;
+		}
+		if (GET_KEYDOWN(KEY_TYPE::NUM_0))
+		{
+			playerAnswer[currentLen++] = '0';
+			playerAnswer[currentLen] = NULL;
 		}
 		if (GET_KEYDOWN(KEY_TYPE::Q))
 		{
@@ -221,19 +273,19 @@ void QuestionPuzzle::Update()
 
 void QuestionPuzzle::Render(HDC hdc)
 {
-	RECT drawRect;
-	RECT errorRect;
-	RECT answerTextRect;
-	SetRect(&drawRect, 0, 0, 300, 100);
-	SetRect(&answerTextRect, 0, 300, 100, 400);
+	SetTextColor(hdc, RGB(255, 0, 0));
+	SetBkColor(hdc, TRANSPARENT);
 	if(isTriggered)
 	{
-		DrawText(hdc, question.c_str(),
-			-1, &drawRect, DT_WORDBREAK);
-		DrawText(hdc, playerAnswer, -1,
-			&answerTextRect, DT_CENTER);
+		TextOut(hdc, 550, 600, question.c_str(),
+			question.size());
+		TextOut(hdc, 550, 650, playerAnswer, 
+			wcslen(playerAnswer));
 		isDrawed = true;
 	}
+	BitBlt(hdc, GetPos().x - 20, GetPos().y - 25, 
+		GetSize().x, GetSize().y,
+		m_pTex->GetTexDC(), 0, 0, SRCCOPY);
 	ComponentRender(hdc);
 }
 
