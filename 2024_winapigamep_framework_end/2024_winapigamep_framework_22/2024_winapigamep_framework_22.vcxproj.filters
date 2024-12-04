@@ -139,25 +139,13 @@
     <ClInclude Include="TitleImage.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="MapScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>Engine\99. Header</Filter>
     </ClInclude>
     <ClInclude Include="QuestionPuzzle.h" />
     <ClInclude Include="Wall.h" />
-    <ClInclude Include="BGDScene.h">
+    <ClInclude Include="MainHole_1F.h">
       <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="TextUI.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="SpawnManger.h">
-      <Filter>Engine\02. Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyWallCast.h">
-      <Filter>Engine\03. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -255,22 +243,10 @@
     <ClCompile Include="TitleImage.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="MapScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="QuestionPuzzle.cpp" />
     <ClCompile Include="Wall.cpp" />
-    <ClCompile Include="BGDScene.cpp">
+    <ClCompile Include="MainHole_1F.cpp">
       <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TextUI.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
-    <ClCompile Include="SpawnManger.cpp">
-      <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyWallCast.cpp">
-      <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

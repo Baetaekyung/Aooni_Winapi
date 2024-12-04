@@ -87,6 +87,10 @@ void Core::MainRender()
 {
 	// 1. clear
 	::PatBlt(m_hBackDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACKNESS);
+	//HBRUSH hbrush = CreateSolidBrush(RGB(0, 0, 0));
+	//RECT rt = { 0,0, SCREEN_WIDTH, SCREEN_HEIGHT };
+	//FillRect(m_hBackDC, &rt, hbrush);
+
 	// 2. Render
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
 	// 3. display	

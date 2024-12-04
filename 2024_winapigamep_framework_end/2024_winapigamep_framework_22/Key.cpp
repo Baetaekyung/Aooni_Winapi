@@ -26,8 +26,8 @@ void Key::Render(HDC hdc)
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
 
-	GDISelector* pBrush = new GDISelector(hdc, BRUSH_TYPE::YELLOW);
-	ELLIPSE_RENDER(hdc, vPos.x, vPos.y,
+	GDISelector* pBrush = new GDISelector(hdc, currentBrushType);
+	RECT_RENDER(hdc, vPos.x, vPos.y,
 		vSize.x, vSize.y);
 	pBrush->~GDISelector();
 

@@ -12,12 +12,11 @@
 #include "Animation.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
-
+#include "Core.h"
 Player::Player()
 	: m_pTex(nullptr)
 	, _speed(1.5)
 	, _playerDir(Direction::DOWN)
-	, keyCount(0)
 	, canGoUpward(true)
 	, canGoDownward(true)
 	, canGoLeftword(true)
@@ -26,7 +25,7 @@ Player::Player()
 {
 	SetName(L"Player");
 
-	#pragma region Animation Init
+#pragma region Animation Init
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Hiroshi", L"Texture\\Hiroshi.bmp");
 	this->AddComponent<Collider>();
 
@@ -55,6 +54,7 @@ Player::Player()
 #pragma endregion
 	//Collision Check
 	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::INTERACTABLE);
+	GetComponent<Collider>()->SetSize({20.f, 35.f});
 }
 
 Player::~Player()
@@ -73,10 +73,10 @@ void Player::Render(HDC _hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
-	
+
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
-	
+
 	ComponentRender(_hdc);
 }
 
@@ -162,8 +162,8 @@ void Player::Interact(Collider* other)
 	if (other->GetOwner()->GetName() == L"Key")
 	{
 		GET_SINGLE(ResourceManager)->Play(L"GetKey");
-		keyCount++;
-		cout << keyCount << '\n';
+		g_playerkeyCount++;
+		cout << g_playerkeyCount << '\n';
 	}
 	if (other->GetOwner()->GetName() == L"Door")
 	{
@@ -174,52 +174,60 @@ void Player::Interact(Collider* other)
 void Player::PlayerMove()
 {
 	Vec2 vPos = GetPos();
+	Vec2 vSize = GetSize();
 	Vec2 colliderSize = GetComponent<Collider>()->GetSize();
+	//HDC _hdc = GetDC(nullptr);
+	HDC _hdc = GET_SINGLE(Core)->GetMainDC();
 
 	if (!canMove) return;
 
 	if (GET_KEY(KEY_TYPE::A))
 	{
+		color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y);
 		if (_playerDir != Direction::LEFT)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiLeft", true);
 			DirectionChanged(Direction::LEFT);
 		}
-		if (canGoLeftword) 
+		if (canGoLeftword) {
 			vPos.x -= 100.f * fDT * _speed;
+		}
 	}
 	else if (GET_KEY(KEY_TYPE::D))
 	{
+		color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y);
 		if (_playerDir != Direction::RIGHT)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiRight", true);
 			DirectionChanged(Direction::RIGHT);
 		}
-		if(canGoRightword)
+		if (canGoRightword)
 			vPos.x += 100.f * fDT * _speed;
 	}
 	else if (GET_KEY(KEY_TYPE::S))
 	{
+		color = GetPixel(_hdc, vPos.x, vPos.y + blockdistance.y);
 		if (_playerDir != Direction::DOWN)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiDown", true);
 			DirectionChanged(Direction::DOWN);
 		}
-		if(canGoDownward)
+		if (canGoDownward)
 			vPos.y += 100.f * fDT * _speed;
 	}
 	else if (GET_KEY(KEY_TYPE::W))
 	{
+		color = GetPixel(_hdc, vPos.x, vPos.y - blockdistance.y);
 		if (_playerDir != Direction::UP)
 		{
 			GetComponent<Animator>()->StopAnimation();
 			GetComponent<Animator>()->PlayAnimation(L"HiroshiUp", true);
 			DirectionChanged(Direction::UP);
 		}
-		if(canGoUpward)
+		if (canGoUpward)
 			vPos.y -= 100.f * fDT * _speed;
 	}
 	else
@@ -248,7 +256,19 @@ void Player::PlayerMove()
 			break;
 		}
 	}
-	SetPos(vPos);
+	if (!IsBlockedByColor(color)) {
+		SetPos(vPos);
+	}
+}
+
+
+
+bool Player::IsBlockedByColor(COLORREF color)
+{
+	return (GetRValue(color) == 0 && GetGValue(color) == 0 && GetBValue(color) == 0)
+		|| (GetRValue(color) == 159 && GetGValue(color) == 158 && GetBValue(color) == 152)
+		|| (GetRValue(color) == 105 && GetGValue(color) == 54 && GetBValue(color) == 0);
+
 }
 
 

@@ -5,6 +5,7 @@
 #include "Tile.h"
 #include "InputManager.h"
 #include "Wall.h"
+#include "Player.h"
 void GameScene::Init()
 {
 	tile = new Tile;
@@ -14,11 +15,10 @@ void GameScene::Init()
 
 	tile->ChangeTile(TileMap::_1F_MAINHOLE);
 
-	wall = new Wall;
-	wall->SetPos({SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
-	wall->SetSize({ 100, 100 });
-	wall->SetName(L"Wall");
-	AddObject(wall, LAYER::WALL);
+	pPlayer = new Player;
+	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
+	pPlayer->SetSize({ 100.f,100.f });
+	AddObject(pPlayer, LAYER::PLAYER);
 }
 
 void GameScene::Update()
