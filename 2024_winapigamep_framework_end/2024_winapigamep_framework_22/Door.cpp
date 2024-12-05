@@ -5,6 +5,7 @@
 #include "GDISelector.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
+#include <string>
 
 Door::Door()
 	: _isEntering(false)
@@ -45,7 +46,7 @@ void Door::EnterCollision(Collider* other)
 		Player* pPlayer = 
 			dynamic_cast<Player*>(other->GetOwner());
 		GET_SINGLE(ResourceManager)->Play(L"Door");
-		if (pPlayer->keyCount > 0)
+		if (NoNeedKey || pPlayer->keyCount > 0)
 		{
 			GET_SINGLE(SceneManager)->LoadScene(nextSceneName);
 		}
@@ -68,14 +69,15 @@ void Door::ExitCollision(Collider* other)
 	}
 }
 
-void Door::SetNextMap(TileMap nextTileMap)
+void Door::SetNextMap(MAP_TYPE nextTileMap)
 {
 	switch (nextTileMap)
 	{
-	case TileMap::_1F_MAINHOLE:
-		nextSceneName = L"GameScene";
+	case MAP_TYPE::MainHole_1FScene:
+		nextSceneName = L"MainHole_1FScene";
 		break;
-	case TileMap::_1F_MAINHOLE_RIGHT_CORRIDOR:
+	case MAP_TYPE::MainHoleRightCorridor_1F:
+		nextSceneName = L"MainHoleRightCorridor_1F";
 		break;
 	default:
 		break;
