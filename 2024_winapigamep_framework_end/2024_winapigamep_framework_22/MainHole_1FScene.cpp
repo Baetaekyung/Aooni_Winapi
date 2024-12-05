@@ -6,12 +6,13 @@
 
 void MainHole_1FScene::Init()
 {
+	std::cout << "\nIn";
+
 	Tile* tile = new Tile;
 	tile->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
-	tile->SetName(L"Map");
-	AddObject(tile, LAYER::BACKGROUND);
-
+	tile->SetSize({ 224, 416 });
 	tile->SetTile(MAP_TYPE::MainHole_1FScene);
+	AddObject(tile, LAYER::BACKGROUND);
 
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });

@@ -1,12 +1,13 @@
 #pragma once
-#include "Scene.h"
-class MainHoleRightCorridor_1F :
-    public Scene
+#include "Object.h"
+class InitTexture :
+    public Object
 {
 public:
-    virtual void Init() override;
+    InitTexture();
 
     virtual void Update() override;
 
     virtual void Render(HDC _hdc) override;
 };
+

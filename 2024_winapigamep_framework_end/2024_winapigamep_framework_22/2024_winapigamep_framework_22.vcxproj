@@ -178,6 +178,7 @@
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="InitTexture.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="MainHoleRightCorridor_1F.h" />
@@ -213,6 +214,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GDISelector.cpp" />
+    <ClCompile Include="InitTexture.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="main.cpp" />

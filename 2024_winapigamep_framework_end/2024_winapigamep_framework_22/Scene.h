@@ -1,7 +1,6 @@
 #pragma once
 //#include "Object.h"
 class Object; // 클래스 전방선언
-class Tile;
 class Player;
 class Scene
 {

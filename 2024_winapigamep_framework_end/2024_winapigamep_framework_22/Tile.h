@@ -23,8 +23,7 @@ public:
 private:
     MAP_TYPE CurrentTileMap
         = MAP_TYPE::MainHole_1FScene;
-
-    std::vector<Texture*> m_TexArr;
-
+    std::map<std::wstring, std::wstring> textures;
+    Texture* m_tTex;
 };
 

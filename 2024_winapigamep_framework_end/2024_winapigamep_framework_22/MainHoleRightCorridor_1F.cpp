@@ -5,11 +5,10 @@
 void MainHoleRightCorridor_1F::Init()
 {
 	Tile* tile = new Tile;
-	tile->SetTile(MAP_TYPE::MainHoleRightCorridor_1F);
 	tile->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
-	tile->SetSize({ 1000, 1000 });
-	tile->SetName(L"Map");
+	tile->SetSize({ 384, 160 });
 	AddObject(tile, LAYER::BACKGROUND);
+	tile->SetTile(MAP_TYPE::MainHole_1FScene);
 }
 
 void MainHoleRightCorridor_1F::Update()
