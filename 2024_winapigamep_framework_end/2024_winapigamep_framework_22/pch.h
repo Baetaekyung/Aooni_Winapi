@@ -39,6 +39,7 @@ using std::wstring;
 
 // 디버깅용 콘솔창
 #ifdef _DEBUG
+
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 #else

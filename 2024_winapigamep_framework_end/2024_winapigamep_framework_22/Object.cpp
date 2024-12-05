@@ -54,6 +54,14 @@ void Object::ExitCollision(Collider* _other)
 {
 }
 
+bool Object::IsBlockedByColor(COLORREF color)
+{
+	return (GetRValue(color) == 0 && GetGValue(color) == 0 && GetBValue(color) == 0)
+		|| (GetRValue(color) == 159 && GetGValue(color) == 158 && GetBValue(color) == 152)
+		|| (GetRValue(color) == 105 && GetGValue(color) == 54 && GetBValue(color) == 0);
+
+}
+
 //void Object::Update()
 //{
 //	if (GET_KEY(KEY_TYPE::LEFT))

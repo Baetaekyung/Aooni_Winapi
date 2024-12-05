@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "Wall.h"
 #include "Player.h"
+#include "CollisionManager.h"
 void GameScene::Init()
 {
 	tile = new Tile;
@@ -19,6 +20,8 @@ void GameScene::Init()
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
 	pPlayer->SetSize({ 100.f,100.f });
 	AddObject(pPlayer, LAYER::PLAYER);
+
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PLAYER);
 }
 
 void GameScene::Update()

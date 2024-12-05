@@ -19,6 +19,14 @@ public:
 	virtual void ExitCollision(Collider* _other);
 public:
 	void WallDirection();
+	Direction GetCurrentDirection()
+	{
+		return _enemeyCurrentDir;
+	}
+	Direction GetLastDirection()
+	{
+		return _enemeyLastDir;
+	}
 private:
 	float _textTIme;
 	Texture* _m_pTex;
@@ -32,5 +40,8 @@ private:
 	//Direction _playerDir;
 	wstring currentAnimation;
 	std::unordered_map<Direction, wstring> animation;
+	bool _iss;
+	Vec2 blockdistance = { 20, 23 };
+	COLORREF color;
 };
 

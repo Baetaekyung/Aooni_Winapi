@@ -18,7 +18,8 @@ public:
 private:
 	bool _isWallCast;
 	Enemy* _owner;
-
+	Vec2 blockdistance = { 5, 10 };
+	COLORREF color; // = RGB(10, 10, 10);
 	Vec2 pos;
 };
 
