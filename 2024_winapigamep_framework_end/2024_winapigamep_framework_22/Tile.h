@@ -18,11 +18,11 @@ public:
 
 
 public:
-    void ChangeTile(TileMap NewTileMap);
+    void SetTile(MAP_TYPE newMapType);
 
 private:
-    TileMap CurrentTileMap
-        = TileMap::_1F_MAINHOLE;
+    MAP_TYPE CurrentTileMap
+        = MAP_TYPE::MainHole_1FScene;
 
     std::vector<Texture*> m_TexArr;
 

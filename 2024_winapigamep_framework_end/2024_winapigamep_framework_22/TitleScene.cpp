@@ -26,7 +26,7 @@ void TitleScene::Init()
 	Door* pDoor = new Door;
 	pDoor->SetPos({ SCREEN_WIDTH - 100, SCREEN_HEIGHT / 2 });
 	pDoor->SetSize({ 30.f, 50.f });
-	pDoor->SetNextMap(TileMap::_1F_MAINHOLE);
+	pDoor->SetNextMap(MAP_TYPE::MainHole_1FScene);
 	AddObject(pDoor, LAYER::INTERACTABLE);
 
 	Object* pKey = new Key;
@@ -46,7 +46,7 @@ void TitleScene::Update()
 {
 	Scene::Update();
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
+		GET_SINGLE(SceneManager)->LoadScene(L"MainHole_1FScene");
 }
 
 void TitleScene::Render(HDC _hdc)
