@@ -85,9 +85,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -143,21 +140,11 @@
       <Filter>Engine\99. Header</Filter>
     </ClInclude>
     <ClInclude Include="QuestionPuzzle.h" />
-    <ClInclude Include="Wall.h" />
-    <ClInclude Include="EndingScene.h" />
-    <ClInclude Include="GameOverScene.h" />
-    <ClInclude Include="QuizData.h" />
-    <ClInclude Include="BGDScene.h">
+    <ClInclude Include="MainHole_1FScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyWallCast.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="SpawnManger.h">
-      <Filter>Engine\02. Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TextUI.h">
-      <Filter>Engine\06. Component</Filter>
+    <ClInclude Include="MainHoleRightCorridor_1F.h">
+      <Filter>Engine\04. Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -200,9 +187,6 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Engine\03. Object</Filter>
@@ -256,21 +240,11 @@
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="QuestionPuzzle.cpp" />
-    <ClCompile Include="Wall.cpp" />
-    <ClCompile Include="EndingScene.cpp" />
-    <ClCompile Include="GameOverScene.cpp" />
-    <ClCompile Include="QuizData.cpp" />
-    <ClCompile Include="BGDScene.cpp">
+    <ClCompile Include="MainHole_1FScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyWallCast.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="SpawnManger.cpp">
-      <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TextUI.cpp">
-      <Filter>Engine\06. Component</Filter>
+    <ClCompile Include="MainHoleRightCorridor_1F.cpp">
+      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

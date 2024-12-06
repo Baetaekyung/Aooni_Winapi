@@ -16,9 +16,6 @@ public:
 	virtual void EnterCollision(Collider* other);
 	virtual void ExitCollision(Collider* other);
 public:
-	void SetPuzzleQuestion(wstring question);
-	void SetPuzzleAnswer(wstring answer);
-	void SetErrorMessage(wstring errorMsg);
 	void SetQuiz(QuizEnum quiz);
 private:
 	bool isTriggered;
@@ -27,6 +24,7 @@ private:
 public:
 	Texture* m_pTex;
 private:
+	QuizData* quizData;
 	wstring question;
 	wstring answer;
 	wstring errorMessage;

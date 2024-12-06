@@ -15,9 +15,11 @@ public:
     virtual void StayCollision(Collider* other);
     virtual void ExitCollision(Collider* other);
 public:
-    void SetNextMap(TileMap nextTileMap);
+    void SetNextMap(MAP_TYPE nextTileMap);
+    void SetNoNeedKey(bool newbool) { NoNeedKey = newbool; };
 private:
     bool _isEntering = false;
+    bool NoNeedKey = false;
     wstring nextSceneName;
 };
 

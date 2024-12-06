@@ -4,7 +4,9 @@ enum class QuizEnum
 {
 	MOTIVE,
 	MATH,
-	NONSENSE
+	NONSENSE,
+	NONSENSE2,
+	NONSENSE3
 };
 
 struct QuizDataSet
@@ -16,14 +18,11 @@ struct QuizDataSet
 
 class QuizData
 {
-	std::unordered_map<QuizEnum, QuizDataSet> quizs = 
-	{ 
-		{QuizEnum::MOTIVE, quiz1}, 
-		{QuizEnum::MATH, quiz2},
-		{QuizEnum::NONSENSE, quiz3},
-
-	};
-
+public:
+	QuizData();
+	~QuizData();
+public:
+	std::unordered_map<QuizEnum, QuizDataSet> quizs;
 private:
 	QuizDataSet quiz1 = {
 		L"우리가 모티브 한 게임은? (영어로 답하시오)",
@@ -40,5 +39,14 @@ private:
 		L"190000",
 		L"쉽구만.."
 	};
+	QuizDataSet quiz4 = {
+		L"말고기를 먹으면 입이 시원해지는 이유는? (조유성 제공)",
+		L"horse",
+		L"Halls(입이 시원해지는 사탕)이기 때문..(조유성 피셜)"
+	};
+	QuizDataSet quiz5 = {
+		L"아몬드가 죽으면?!?!?",
+		L"diamond",
+		L"다이아몬드 입니다 ㅎㅎ"
+	};
 };
-

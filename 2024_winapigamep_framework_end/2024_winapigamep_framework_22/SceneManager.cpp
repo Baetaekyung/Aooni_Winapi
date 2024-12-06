@@ -2,8 +2,8 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TitleScene.h"
-#include "GameScene.h"
-#include "MainHole_1F.h"
+#include "MainHole_1FScene.h"
+#include "MainHoleRightCorridor_1F.h"
 
 void SceneManager::Init()
 {
@@ -11,7 +11,8 @@ void SceneManager::Init()
 
 	// ¾À µî·Ï
 	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
-	RegisterScene(L"GameScene", std::make_shared<GameScene>());
+	RegisterScene(L"MainHole_1FScene", std::make_shared<MainHole_1FScene>());
+	RegisterScene(L"MainHoleRightCorridor_1F", std::make_shared<MainHoleRightCorridor_1F>());
 
 	// ¾À ·Îµå
 	LoadScene(L"TitleScene");
