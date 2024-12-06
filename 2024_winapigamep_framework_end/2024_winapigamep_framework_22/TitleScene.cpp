@@ -23,8 +23,8 @@ void TitleScene::Init()
 
 void TitleScene::Update() {
     Scene::Update();
-    if (GET_KEYDOWN(KEY_TYPE::ENTER))
-        GET_SINGLE(SceneManager)->LoadScene(L"MainHole_1FScene");
+    if (GET_KEYDOWN(KEY_TYPE::SPACE))
+        GET_SINGLE(SceneManager)->LoadScene(L"IntroScene");
 }
 
 void TitleScene::Render(HDC _hdc)
@@ -32,5 +32,5 @@ void TitleScene::Render(HDC _hdc)
     Scene::Render(_hdc);
     SetBkColor(_hdc, TRANSPARENT);
     SetTextColor(_hdc, RGB(255, 0, 0));
-    TextOut(_hdc, 550, 400, L"Enter to start..", wcslen(L"Enter to start.."));
+    TextOut(_hdc, 550, 400, L"Space to start..", wcslen(L"Space to start.."));
 }

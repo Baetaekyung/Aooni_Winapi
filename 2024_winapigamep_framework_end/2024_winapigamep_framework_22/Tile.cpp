@@ -5,11 +5,6 @@
 #include <vector>
 #include <map>
 
-#define SET_TILE_CASE(mapType, textureName) \
-    case MAP_TYPE::##mapType:              \
-        m_tTex = GET_SINGLE(ResourceManager)->TextureFind(L##textureName); \
-        break;
-
 Tile::Tile()
 {
     m_tTex = GET_SINGLE(ResourceManager)->TextureFind(L"Kitchen_1F");
@@ -58,6 +53,9 @@ void Tile::SetTile(MAP_TYPE newMapType)
         break;
     case MAP_TYPE::Kitchen_1F:
         path = L"Kitchen_1F";
+        break;
+    case MAP_TYPE::LeftCorridor_1FScene:
+        path = L"LeftCorridor_1FScene";
         break;
     case MAP_TYPE::END:
         break;
