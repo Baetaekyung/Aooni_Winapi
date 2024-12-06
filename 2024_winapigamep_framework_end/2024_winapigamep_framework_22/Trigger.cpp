@@ -86,6 +86,9 @@ void Trigger::SetNextMap(MAP_TYPE nextTileMap)
 	case MAP_TYPE::Kitchen_1F:
 		nextSceneName = L"Kitchen_1FScene";
 		break;
+	case MAP_TYPE::LeftCorridor_1FScene:
+		nextSceneName = L"LeftCorridor_1FScene";
+		break;
 	default:
 		break;
 	}

@@ -159,6 +159,15 @@
     <ClInclude Include="EnemyWallCast.h" />
     <ClInclude Include="SpawnManger.h" />
     <ClInclude Include="TextUI.h" />
+    <ClInclude Include="LeftCorridor_1FScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroObject.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -272,5 +281,14 @@
     <ClCompile Include="EnemyWallCast.cpp" />
     <ClCompile Include="SpawnManger.cpp" />
     <ClCompile Include="TextUI.cpp" />
+    <ClCompile Include="LeftCorridor_1FScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroObject.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

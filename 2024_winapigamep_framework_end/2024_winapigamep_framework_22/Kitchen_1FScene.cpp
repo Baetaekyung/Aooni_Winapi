@@ -2,7 +2,6 @@
 #include "Kitchen_1FScene.h"
 #include "Tile.h"
 #include "Player.h"
-#include "PlayerManager.h"
 #include "Trigger.h"
 void Kitchen_1FScene::Init()
 {
@@ -56,10 +55,28 @@ void Kitchen_1FScene::Init()
 	}
 
 	{
+		//오른쪽 아래 소파 막기
+		Trigger* door = new Trigger;
+		door->SetPos({ 710, 520 });
+		door->SetColliderSize({ 30, 60 });
+		door->SetNeedKey(true);
+		door->SetName(L"Wall");
+		AddObject(door, LAYER::INTERACTABLE);
+	}
+	{
 		//아래 소파 막기
 		Trigger* door = new Trigger;
-		door->SetPos({ 720, 240 });
-		door->SetColliderSize({ 120, 30 });
+		door->SetPos({ 620, 590 });
+		door->SetColliderSize({ 60, 30 });
+		door->SetNeedKey(true);
+		door->SetName(L"Wall");
+		AddObject(door, LAYER::INTERACTABLE);
+	}
+	{
+		//입, 출구쪽 벽 막기
+		Trigger* door = new Trigger;
+		door->SetPos({ 510, 360 });
+		door->SetColliderSize({ 30, 30 });
 		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);

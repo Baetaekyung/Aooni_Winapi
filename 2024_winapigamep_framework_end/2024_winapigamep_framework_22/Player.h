@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "PlayerManager.h"
 
 #define SpawnPlayer \
 	Object* pPlayer = new Player; \

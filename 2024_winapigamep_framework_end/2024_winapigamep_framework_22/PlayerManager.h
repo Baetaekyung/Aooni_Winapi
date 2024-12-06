@@ -7,6 +7,6 @@ public:
 	void SetPlayerSpawnPos(Vec2 newPlayerPos) { pPlayerSpawnPos = newPlayerPos; }
 
 private:
-	Vec2 pPlayerSpawnPos = { 1280 / 2, 500 };
+	Vec2 pPlayerSpawnPos = { 470, 383 };
 };
 
