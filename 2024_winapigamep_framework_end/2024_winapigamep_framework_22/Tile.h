@@ -19,6 +19,8 @@ public:
 public:
     void SetTile(MAP_TYPE newMapType);
 
+    void SetCustomTile(wstring newwstr);
+
 private:
     MAP_TYPE CurrentTileMap
         = MAP_TYPE::MainHole_1FScene;
