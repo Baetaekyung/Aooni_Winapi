@@ -59,51 +59,53 @@ Enemy::~Enemy()
 void Enemy::Update()
 {
 
-	if (_iss)
+	if (_isWallCafe)
 	{
 		HDC _hdc = GET_SINGLE(Core)->GetMainDC();
 		Vec2 vPos = GetPos();
 		Vec2 playerPos = _player->GetPos();
 
-		switch (_enemeyCurrentDir)
+		//switch (_enemeyCurrentDir)
+		//{
+		//case Direction::LEFT:
+		//	color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y + 40);
+		//	break;
+		//case Direction::RIGHT:
+		//	color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y + 40);
+		//	break;
+		//case Direction::UP:
+		//	color = GetPixel(_hdc, vPos.x, vPos.y + 40 - blockdistance.y);
+		//	break;
+		//case Direction::DOWN:
+		//	color = GetPixel(_hdc, vPos.x, vPos.y + 40 + blockdistance.y);
+		//	break;
+		//}
+
+
+		if (_time >= 1.f)
 		{
-		case Direction::LEFT:
-			color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y + 40);
-			break;
-		case Direction::RIGHT:
-			color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y + 40);
-			break;
-		case Direction::UP:
-			color = GetPixel(_hdc, vPos.x, vPos.y + 40 - blockdistance.y);
-			break;
-		case Direction::DOWN:
-			color = GetPixel(_hdc, vPos.x, vPos.y + 40 + blockdistance.y);
-			break;
+			_isWallCafe = false;
+			_time = 0;
 		}
-
-
-		if (!IsBlockedByColor(color))
-			_iss = false;
-
-		//if (!IsBlockedByColor(color))
-		//	_iss = false;
+		else
+			_time += fDT;
 
 		switch (_enemeyLastDir)
 		{
 		case Direction::LEFT:
-
+			color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y + 40);
 			vPos.x -= 100 * _speed * fDT;
 			break;
 		case Direction::RIGHT:
-
+			color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y + 40);
 			vPos.x += 100 * _speed * fDT;
 			break;
 		case Direction::UP:
-
+			color = GetPixel(_hdc, vPos.x, vPos.y + 40 - blockdistance.y);
 			vPos.y -= 100 * _speed * fDT;
 			break;
 		case Direction::DOWN:
-
+			color = GetPixel(_hdc, vPos.x, vPos.y + 40 + blockdistance.y);
 			vPos.y += 100 * _speed * fDT;
 			break;
 		}
@@ -116,10 +118,15 @@ void Enemy::Update()
 			currentAnimation = animation[_enemeyLastDir];
 		}
 
-
-		if(IsBlockedByColor(color))
+		if (!IsBlockedByColor(color))
+		{
 			SetPos(vPos);
-
+		}
+		else
+		{
+			WallDirection();
+			cout << 1 << endl;
+		}
 
 	}
 	else
@@ -137,23 +144,7 @@ void Enemy::Move()
 	Vec2 vPos = GetPos();
 	Vec2 playerPos = _player->GetPos();
 	HDC _hdc = GET_SINGLE(Core)->GetMainDC();
-	if (abs((vPos.y +40) - playerPos.y ) > 2.f)
-	{
-		if (playerPos.y < (vPos.y + 40))
-		{
-			color = GetPixel(_hdc, vPos.x , vPos.y + 40 - blockdistance.y);
-
-			vPos.y -= 100 * _speed * fDT;
-			_enemeyCurrentDir = Direction::UP;
-		}
-		if (playerPos.y > (vPos.y + 40))
-		{
-			color = GetPixel(_hdc, vPos.x , vPos.y + 40 + blockdistance.y);
-			vPos.y += 100 * _speed * fDT;
-			_enemeyCurrentDir = Direction::DOWN;
-		}
-	}
-	else if (abs(playerPos.x - vPos.x) > 2.f)
+	if (abs(playerPos.x - vPos.x) > 1.f)
 	{
 		if (playerPos.x > vPos.x)
 		{
@@ -168,6 +159,25 @@ void Enemy::Move()
 			_enemeyCurrentDir = Direction::LEFT;
 		}
 	}
+	else if (abs((vPos.y + 40) - playerPos.y) > 2.f)
+	{
+		if (playerPos.y < (vPos.y + 40))
+		{
+			color = GetPixel(_hdc, vPos.x, vPos.y + 40 - blockdistance.y);
+
+			vPos.y -= 100 * _speed * fDT;
+			_enemeyCurrentDir = Direction::UP;
+		}
+		if (playerPos.y > (vPos.y + 40))
+		{
+			color = GetPixel(_hdc, vPos.x, vPos.y + 40 + blockdistance.y);
+			vPos.y += 100 * _speed * fDT;
+			_enemeyCurrentDir = Direction::DOWN;
+		}
+	}
+
+	 
+	
 
 
 	if (currentAnimation != animation[_enemeyCurrentDir])
@@ -178,12 +188,13 @@ void Enemy::Move()
 	}
 
 	if (!IsBlockedByColor(color))
+	{
 		SetPos(vPos);
+	}
 	else
 	{
 		WallDirection();
-		_iss = true;
-		cout << 1 << endl;
+		_isWallCafe = true;
 	}
 }
 
@@ -236,13 +247,12 @@ void Enemy::WallDirection()
 	case Direction::RIGHT:
 		if (_player->GetPos().y <= (vPos.y + 40))
 		{
-			_enemeyLastDir = Direction::DOWN;
-
+			_enemeyLastDir = Direction::UP;
 
 		}
 		else
 		{
-			_enemeyLastDir = Direction::UP;
+			_enemeyLastDir = Direction::DOWN;
 
 		}
 		break;

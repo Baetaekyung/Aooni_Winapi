@@ -40,8 +40,9 @@ private:
 	//Direction _playerDir;
 	wstring currentAnimation;
 	std::unordered_map<Direction, wstring> animation;
-	bool _iss;
-	Vec2 blockdistance = { 20, 23 };
+	bool _isWallCafe;
+	Vec2 blockdistance = { 20, 25 };
+	float _time;
 	COLORREF color;
 };
 
