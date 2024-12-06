@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-#include "TileMap.h"
+
 class Door :
     public Object
 {
@@ -17,9 +17,11 @@ public:
 public:
     void SetNextMap(MAP_TYPE nextTileMap);
     void SetNoNeedKey(bool newbool) { NoNeedKey = newbool; };
+    void SetPlayerSpawnPoint(Vec2 newVec) { pPlayerSpawnVec2 = newVec; }
+    void SetColliderSize(Vec2 newVec);
 private:
     bool _isEntering = false;
     bool NoNeedKey = false;
     wstring nextSceneName;
+    Vec2 pPlayerSpawnVec2;
 };
-

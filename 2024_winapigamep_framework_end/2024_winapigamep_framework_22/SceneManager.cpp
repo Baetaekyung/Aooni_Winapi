@@ -40,7 +40,7 @@ void SceneManager::RegisterScene(const wstring& _sceneName, std::shared_ptr<Scen
 	m_mapScenes.insert(m_mapScenes.end(), { _sceneName, _scene });
 }
 
-void SceneManager::LoadScene(const wstring& _sceneName)
+void SceneManager::LoadScene(const wstring _sceneName)
 {
 	// ¾ÀÀÌ ÀÖÀ¸¸é
 	if (m_pCurrentScene != nullptr)

@@ -6,7 +6,8 @@
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include <string>
-
+#include "PlayerManager.h"
+#include "Collider.h"
 Door::Door()
 	: _isEntering(false)
 	, nextSceneName(L"")
@@ -48,6 +49,8 @@ void Door::EnterCollision(Collider* other)
 		GET_SINGLE(ResourceManager)->Play(L"Door");
 		if (NoNeedKey || pPlayer->keyCount > 0)
 		{
+			//MessageBox(NULL, L"abc", nextSceneName.c_str(), MB_OK);
+			GET_SINGLE(PlayerManager)->SetPlayerSpawnPos(pPlayerSpawnVec2);
 			GET_SINGLE(SceneManager)->LoadScene(nextSceneName);
 		}
 		else
@@ -82,4 +85,9 @@ void Door::SetNextMap(MAP_TYPE nextTileMap)
 	default:
 		break;
 	}
+}
+
+void Door::SetColliderSize(Vec2 newVec)
+{
+	GetComponent<Collider>()->SetSize(newVec);
 }
