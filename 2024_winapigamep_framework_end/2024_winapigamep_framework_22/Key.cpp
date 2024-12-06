@@ -4,10 +4,18 @@
 #include "EventManager.h"
 #include "GDISelector.h"
 #include "ResourceManager.h"
+#include "Animator.h"
 
 Key::Key()
 	:currentBrushType(BRUSH_TYPE::YELLOW)
 {
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Key", L"Texture\\light.bmp");
+
+	AddComponent<Animator>();
+	GetComponent<Animator>()->CreateAnimation(L"KeyAnim", m_pTex, Vec2(0.f, 0.f),
+		Vec2(10.f, 10.f), Vec2(10.f, 0.f), 8, 0.1f);
+	GetComponent<Animator>()->PlayAnimation(L"KeyAnim", true);
+
 	SetName(L"Key");
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ 10, 10 });
@@ -23,14 +31,6 @@ void Key::Update()
 
 void Key::Render(HDC hdc)
 {
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-
-	GDISelector* pBrush = new GDISelector(hdc, currentBrushType);
-	RECT_RENDER(hdc, vPos.x, vPos.y,
-		vSize.x, vSize.y);
-	pBrush->~GDISelector();
-
 	ComponentRender(hdc);
 }
 
