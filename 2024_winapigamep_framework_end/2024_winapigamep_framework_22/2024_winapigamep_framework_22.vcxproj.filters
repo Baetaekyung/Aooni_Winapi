@@ -124,7 +124,7 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Door.h">
+    <ClInclude Include="Trigger.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Key.h">
@@ -155,6 +155,10 @@
     <ClInclude Include="Kitchen_1FScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="BGDScene.h" />
+    <ClInclude Include="EnemyWallCast.h" />
+    <ClInclude Include="SpawnManger.h" />
+    <ClInclude Include="TextUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -236,7 +240,7 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Door.cpp">
+    <ClCompile Include="Trigger.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Key.cpp">
@@ -264,5 +268,9 @@
     <ClCompile Include="Kitchen_1FScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
+    <ClCompile Include="BGDScene.cpp" />
+    <ClCompile Include="EnemyWallCast.cpp" />
+    <ClCompile Include="SpawnManger.cpp" />
+    <ClCompile Include="TextUI.cpp" />
   </ItemGroup>
 </Project>

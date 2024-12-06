@@ -22,6 +22,7 @@ Player::Player()
 	, canGoLeftword(true)
 	, canGoRightword(true)
 	, canMove(true)
+	, blockdistance({ 15, 25 })
 {
 	SetName(L"Player");
 
@@ -260,17 +261,6 @@ void Player::PlayerMove()
 		SetPos(vPos);
 	}
 }
-
-
-
-bool Player::IsBlockedByColor(COLORREF color)
-{
-	return (GetRValue(color) == 0 && GetGValue(color) == 0 && GetBValue(color) == 0)
-		|| (GetRValue(color) == 159 && GetGValue(color) == 158 && GetBValue(color) == 152)
-		|| (GetRValue(color) == 105 && GetGValue(color) == 54 && GetBValue(color) == 0);
-
-}
-
 
 //void Player::CreateProjectile()
 //{

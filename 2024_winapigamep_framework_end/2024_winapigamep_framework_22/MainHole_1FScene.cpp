@@ -2,7 +2,7 @@
 #include "MainHole_1FScene.h"
 #include "Tile.h"
 #include "Player.h"
-#include "Door.h"
+#include "Trigger.h"
 #include "PlayerManager.h"
 void MainHole_1FScene::Init()
 {
@@ -12,21 +12,17 @@ void MainHole_1FScene::Init()
 	tile->SetTile(MAP_TYPE::MainHole_1FScene);
 	AddObject(tile, LAYER::BACKGROUND);
 
-	Object* pPlayer = new Player;
-	pPlayer->SetPos(GET_SINGLE(PlayerManager)->GetPlayerSpwanPos());
-	pPlayer->SetSize({ 100.f,100.f });
-	AddObject(pPlayer, LAYER::PLAYER);
+	SpawnPlayer
 
 
 	//µ¿ÂÊ ¹®
 	{
-		Door* door = new Door;
-		door->SetPos({ 750, 420 });
+		Trigger* door = new Trigger;
+		door->SetPos({ 760, 450 });
 		door->SetColliderSize({ 30, 150 });
 		door->SetNextMap(MAP_TYPE::MainHoleRightCorridor_1F);
 		door->SetName(L"Door");
-		door->SetNoNeedKey(true);
-		door->SetPlayerSpawnPoint({459, 380});
+		door->SetPlayerSpawnPoint({ 477, 380});
 		AddObject(door, LAYER::INTERACTABLE);
 	}
 }

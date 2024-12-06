@@ -6,7 +6,6 @@
 #include "EnemyWallCast.h"
 #include "CollisionManager.h"
 #include "Tile.h"
-#include "Wall.h"
 
 void BGDScene::Init()
 {

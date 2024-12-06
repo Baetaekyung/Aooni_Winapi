@@ -6,7 +6,7 @@
 #include "SceneManager.h"
 #include "Enemy.h"
 #include "Key.h"
-#include "Door.h"
+#include "Trigger.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "InitTexture.h"

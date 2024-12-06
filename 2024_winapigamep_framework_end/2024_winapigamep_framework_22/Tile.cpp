@@ -12,7 +12,7 @@
 
 Tile::Tile()
 {
-    m_tTex = GET_SINGLE(ResourceManager)->TextureFind(L"MainHole_1FScene");
+    m_tTex = GET_SINGLE(ResourceManager)->TextureFind(L"Kitchen_1F");
 }
 
 Tile::~Tile()
@@ -47,6 +47,7 @@ void Tile::Render(HDC _hdc)
 void Tile::SetTile(MAP_TYPE newMapType)
 {
     wstring path;
+
     switch (newMapType)
     {
     case MAP_TYPE::MainHole_1FScene:
@@ -63,5 +64,5 @@ void Tile::SetTile(MAP_TYPE newMapType)
     default:
         break;
     }
-    GET_SINGLE(ResourceManager)->TextureFind(path);
+    m_tTex = GET_SINGLE(ResourceManager)->TextureFind(path);
 }

@@ -5,8 +5,8 @@
 
 TitleImage::TitleImage()
 {
-	m_tTex = GET_SINGLE(ResourceManager)
-		->TextureLoad(L"TitleTexture", L"Title.bmp");
+	if (m_tTex = GET_SINGLE(ResourceManager)->TextureLoad(L"TitleTexture", L"Texture\\aooniTitle.bmp"))
+		std::cout << "Title Sucsess\n";
 
 	std::cout << "Start";
 }

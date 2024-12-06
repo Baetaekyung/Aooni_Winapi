@@ -1,12 +1,12 @@
 #pragma once
 #include "Object.h"
 
-class Door :
+class Trigger :
     public Object
 {
 public:
-    Door();
-    ~Door();
+    Trigger();
+    ~Trigger();
 public:
     void Update() override;
     void Render(HDC hdc) override;
@@ -16,7 +16,7 @@ public:
     virtual void ExitCollision(Collider* other);
 public:
     void SetNextMap(MAP_TYPE nextTileMap);
-    void SetNoNeedKey(bool newbool) { NoNeedKey = newbool; };
+    void SetNeedKey(bool newbool) { NoNeedKey = newbool; };
     void SetPlayerSpawnPoint(Vec2 newVec) { pPlayerSpawnVec2 = newVec; }
     void SetColliderSize(Vec2 newVec);
 private:

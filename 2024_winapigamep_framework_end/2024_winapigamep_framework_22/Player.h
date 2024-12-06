@@ -1,5 +1,12 @@
 #pragma once
 #include "Object.h"
+
+#define SpawnPlayer \
+	Object* pPlayer = new Player; \
+	pPlayer->SetSize({ 100, 100 }); \
+	pPlayer->SetPos(GET_SINGLE(PlayerManager)->GetPlayerSpwanPos()); \
+	AddObject(pPlayer, LAYER::PLAYER);
+
 class Texture;
 
 enum class Direction
@@ -32,7 +39,6 @@ public:
 private:
 	void Interact(Collider* other);
 	void PlayerMove();
-	bool IsBlockedByColor(COLORREF color);
 private:
 	/*void CreateProjectile();*/
 	Texture* m_pTex;
@@ -40,7 +46,7 @@ private:
 	Direction _playerDir;
 	float checkblackLength = 10.f;
 	float vSize = 30.f;
-	Vec2 blockdistance = {15, 23};
+	Vec2 blockdistance = {15, 25};
 public:
 	int keyCount = 0;
 private:

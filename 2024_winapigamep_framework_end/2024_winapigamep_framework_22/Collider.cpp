@@ -8,7 +8,6 @@ Collider::Collider()
 	, m_ID(m_sNextID++)
 	, m_vLatePos(0.f, 0.f)
 	, m_vOffsetPos(0.f, 0.f)
-	, m_ID(m_sNextID++)
 {
 }
 

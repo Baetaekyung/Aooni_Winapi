@@ -173,7 +173,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Define.h" />
-    <ClInclude Include="Door.h" />
+    <ClInclude Include="Trigger.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyWallCast.h" />
     <ClInclude Include="Enums.h" />
@@ -217,7 +217,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyWallCast.cpp" />
     <ClCompile Include="EventManager.cpp" />
