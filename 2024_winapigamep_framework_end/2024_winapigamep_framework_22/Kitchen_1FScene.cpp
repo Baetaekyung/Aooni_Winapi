@@ -28,6 +28,7 @@ void Kitchen_1FScene::Init()
 
 	//ㅡㅡㅡㅡㅡㅡ오브젝트들ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	{
+		//식탁 막기
 		Trigger* door = new Trigger;
 		door->SetPos({ 670, 330 });
 		door->SetColliderSize({ 100, 150 });
@@ -36,6 +37,7 @@ void Kitchen_1FScene::Init()
 		AddObject(door, LAYER::INTERACTABLE);
 	}
 	{
+		//냉장고 쩌리쩌리 막기
 		Trigger* door = new Trigger;
 		door->SetPos({ 650, 140 });
 		door->SetColliderSize({ 240, 80 });
@@ -44,6 +46,17 @@ void Kitchen_1FScene::Init()
 		AddObject(door, LAYER::INTERACTABLE);
 	}
 	{
+		//싱크대 막기
+		Trigger* door = new Trigger;
+		door->SetPos({ 720, 240 });
+		door->SetColliderSize({ 120, 30 });
+		door->SetNeedKey(true);
+		door->SetName(L"Wall");
+		AddObject(door, LAYER::INTERACTABLE);
+	}
+
+	{
+		//아래 소파 막기
 		Trigger* door = new Trigger;
 		door->SetPos({ 720, 240 });
 		door->SetColliderSize({ 120, 30 });
