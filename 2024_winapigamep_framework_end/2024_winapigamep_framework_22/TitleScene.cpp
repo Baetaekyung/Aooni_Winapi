@@ -32,5 +32,5 @@ void TitleScene::Render(HDC _hdc)
     Scene::Render(_hdc);
     SetBkColor(_hdc, TRANSPARENT);
     SetTextColor(_hdc, RGB(255, 0, 0));
-    TextOut(_hdc, 550, 400, L"Space to start..", wcslen(L"Space to start.."));
+    TextOut(_hdc, (SCREEN_WIDTH / 2) - 50, 600, L"Space to start..", wcslen(L"Space to start.."));
 }

@@ -8,7 +8,8 @@
 #include "PlayerManager.h"
 
 IntroObject::IntroObject() :
-    cnt(0)
+    cnt(0),
+    bCanMoveScene(false)
 {
     std::cout << "\nStart Intro\n";
     for (int i = 0; i <= 8; ++i) {
@@ -21,10 +22,15 @@ IntroObject::IntroObject() :
 
     GET_SINGLE(ResourceManager)->LoadSound(L"Glass"
         , L"Sound\\GlassBroken.wav", false);
+    GET_SINGLE(ResourceManager)->LoadSound(L"Wind"
+        , L"Sound\\WindBaseSFX.wav", true);
+
 
     std::wstring currentTextureKey = std::to_wstring(cnt);
     m_InTex = GET_SINGLE(ResourceManager)
         ->TextureFind(currentTextureKey);
+
+    GET_SINGLE(ResourceManager)->Play(L"Wind");
 }
 
 void IntroObject::Update()
@@ -57,8 +63,7 @@ void IntroObject::NextIntro()
     std::cout << "\nNext Intro\n";
 
     if (cnt >= 8) {
-        GET_SINGLE(SceneManager)->LoadScene(L"MainHoleRightCorridor_1F");
-        GET_SINGLE(PlayerManager)->SetPlayerSpawnPos({ 477, 380 });
+        bCanMoveScene = true;
     }
 
 

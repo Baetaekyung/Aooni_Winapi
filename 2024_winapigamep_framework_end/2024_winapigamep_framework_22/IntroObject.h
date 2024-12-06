@@ -11,11 +11,12 @@ public:
 
     virtual void Render(HDC _hdc) override;
 
+public:
+    bool GetMoveScene() { return bCanMoveScene; };
 private:
     void NextIntro();
-
     Texture* m_InTex;
-
+    bool bCanMoveScene;
     int cnt = 0;
 };
 
