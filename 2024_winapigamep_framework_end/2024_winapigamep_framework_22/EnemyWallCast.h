@@ -17,6 +17,7 @@ public:
 	const bool& GetWallCast() const { return _isWallCast; }
 	const bool& GetWallListDirection() const { return _isWallCast; }
 private:
+	int enterCnt;
 	bool _isWallCast;
 	Enemy* _owner;
 	Vec2 blockdistance = { 5, 10 };

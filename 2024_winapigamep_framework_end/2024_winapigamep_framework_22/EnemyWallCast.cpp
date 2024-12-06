@@ -29,35 +29,10 @@ void EnemyWallCast::Update()
 	Vec2 vPos = _owner->GetPos(); 
 	if (_owner == nullptr)
 		return;
-	//HDC _hdc = GET_SINGLE(Core)->GetMainDC();
-	//Direction dir;
-	//if(_isWallCast)
-	//	dir = _owner->GetLastDirection();
-	//else
-	//	dir = _owner->GetCurrentDirection();
-
-	/*switch (dir)
-	{
-	case Direction::LEFT:
-		color = GetPixel(_hdc, vPos.x , vPos.y + 40);
-		break;
-	case Direction::RIGHT:
-		color = GetPixel(_hdc, vPos.x , vPos.y + 40 );
-		break;
-	case Direction::UP:
-		color = GetPixel(_hdc, vPos.x , vPos.y + 40);
-		break;
-	case Direction::DOWN:
-		color = GetPixel(_hdc, vPos.x , vPos.y + 40);
-		break;
-	}*/
-	//if(!_isWallCast)
-	//{
-	//	_isWallCast = true;
-	//	_owner->WallDirection();
-
-	//	cout << 2 << endl;
-	//}
+	if (enterCnt > 0)
+		_isWallCast = true;
+	else
+		_isWallCast = false;
 	pos = vPos;
 	SetPos(pos);
 
@@ -72,6 +47,7 @@ void EnemyWallCast::Render(HDC _hdc)
 void EnemyWallCast::EnterCollision(Collider* _other)
 {
 	//cout << "CASTENTER" << endl;
+	enterCnt++;
 	_owner->WallDirection();
 	_isWallCast = true;
 }
@@ -82,6 +58,7 @@ void EnemyWallCast::StayCollision(Collider* _other)
 
 void EnemyWallCast::ExitCollision(Collider* _other)
 {
+	enterCnt--;
 	//Object* obj = _other->GetOwner();
 	_isWallCast = false;
 	//cout << "CASTEXIT" << endl;
