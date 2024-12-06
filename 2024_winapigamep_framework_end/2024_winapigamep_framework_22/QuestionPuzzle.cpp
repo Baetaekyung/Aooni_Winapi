@@ -23,7 +23,7 @@ QuestionPuzzle::QuestionPuzzle()
 	, currentChecked(3)
 	, playerAnswer()
 {
-	quizData = new QuizData();
+	//quizData = new QuizData();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Cavinet", L"Texture\\Cavinet.bmp");
 	SetSize({ 40, 45 });
 	this->AddComponent<Collider>();
@@ -324,7 +324,7 @@ void QuestionPuzzle::ExitCollision(Collider* other)
 
 void QuestionPuzzle::SetQuiz(QuizEnum quiz)
 {
-	question = quizData->quizs[quiz].question;
+	/*question = quizData->quizs[quiz].question;
 	errorMessage = quizData->quizs[quiz].errorMessage;
-	answer = quizData->quizs[quiz].answer;
+	answer = quizData->quizs[quiz].answer;*/
 }

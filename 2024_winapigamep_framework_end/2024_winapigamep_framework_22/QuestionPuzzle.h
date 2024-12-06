@@ -24,7 +24,7 @@ private:
 public:
 	Texture* m_pTex;
 private:
-	QuizData* quizData;
+	//QuizData* quizData;
 	wstring question;
 	wstring answer;
 	wstring errorMessage;
