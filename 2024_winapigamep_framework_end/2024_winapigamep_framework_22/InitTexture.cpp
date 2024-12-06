@@ -8,6 +8,7 @@ InitTexture::InitTexture()
     std::map<std::wstring, std::wstring> textures = {
         {L"MainHole_1FScene", L"Texture\\aooniMap_1F_Hole.bmp"},
         {L"MainHoleRightCorridor_1F", L"Texture\\aooniMap_1F_HoleRightCorridor.bmp"},
+        {L"Kitchen_1F", L"Texture\\aooniMap_1F_kitchen.bmp"}
     };
 
     // 텍스처 로드

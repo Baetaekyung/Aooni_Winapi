@@ -181,11 +181,13 @@
     <ClInclude Include="InitTexture.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Key.h" />
+    <ClInclude Include="Kitchen_1FScene.h" />
     <ClInclude Include="MainHoleRightCorridor_1F.h" />
     <ClInclude Include="MainHole_1FScene.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="QuestionPuzzle.h" />
     <ClInclude Include="Resource.h" />
@@ -217,11 +219,13 @@
     <ClCompile Include="InitTexture.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Key.cpp" />
+    <ClCompile Include="Kitchen_1FScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainHoleRightCorridor_1F.cpp" />
     <ClCompile Include="MainHole_1FScene.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="QuestionPuzzle.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

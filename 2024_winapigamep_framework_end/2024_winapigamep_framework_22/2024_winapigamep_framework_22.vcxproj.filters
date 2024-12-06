@@ -146,6 +146,15 @@
     <ClInclude Include="MainHoleRightCorridor_1F.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="InitTexture.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Kitchen_1FScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -244,6 +253,15 @@
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="MainHoleRightCorridor_1F.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="InitTexture.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Kitchen_1FScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
   </ItemGroup>

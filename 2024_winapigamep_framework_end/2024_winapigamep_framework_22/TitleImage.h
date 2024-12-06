@@ -11,8 +11,10 @@ public:
     ~TitleImage();
 
 public:
+    virtual void Update() override;
+
     virtual void Render(HDC _hdc) override;
 public:
-    Texture* m_TTex;
+    Texture* m_tTex;
 };
 

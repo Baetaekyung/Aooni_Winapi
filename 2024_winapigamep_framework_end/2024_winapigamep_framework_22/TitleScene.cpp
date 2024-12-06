@@ -9,15 +9,19 @@
 #include "Door.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
-#include "TileMap.h"
 #include "InitTexture.h"
+#include "TitleImage.h"
 void TitleScene::Init()
 {
     Object* initTexture = new InitTexture;
+
+    Object* title = new TitleImage;
+    title->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
+    title->SetSize({ 1000, 562 });
+    AddObject(title, LAYER::BACKGROUND);
 }
 
-void TitleScene::Update()
-{
+void TitleScene::Update() {
     Scene::Update();
     if (GET_KEYDOWN(KEY_TYPE::ENTER))
         GET_SINGLE(SceneManager)->LoadScene(L"MainHole_1FScene");
