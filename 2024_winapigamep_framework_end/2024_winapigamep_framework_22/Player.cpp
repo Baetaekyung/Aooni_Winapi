@@ -22,6 +22,7 @@ Player::Player()
 	, canGoLeftword(true)
 	, canGoRightword(true)
 	, canMove(true)
+	, blockdistance({ 15, 25 })
 {
 	SetName(L"Player");
 
@@ -84,21 +85,22 @@ void Player::StayCollision(Collider* _other)
 {
 	if (_other->GetOwner()->GetName() == L"Wall")
 	{
-		if (GetPlayerDirection() == Direction::LEFT)
+		switch (_wallEnterDirection)
 		{
+		case Direction::LEFT:
 			canGoLeftword = false;
-		}
-		if (GetPlayerDirection() == Direction::RIGHT)
-		{
+			break;
+		case Direction::RIGHT:
 			canGoRightword = false;
-		}
-		if (GetPlayerDirection() == Direction::UP)
-		{
+			break;
+		case Direction::UP:
 			canGoUpward = false;
-		}
-		if (GetPlayerDirection() == Direction::DOWN)
-		{
+			break;
+		case Direction::DOWN:
 			canGoDownward = false;
+			break;
+		default:
+			break;
 		}
 	}
 }
@@ -115,19 +117,19 @@ void Player::EnterCollision(Collider* other)
 	{
 		if (GetPlayerDirection() == Direction::LEFT)
 		{
-			canGoLeftword = false;
+			_wallEnterDirection = Direction::LEFT;
 		}
-		if (GetPlayerDirection() == Direction::RIGHT)
+		else if (GetPlayerDirection() == Direction::RIGHT)
 		{
-			canGoRightword = false;
+			_wallEnterDirection = Direction::RIGHT;
 		}
-		if (GetPlayerDirection() == Direction::UP)
+		else if (GetPlayerDirection() == Direction::UP)
 		{
-			canGoUpward = false;
+			_wallEnterDirection = Direction::UP;
 		}
-		if (GetPlayerDirection() == Direction::DOWN)
+		else if (GetPlayerDirection() == Direction::DOWN)
 		{
-			canGoDownward = false;
+			_wallEnterDirection = Direction::DOWN;
 		}
 	}
 }
@@ -260,17 +262,6 @@ void Player::PlayerMove()
 		SetPos(vPos);
 	}
 }
-
-
-
-bool Player::IsBlockedByColor(COLORREF color)
-{
-	return (GetRValue(color) == 0 && GetGValue(color) == 0 && GetBValue(color) == 0)
-		|| (GetRValue(color) == 159 && GetGValue(color) == 158 && GetBValue(color) == 152)
-		|| (GetRValue(color) == 105 && GetGValue(color) == 54 && GetBValue(color) == 0);
-
-}
-
 
 //void Player::CreateProjectile()
 //{

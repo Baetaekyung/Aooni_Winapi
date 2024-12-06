@@ -4,7 +4,6 @@
 #include "Key.h"
 #include "Tile.h"
 #include "InputManager.h"
-#include "Wall.h"
 #include "Player.h"
 #include "CollisionManager.h"
 void GameScene::Init()

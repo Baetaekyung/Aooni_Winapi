@@ -34,7 +34,10 @@ enum class EVENT_TYPE
 	END,
 };
 
-enum class MAP_TYPE {
-	MAIN_HALL,
-
+enum class MAP_TYPE
+{
+	MainHole_1FScene,
+	MainHoleRightCorridor_1F,
+	Kitchen_1F,
+	END
 };

@@ -10,6 +10,7 @@
 #include "EventManager.h"
 #include "ResourceManager.h"
 #include "Texture.h"
+#include "QuizData.h"
 
 QuestionPuzzle::QuestionPuzzle()
 	: question(L"")
@@ -22,6 +23,7 @@ QuestionPuzzle::QuestionPuzzle()
 	, currentChecked(3)
 	, playerAnswer()
 {
+	//quizData = new QuizData();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Cavinet", L"Texture\\Cavinet.bmp");
 	SetSize({ 40, 45 });
 	this->AddComponent<Collider>();
@@ -320,17 +322,9 @@ void QuestionPuzzle::ExitCollision(Collider* other)
 	}
 }
 
-void QuestionPuzzle::SetPuzzleQuestion(wstring question)
+void QuestionPuzzle::SetQuiz(QuizEnum quiz)
 {
-	this->question = question;
-}
-
-void QuestionPuzzle::SetPuzzleAnswer(wstring answer)
-{
-	this->answer = answer;
-}
-
-void QuestionPuzzle::SetErrorMessage(wstring errorMsg)
-{
-	this->errorMessage = errorMsg;
+	/*question = quizData->quizs[quiz].question;
+	errorMessage = quizData->quizs[quiz].errorMessage;
+	answer = quizData->quizs[quiz].answer;*/
 }

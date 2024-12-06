@@ -1,20 +1,13 @@
 #pragma once
 #include "Object.h"
-
-class Texture;
-
-class TitleImage :
+class InitTexture :
     public Object
 {
 public:
-    TitleImage();
-    ~TitleImage();
+    InitTexture();
 
-public:
     virtual void Update() override;
 
     virtual void Render(HDC _hdc) override;
-public:
-    Texture* m_tTex;
 };
 

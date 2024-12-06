@@ -1,29 +1,32 @@
 #include "pch.h"
-#include "Door.h"
+#include "Trigger.h"
 #include "Collider.h"
 #include "Player.h"
 #include "GDISelector.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
-
-Door::Door()
+#include <string>
+#include "PlayerManager.h"
+#include "Collider.h"
+Trigger::Trigger()
 	: _isEntering(false)
 	, nextSceneName(L"")
+	, NoNeedKey(false)
 {
 	SetName(L"Door");
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ 30, 50 });
 }
 
-Door::~Door()
+Trigger::~Trigger()
 {
 }
 
-void Door::Update()
+void Trigger::Update()
 {
 }
 
-void Door::Render(HDC hdc)
+void Trigger::Render(HDC hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
@@ -36,7 +39,7 @@ void Door::Render(HDC hdc)
 	ComponentRender(hdc);
 }
 
-void Door::EnterCollision(Collider* other)
+void Trigger::EnterCollision(Collider* other)
 {
 	if (other->GetOwner()->GetName() == L"Player" && _isEntering == false)
 	{
@@ -45,8 +48,10 @@ void Door::EnterCollision(Collider* other)
 		Player* pPlayer = 
 			dynamic_cast<Player*>(other->GetOwner());
 		GET_SINGLE(ResourceManager)->Play(L"Door");
-		if (pPlayer->keyCount > 0)
+		if (!NoNeedKey || pPlayer->keyCount > 0)
 		{
+			//MessageBox(NULL, L"abc", nextSceneName.c_str(), MB_OK);
+			GET_SINGLE(PlayerManager)->SetPlayerSpawnPos(pPlayerSpawnVec2);
 			GET_SINGLE(SceneManager)->LoadScene(nextSceneName);
 		}
 		else
@@ -56,11 +61,11 @@ void Door::EnterCollision(Collider* other)
 	}
 }
 
-void Door::StayCollision(Collider* other)
+void Trigger::StayCollision(Collider* other)
 {
 }
 
-void Door::ExitCollision(Collider* other)
+void Trigger::ExitCollision(Collider* other)
 {
 	if (other->GetOwner()->GetName() == L"Player" && _isEntering == true)
 	{
@@ -68,16 +73,25 @@ void Door::ExitCollision(Collider* other)
 	}
 }
 
-void Door::SetNextMap(TileMap nextTileMap)
+void Trigger::SetNextMap(MAP_TYPE nextTileMap)
 {
 	switch (nextTileMap)
 	{
-	case TileMap::_1F_MAINHOLE:
-		nextSceneName = L"GameScene";
+	case MAP_TYPE::MainHole_1FScene:
+		nextSceneName = L"MainHole_1FScene";
 		break;
-	case TileMap::_1F_MAINHOLE_RIGHT_CORRIDOR:
+	case MAP_TYPE::MainHoleRightCorridor_1F:
+		nextSceneName = L"MainHoleRightCorridor_1F";
+		break;
+	case MAP_TYPE::Kitchen_1F:
+		nextSceneName = L"Kitchen_1FScene";
 		break;
 	default:
 		break;
 	}
+}
+
+void Trigger::SetColliderSize(Vec2 newVec)
+{
+	GetComponent<Collider>()->SetSize(newVec);
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Object.h"
-#include "TileMap.h"
 
 class Texture;
 
@@ -18,13 +17,12 @@ public:
 
 
 public:
-    void ChangeTile(TileMap NewTileMap);
+    void SetTile(MAP_TYPE newMapType);
 
 private:
-    TileMap CurrentTileMap
-        = TileMap::_1F_MAINHOLE;
-
-    std::vector<Texture*> m_TexArr;
-
+    MAP_TYPE CurrentTileMap
+        = MAP_TYPE::MainHole_1FScene;
+    std::map<std::wstring, std::wstring> textures;
+    Texture* m_tTex;
 };
 

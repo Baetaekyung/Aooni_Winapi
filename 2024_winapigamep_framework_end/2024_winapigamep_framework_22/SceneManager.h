@@ -10,7 +10,7 @@ public:
 public:
 	void RegisterScene(const wstring& _sceneName, 
 					std::shared_ptr<Scene> _scene);
-	void LoadScene(const wstring& _sceneName);
+	void LoadScene(const wstring _sceneName);
 public:
 	const std::shared_ptr<Scene>& GetCurrentScene() const
 	{

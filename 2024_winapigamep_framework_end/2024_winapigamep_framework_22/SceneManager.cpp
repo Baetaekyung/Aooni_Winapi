@@ -2,16 +2,18 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TitleScene.h"
-#include "GameScene.h"
-#include "MainHole_1F.h"
-
+#include "MainHole_1FScene.h"
+#include "MainHoleRightCorridor_1F.h"
+#include "Kitchen_1FScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
 
 	// ¾À µî·Ï
 	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
-	RegisterScene(L"GameScene", std::make_shared<GameScene>());
+	RegisterScene(L"MainHole_1FScene", std::make_shared<MainHole_1FScene>());
+	RegisterScene(L"MainHoleRightCorridor_1F", std::make_shared<MainHoleRightCorridor_1F>());
+	RegisterScene(L"Kitchen_1FScene", std::make_shared<Kitchen_1FScene>());
 
 	// ¾À ·Îµå
 	LoadScene(L"TitleScene");
@@ -39,7 +41,7 @@ void SceneManager::RegisterScene(const wstring& _sceneName, std::shared_ptr<Scen
 	m_mapScenes.insert(m_mapScenes.end(), { _sceneName, _scene });
 }
 
-void SceneManager::LoadScene(const wstring& _sceneName)
+void SceneManager::LoadScene(const wstring _sceneName)
 {
 	// ¾ÀÀÌ ÀÖÀ¸¸é
 	if (m_pCurrentScene != nullptr)
