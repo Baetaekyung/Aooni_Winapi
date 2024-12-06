@@ -46,7 +46,7 @@ void Kitchen_1FScene::Init()
 	{
 		Trigger* door = new Trigger;
 		door->SetPos({ 720, 240 });
-		door->SetColliderSize({ 100, 30 });
+		door->SetColliderSize({ 120, 30 });
 		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);

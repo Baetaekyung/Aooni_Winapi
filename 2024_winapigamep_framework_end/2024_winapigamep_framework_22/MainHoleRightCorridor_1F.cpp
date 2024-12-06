@@ -35,6 +35,15 @@ void MainHoleRightCorridor_1F::Init()
 		door->SetNextMap(MAP_TYPE::MainHole_1FScene);
 		AddObject(door, LAYER::INTERACTABLE);
 	}
+	//ㅡㅡㅡㅡㅡㅡ오브젝트들ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	{
+		Trigger* door = new Trigger;
+		door->SetPos({ 650, 310 });
+		door->SetColliderSize({ 420, 50 });
+		door->SetNeedKey(true);
+		door->SetName(L"Wall");
+		AddObject(door, LAYER::INTERACTABLE);
+	}
 }
 
 void MainHoleRightCorridor_1F::Update()
