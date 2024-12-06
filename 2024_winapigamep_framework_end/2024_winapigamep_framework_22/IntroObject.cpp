@@ -12,7 +12,7 @@ IntroObject::IntroObject() :
     bCanMoveScene(false)
 {
     std::cout << "\nStart Intro\n";
-    for (int i = 0; i <= 8; ++i) {
+    for (int i = 0; i <= 9; ++i) {
         std::wstring textureKey = std::to_wstring(i);
         std::wstring texturePath = L"Texture\\" + textureKey + L".bmp";
 
@@ -64,6 +64,7 @@ void IntroObject::NextIntro()
 
     if (cnt >= 8) {
         bCanMoveScene = true;
+        GET_SINGLE(SceneManager)->LoadScene(L"IntroMoveScene");
     }
 
 

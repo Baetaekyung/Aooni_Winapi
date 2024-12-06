@@ -23,6 +23,8 @@ Player::Player()
 	, canGoRightword(true)
 	, canMove(true)
 	, blockdistance({ 15, 25 })
+	, bIsIntro(false)
+	, bCanInput(true)
 {
 	SetName(L"Player");
 
@@ -68,6 +70,11 @@ void Player::Update()
 
 	/*if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		CreateProjectile();*/
+
+	if (bIsIntro) {
+		SetPos({ GetPos().x +100 * _speed * fDT, GetPos().y });
+		GetComponent<Animator>()->PlayAnimation(L"HiroshiRight", true);
+	}
 }
 
 void Player::Render(HDC _hdc)
@@ -159,6 +166,12 @@ Direction Player::GetPlayerDirection()
 	return _playerDir;
 }
 
+void Player::SetIntro()
+{
+	bCanInput = false;
+	bIsIntro = true;
+}
+
 void Player::Interact(Collider* other)
 {
 	if (other->GetOwner()->GetName() == L"Key")
@@ -175,6 +188,9 @@ void Player::Interact(Collider* other)
 
 void Player::PlayerMove()
 {
+	if (!bCanInput)
+		return;
+
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
 	Vec2 colliderSize = GetComponent<Collider>()->GetSize();

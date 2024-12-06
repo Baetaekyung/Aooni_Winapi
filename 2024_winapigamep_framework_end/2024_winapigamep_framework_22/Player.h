@@ -3,7 +3,7 @@
 #include "PlayerManager.h"
 
 #define SpawnPlayer \
-	Object* pPlayer = new Player; \
+	Player* pPlayer = new Player; \
 	pPlayer->SetSize({ 100, 100 }); \
 	pPlayer->SetPos(GET_SINGLE(PlayerManager)->GetPlayerSpwanPos()); \
 	AddObject(pPlayer, LAYER::PLAYER);
@@ -37,6 +37,8 @@ public:
 	{
 		canMove = isActive;
 	}
+
+	void SetIntro();
 private:
 	void Interact(Collider* other);
 	void PlayerMove();
@@ -57,7 +59,8 @@ private:
 	bool canGoDownward;
 	bool canGoRightword;
 	bool canGoLeftword;
-
+	bool bIsIntro;
+	bool bCanInput;
 //Debug
 private:
 	COLORREF color; // = RGB(10, 10, 10);

@@ -7,6 +7,7 @@
 #include "Kitchen_1FScene.h"
 #include "LeftCorridor_1FScene.h"
 #include "IntroScene.h"
+#include "IntroMoveScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
@@ -18,6 +19,7 @@ void SceneManager::Init()
 	RegisterScene(L"Kitchen_1FScene", std::make_shared<Kitchen_1FScene>());
 	RegisterScene(L"LeftCorridor_1FScene", std::make_shared<LeftCorridor_1FScene>());
 	RegisterScene(L"IntroScene", std::make_shared<IntroScene>());
+	RegisterScene(L"IntroMoveScene", std::make_shared<IntroMoveScene>());
 
 	// ¾À ·Îµå
 	LoadScene(L"TitleScene");

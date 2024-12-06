@@ -3,6 +3,7 @@
 #include "Tile.h"
 #include "Player.h"
 #include "Trigger.h"
+#include "Key.h"
 void Kitchen_1FScene::Init()
 {
 	std::cout << "\nHelloWrold\n";
@@ -14,6 +15,14 @@ void Kitchen_1FScene::Init()
 	AddObject(tile, LAYER::BACKGROUND);
 
 	SpawnPlayer
+
+	//열쇠
+	{
+		Key * key = new Key;
+		key->SetPos({ 635, 225 });
+		key->SetSize({ 20, 20 });
+		AddObject(key, LAYER::INTERACTABLE);
+	}
 
 	//서쪽 문
 	{
