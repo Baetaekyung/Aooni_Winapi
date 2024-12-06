@@ -79,7 +79,7 @@ void Player::Render(HDC _hdc)
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 
-	ComponentRender(_hdc);
+	ComponentRender(_hdc); 
 }
 
 void Player::StayCollision(Collider* _other)

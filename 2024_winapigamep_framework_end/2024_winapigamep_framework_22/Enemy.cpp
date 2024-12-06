@@ -49,8 +49,6 @@ Enemy::Enemy()
 	if (playerVec.size() > 0)
 		_player = dynamic_cast<Player*>(playerVec[0]);
 	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::ENEMYCAST, LAYER::INTERACTABLE);
-	//std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
-	//const vector<Object*>& vecLeftLayer = pCurrentScene->GetLayerObjects(_left);
 }
 
 Enemy::~Enemy()

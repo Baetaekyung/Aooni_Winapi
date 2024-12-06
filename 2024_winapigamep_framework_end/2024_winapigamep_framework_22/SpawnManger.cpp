@@ -6,7 +6,7 @@
 #include "Enemy.h"
 #include "EnemyWallCast.h"
 
-void SpawnManger::Spawn(Vec2 spawnPos, int spawnCnt)
+void EnemtSpawnManger::Spawn(Vec2 spawnPos, int spawnCnt)
 {
 	//cout << 1 << endl;
 	Object* pEnemy = new Enemy;
@@ -24,7 +24,7 @@ void SpawnManger::Spawn(Vec2 spawnPos, int spawnCnt)
 
 }
 
-void SpawnManger::Update()
+void EnemtSpawnManger::Update()
 {
 
 	if (_spawnCnt > 0
@@ -49,7 +49,7 @@ void SpawnManger::Update()
 	}
 }
 
-void SpawnManger::SpawnCntDown()
+void EnemtSpawnManger::SpawnCntDown()
 {
 	_spawnCnt--;
 }
