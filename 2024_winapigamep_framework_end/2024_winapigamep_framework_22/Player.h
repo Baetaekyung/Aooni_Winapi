@@ -60,5 +60,6 @@ private:
 //Debug
 private:
 	COLORREF color; // = RGB(10, 10, 10);
+	
 };
 

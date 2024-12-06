@@ -10,11 +10,12 @@
 #include "SceneManager.h"
 #include "EnemyWallCast.h"
 #include "InputManager.h"
+#include "CollisionManager.h"
 #include "Scene.h"
 #include "Core.h"
 
 Enemy::Enemy()
-	:_speed(1.2)
+	:_speed(1.5)
 	, _enemeyCurrentDir(Direction::DOWN)
 	, _enemeyLastDir(Direction::RIGHT)
 {
@@ -47,7 +48,7 @@ Enemy::Enemy()
 	const vector<Object*>& playerVec = pCurrentScene->GetLayerObjects(LAYER::PLAYER);
 	if (playerVec.size() > 0)
 		_player = dynamic_cast<Player*>(playerVec[0]);
-
+	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::ENEMYCAST, LAYER::INTERACTABLE);
 	//std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
 	//const vector<Object*>& vecLeftLayer = pCurrentScene->GetLayerObjects(_left);
 }
@@ -58,30 +59,55 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-
-	if (_isWallCafe)
+	if (_wallcast == nullptr)
 	{
-		HDC _hdc = GET_SINGLE(Core)->GetMainDC();
+		std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
+		const vector<Object*>& castVec = pCurrentScene->GetLayerObjects(LAYER::ENEMYCAST);
+		if (castVec.size() > 0)
+			_wallcast = dynamic_cast<EnemyWallCast*>(castVec[0]);
+		else
+			return;
+	}
 
+	if (_wallcast->GetWallCast())
+	{
+		Vec2 vPos = GetPos();
+		HDC hdc = GET_SINGLE(Core)->GetMainDC();
+		switch (_enemeyLastDir)
+		{
+		case Direction::LEFT:
+			color = GetPixel(hdc, vPos.x - blockdistance.x, vPos.y + 40);
+			vPos.x -= 100 * _speed * fDT;
+			break;
+		case Direction::RIGHT:
+			color = GetPixel(hdc, vPos.x + blockdistance.x, vPos.y + 40);
+			vPos.x += 100 * _speed * fDT;
+			break;
+		case Direction::UP:
+			color = GetPixel(hdc, vPos.x, vPos.y + 40 - blockdistance.y);
+			vPos.y -= 100 * _speed * fDT;
+			break;
+		case Direction::DOWN:
+			color = GetPixel(hdc, vPos.x, vPos.y + 40 + blockdistance.y);
+			vPos.y += 100 * _speed * fDT;
+			break;
+		}
+
+
+		if (currentAnimation != animation[_enemeyLastDir])
+		{
+			GetComponent<Animator>()->StopAnimation();
+			GetComponent<Animator>()->PlayAnimation(animation[_enemeyLastDir], true);
+			currentAnimation = animation[_enemeyLastDir];
+		}
+
+		SetPos(vPos);
+	}
+	else if (_isWallCafe)
+	{
+		HDC hdc = GET_SINGLE(Core)->GetMainDC();
 		Vec2 vPos = GetPos();
 		Vec2 playerPos = _player->GetPos();
-
-		//switch (_enemeyCurrentDir)
-		//{
-		//case Direction::LEFT:
-		//	color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y + 40);
-		//	break;
-		//case Direction::RIGHT:
-		//	color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y + 40);
-		//	break;
-		//case Direction::UP:
-		//	color = GetPixel(_hdc, vPos.x, vPos.y + 40 - blockdistance.y);
-		//	break;
-		//case Direction::DOWN:
-		//	color = GetPixel(_hdc, vPos.x, vPos.y + 40 + blockdistance.y);
-		//	break;
-		//}
-
 
 		if (_time >= 1.5f)
 		{
@@ -96,19 +122,19 @@ void Enemy::Update()
 		switch (_enemeyLastDir)
 		{
 		case Direction::LEFT:
-			color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y + 40);
+			color = GetPixel(hdc, vPos.x - blockdistance.x, vPos.y + 40);
 			vPos.x -= 100 * _speed * fDT;
 			break;
 		case Direction::RIGHT:
-			color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y + 40);
+			color = GetPixel(hdc, vPos.x + blockdistance.x, vPos.y + 40);
 			vPos.x += 100 * _speed * fDT;
 			break;
 		case Direction::UP:
-			color = GetPixel(_hdc, vPos.x, vPos.y + 40 - blockdistance.y);
+			color = GetPixel(hdc, vPos.x, vPos.y + 40 - blockdistance.y);
 			vPos.y -= 100 * _speed * fDT;
 			break;
 		case Direction::DOWN:
-			color = GetPixel(_hdc, vPos.x, vPos.y + 40 + blockdistance.y);
+			color = GetPixel(hdc, vPos.x, vPos.y + 40 + blockdistance.y);
 			vPos.y += 100 * _speed * fDT;
 			break;
 		}
@@ -130,7 +156,6 @@ void Enemy::Update()
 			WallDirection();
 			cout << 1 << endl;
 		}
-		DeleteDC(_hdc);
 	}
 	else
 		Move();
@@ -139,9 +164,8 @@ void Enemy::Update()
 
 void Enemy::Move()
 {
-	HDC _hdc = GET_SINGLE(Core)->GetMainDC();
 	bool isPlayer = _player != nullptr;
-
+	HDC hdc = GET_SINGLE(Core)->GetMainDC();
 	if (!isPlayer)
 		return;
 
@@ -151,13 +175,13 @@ void Enemy::Move()
 	{
 		if (playerPos.x > vPos.x)
 		{
-			color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y + 40);
+			color = GetPixel(hdc, vPos.x + blockdistance.x, vPos.y + 40);
 			vPos.x += 100 * _speed * fDT;
 			_enemeyCurrentDir = Direction::RIGHT;
 		}
 		else if (playerPos.x < vPos.x)
 		{
-			color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y + 40);
+			color = GetPixel(hdc, vPos.x - blockdistance.x, vPos.y + 40);
 			vPos.x -= 100 * _speed * fDT;
 			_enemeyCurrentDir = Direction::LEFT;
 		}
@@ -166,14 +190,14 @@ void Enemy::Move()
 	{
 		if (playerPos.y < (vPos.y + 40))
 		{
-			color = GetPixel(_hdc, vPos.x , vPos.y + 40 - blockdistance.y);
+			color = GetPixel(hdc, vPos.x , vPos.y + 40 - blockdistance.y);
 
 			vPos.y -= 100 * _speed * fDT;
 			_enemeyCurrentDir = Direction::UP;
 		}
 		if (playerPos.y > (vPos.y + 40))
 		{
-			color = GetPixel(_hdc, vPos.x , vPos.y + 40 + blockdistance.y);
+			color = GetPixel(hdc, vPos.x , vPos.y + 40 + blockdistance.y);
 			vPos.y += 100 * _speed * fDT;
 			_enemeyCurrentDir = Direction::DOWN;
 		}
@@ -196,7 +220,7 @@ void Enemy::Move()
 		_isWallCafe = true;
 	}
 
-	DeleteDC(_hdc);
+	//DeleteDC(_hdc);
 }
 
 void Enemy::Render(HDC _hdc)
@@ -242,32 +266,68 @@ void Enemy::WallDirection()
 	Vec2 vPos = GetPos();
 	Vec2 playerPos = _player->GetPos();
 
-	switch (_enemeyCurrentDir)
+	if (_wallcast->GetWallCast())
 	{
-	case Direction::LEFT:
-	case Direction::RIGHT:
-		if (_player->GetPos().y <= (vPos.y + 40))
+		switch (_enemeyLastDir)
 		{
-			_enemeyLastDir = Direction::UP;
+		case Direction::LEFT:
+		case Direction::RIGHT:
+			if (_player->GetPos().y <= (vPos.y + 40))
+			{
+				_enemeyLastDir = Direction::UP;
 
-		}
-		else
-		{
-			_enemeyLastDir = Direction::DOWN;
+			}
+			else
+			{
+				_enemeyLastDir = Direction::DOWN;
 
+			}
+			break;
+		case Direction::UP:
+		case Direction::DOWN:
+			if (_player->GetPos().x >= vPos.x)
+			{
+				_enemeyLastDir = Direction::RIGHT;
+			}
+			else
+			{
+				_enemeyLastDir = Direction::LEFT;
+			}
+			break;
 		}
-		break;
-	case Direction::UP:
-	case Direction::DOWN:
-		if (_player->GetPos().x >= vPos.x)
-		{
-			_enemeyLastDir = Direction::RIGHT;
-		}
-		else
-		{
-			_enemeyLastDir = Direction::LEFT;
-		}
-		break;
 	}
+	else
+	{
+		switch (_enemeyCurrentDir)
+		{
+		case Direction::LEFT:
+		case Direction::RIGHT:
+			if (_player->GetPos().y <= (vPos.y + 40))
+			{
+				_enemeyLastDir = Direction::UP;
+
+			}
+			else
+			{
+				_enemeyLastDir = Direction::DOWN;
+
+			}
+			break;
+		case Direction::UP:
+		case Direction::DOWN:
+			if (_player->GetPos().x >= vPos.x)
+			{
+				_enemeyLastDir = Direction::RIGHT;
+			}
+			else
+			{
+				_enemeyLastDir = Direction::LEFT;
+			}
+			break;
+		}
+		//_wallListDir = _enemeyLastDir;
+	}
+
+	
 
 }

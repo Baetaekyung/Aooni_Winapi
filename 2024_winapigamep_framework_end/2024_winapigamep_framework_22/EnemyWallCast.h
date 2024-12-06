@@ -15,6 +15,7 @@ public:
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 	const bool& GetWallCast() const { return _isWallCast; }
+	const bool& GetWallListDirection() const { return _isWallCast; }
 private:
 	bool _isWallCast;
 	Enemy* _owner;

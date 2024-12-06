@@ -12,6 +12,7 @@
 #include "Animation.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "SpawnManger.h"
 #include "Core.h"
 Player::Player()
 	: m_pTex(nullptr)
@@ -60,10 +61,10 @@ Player::Player()
 
 Player::~Player()
 {
-
 }
 void Player::Update()
 {
+
 	PlayerMove();
 
 	/*if (GET_KEYDOWN(KEY_TYPE::SPACE))
@@ -175,17 +176,20 @@ void Player::Interact(Collider* other)
 
 void Player::PlayerMove()
 {
+	HDC hdc = GET_SINGLE(Core)->GetMainDC();
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
 	Vec2 colliderSize = GetComponent<Collider>()->GetSize();
 	//HDC _hdc = GetDC(nullptr);
-	HDC _hdc = GET_SINGLE(Core)->GetMainDC();
+	//HDC _hdc = GET_SINGLE(Core)->GetMainDC();
+
+
 
 	if (!canMove) return;
 
 	if (GET_KEY(KEY_TYPE::A))
 	{
-		color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y);
+		color = GetPixel(hdc, vPos.x - blockdistance.x, vPos.y);
 		if (_playerDir != Direction::LEFT)
 		{
 			GetComponent<Animator>()->StopAnimation();
@@ -198,7 +202,7 @@ void Player::PlayerMove()
 	}
 	else if (GET_KEY(KEY_TYPE::D))
 	{
-		color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y);
+		color = GetPixel(hdc, vPos.x + blockdistance.x, vPos.y);
 		if (_playerDir != Direction::RIGHT)
 		{
 			GetComponent<Animator>()->StopAnimation();
@@ -210,7 +214,7 @@ void Player::PlayerMove()
 	}
 	else if (GET_KEY(KEY_TYPE::S))
 	{
-		color = GetPixel(_hdc, vPos.x, vPos.y + blockdistance.y);
+		color = GetPixel(hdc, vPos.x, vPos.y + blockdistance.y);
 		if (_playerDir != Direction::DOWN)
 		{
 			GetComponent<Animator>()->StopAnimation();
@@ -222,7 +226,7 @@ void Player::PlayerMove()
 	}
 	else if (GET_KEY(KEY_TYPE::W))
 	{
-		color = GetPixel(_hdc, vPos.x, vPos.y - blockdistance.y);
+		color = GetPixel(hdc, vPos.x, vPos.y - blockdistance.y);
 		if (_playerDir != Direction::UP)
 		{
 			GetComponent<Animator>()->StopAnimation();
@@ -261,6 +265,7 @@ void Player::PlayerMove()
 	if (!IsBlockedByColor(color)) {
 		SetPos(vPos);
 	}
+	//DeleteDC(_hdc);
 }
 
 //void Player::CreateProjectile()

@@ -42,6 +42,5 @@ private:
 	Vec2 blockdistance = { 20, 30 };
 	float _time;
 	COLORREF color;
-	HDC _hdc;
 };
 
