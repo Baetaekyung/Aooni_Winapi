@@ -58,10 +58,11 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	HDC _hdc = GET_SINGLE(Core)->GetMainDC();
 
 	if (_isWallCafe)
 	{
+		HDC _hdc = GET_SINGLE(Core)->GetMainDC();
+
 		Vec2 vPos = GetPos();
 		Vec2 playerPos = _player->GetPos();
 
@@ -129,6 +130,7 @@ void Enemy::Update()
 			WallDirection();
 			cout << 1 << endl;
 		}
+		DeleteDC(_hdc);
 	}
 	else
 		Move();
@@ -176,10 +178,6 @@ void Enemy::Move()
 			_enemeyCurrentDir = Direction::DOWN;
 		}
 	}
-
-	 
-	
-
 
 	if (currentAnimation != animation[_enemeyCurrentDir])
 	{
