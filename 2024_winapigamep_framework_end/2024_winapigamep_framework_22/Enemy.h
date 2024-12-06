@@ -28,21 +28,20 @@ public:
 		return _enemeyLastDir;
 	}
 private:
-	float _textTIme;
 	Texture* _m_pTex;
 	Player* _player;
 	EnemyWallCast* _wallcast;
 	Direction _enemeyCurrentDir;
 	Direction _enemeyLastDir;
 	bool _isWallBumpInto;
-	bool _isEnter;
 	int _speed;
 	//Direction _playerDir;
 	wstring currentAnimation;
 	std::unordered_map<Direction, wstring> animation;
 	bool _isWallCafe;
-	Vec2 blockdistance = { 20, 25 };
+	Vec2 blockdistance = { 20, 30 };
 	float _time;
 	COLORREF color;
+	HDC _hdc;
 };
 
