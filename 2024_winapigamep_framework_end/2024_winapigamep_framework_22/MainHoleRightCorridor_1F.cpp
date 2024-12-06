@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "PlayerManager.h"
 #include "Trigger.h"
+#include "Key.h"
 void MainHoleRightCorridor_1F::Init()
 {
 	std::cout << "\nHelloWrold\n";
@@ -30,7 +31,7 @@ void MainHoleRightCorridor_1F::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 445, 380 });
 		door->SetColliderSize({ 20, 100 });
-		//door->SetNeedKey(true);
+		door->SetNeedKey(true);
 		door->SetPlayerSpawnPoint({ 732, 446 });
 		door->SetNextMap(MAP_TYPE::MainHole_1FScene);
 		AddObject(door, LAYER::INTERACTABLE);

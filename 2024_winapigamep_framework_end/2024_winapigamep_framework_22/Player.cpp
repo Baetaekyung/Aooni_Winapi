@@ -12,7 +12,6 @@
 #include "Animation.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
-#include "SpawnManger.h"
 #include "Core.h"
 Player::Player()
 	: m_pTex(nullptr)
@@ -24,6 +23,8 @@ Player::Player()
 	, canGoRightword(true)
 	, canMove(true)
 	, blockdistance({ 15, 25 })
+	, bIsIntro(false)
+	, bCanInput(true)
 {
 	SetName(L"Player");
 
@@ -61,14 +62,19 @@ Player::Player()
 
 Player::~Player()
 {
+
 }
 void Player::Update()
 {
-
 	PlayerMove();
 
 	/*if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		CreateProjectile();*/
+
+	if (bIsIntro) {
+		SetPos({ GetPos().x +100 * _speed * fDT, GetPos().y });
+		GetComponent<Animator>()->PlayAnimation(L"HiroshiRight", true);
+	}
 }
 
 void Player::Render(HDC _hdc)
@@ -79,7 +85,7 @@ void Player::Render(HDC _hdc)
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 
-	ComponentRender(_hdc); 
+	ComponentRender(_hdc);
 }
 
 void Player::StayCollision(Collider* _other)
@@ -160,6 +166,12 @@ Direction Player::GetPlayerDirection()
 	return _playerDir;
 }
 
+void Player::SetIntro()
+{
+	bCanInput = false;
+	bIsIntro = true;
+}
+
 void Player::Interact(Collider* other)
 {
 	if (other->GetOwner()->GetName() == L"Key")
@@ -176,20 +188,20 @@ void Player::Interact(Collider* other)
 
 void Player::PlayerMove()
 {
-	HDC hdc = GET_SINGLE(Core)->GetMainDC();
+	if (!bCanInput)
+		return;
+
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
 	Vec2 colliderSize = GetComponent<Collider>()->GetSize();
 	//HDC _hdc = GetDC(nullptr);
-	//HDC _hdc = GET_SINGLE(Core)->GetMainDC();
-
-
+	HDC _hdc = GET_SINGLE(Core)->GetMainDC();
 
 	if (!canMove) return;
 
 	if (GET_KEY(KEY_TYPE::A))
 	{
-		color = GetPixel(hdc, vPos.x - blockdistance.x, vPos.y);
+		color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y);
 		if (_playerDir != Direction::LEFT)
 		{
 			GetComponent<Animator>()->StopAnimation();
@@ -202,7 +214,7 @@ void Player::PlayerMove()
 	}
 	else if (GET_KEY(KEY_TYPE::D))
 	{
-		color = GetPixel(hdc, vPos.x + blockdistance.x, vPos.y);
+		color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y);
 		if (_playerDir != Direction::RIGHT)
 		{
 			GetComponent<Animator>()->StopAnimation();
@@ -214,7 +226,7 @@ void Player::PlayerMove()
 	}
 	else if (GET_KEY(KEY_TYPE::S))
 	{
-		color = GetPixel(hdc, vPos.x, vPos.y + blockdistance.y);
+		color = GetPixel(_hdc, vPos.x, vPos.y + blockdistance.y);
 		if (_playerDir != Direction::DOWN)
 		{
 			GetComponent<Animator>()->StopAnimation();
@@ -226,7 +238,7 @@ void Player::PlayerMove()
 	}
 	else if (GET_KEY(KEY_TYPE::W))
 	{
-		color = GetPixel(hdc, vPos.x, vPos.y - blockdistance.y);
+		color = GetPixel(_hdc, vPos.x, vPos.y - blockdistance.y);
 		if (_playerDir != Direction::UP)
 		{
 			GetComponent<Animator>()->StopAnimation();
@@ -265,7 +277,6 @@ void Player::PlayerMove()
 	if (!IsBlockedByColor(color)) {
 		SetPos(vPos);
 	}
-	//DeleteDC(_hdc);
 }
 
 //void Player::CreateProjectile()

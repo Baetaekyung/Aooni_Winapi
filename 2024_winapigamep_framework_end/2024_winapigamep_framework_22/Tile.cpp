@@ -64,3 +64,8 @@ void Tile::SetTile(MAP_TYPE newMapType)
     }
     m_tTex = GET_SINGLE(ResourceManager)->TextureFind(path);
 }
+
+void Tile::SetCustomTile(wstring newwstr)
+{
+    m_tTex = GET_SINGLE(ResourceManager)->TextureFind(newwstr);
+}
