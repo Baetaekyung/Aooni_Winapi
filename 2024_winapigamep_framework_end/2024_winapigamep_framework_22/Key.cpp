@@ -5,9 +5,13 @@
 #include "GDISelector.h"
 #include "ResourceManager.h"
 #include "Animator.h"
-
-Key::Key()
-	:currentBrushType(BRUSH_TYPE::YELLOW)
+#include "PlayerManager.h"
+#include "TextBoxObject.h"
+#include "SceneManager.h"
+#include "Scene.h"
+Key::Key() :
+	MyKeyType(KEY_TYPE::None),
+	currentBrushType(BRUSH_TYPE::YELLOW)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Key", L"Texture\\light.bmp");
 
@@ -19,6 +23,8 @@ Key::Key()
 	SetName(L"Key");
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ 10, 10 });
+
+
 }
 
 Key::~Key()
@@ -39,6 +45,8 @@ void Key::EnterCollision(Collider* other)
 	if (other->GetOwner()->GetName() == L"Player")
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
+		GET_SINGLE(PlayerManager)->AddPlayerKey(MyKeyType);
+		UpTextBox();
 	}
 }
 
@@ -48,4 +56,9 @@ void Key::StayCollision(Collider* other)
 
 void Key::ExitCollision(Collider* other)
 {
+}
+
+void Key::UpTextBox()
+{
+	SpawnTextBox(MyTextType);
 }

@@ -1,12 +1,5 @@
 #pragma once
 #include "Object.h"
-#include "PlayerManager.h"
-
-#define SpawnPlayer \
-	Player* pPlayer = new Player; \
-	pPlayer->SetSize({ 100, 100 }); \
-	pPlayer->SetPos(GET_SINGLE(PlayerManager)->GetPlayerSpwanPos()); \
-	AddObject(pPlayer, LAYER::PLAYER);
 
 class Texture;
 

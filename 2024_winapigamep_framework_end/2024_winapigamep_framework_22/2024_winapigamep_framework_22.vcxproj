@@ -177,6 +177,8 @@
     <ClInclude Include="IntroObject.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="LeftCorridor_1FScene.h" />
+    <ClInclude Include="MissingScene.h" />
+    <ClInclude Include="TextBoxObject.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyWallCast.h" />
@@ -225,6 +227,8 @@
     <ClCompile Include="IntroObject.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="LeftCorridor_1FScene.cpp" />
+    <ClCompile Include="MissingScene.cpp" />
+    <ClCompile Include="TextBoxObject.cpp" />
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyWallCast.cpp" />

@@ -10,6 +10,7 @@ enum class LAYER
 	INTERACTABLE,
 	ENEMYCAST,
 	// UI
+	TEXTBOX,
 	END = 30
 };
 
@@ -47,4 +48,12 @@ enum class KEY_TYPE
 {
 	None,
 	Glass
+};
+
+enum class TEXT_TYPE {
+	GetLiberyKey,
+	Scare,
+	GetGlass,
+	ItLock,
+	Guys,
 };
