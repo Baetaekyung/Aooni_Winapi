@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+class Texture;
 class Key :
     public Object
 {
@@ -15,5 +16,6 @@ public:
     virtual void ExitCollision(Collider* other);
 private:
     BRUSH_TYPE currentBrushType;
+    Texture* m_pTex;
 };
 

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Tile.h"
 #include "Trigger.h"
+#include "Animator.h"
 void IntroMoveScene::Init()
 {
 	Tile* tile = new Tile;

@@ -12,7 +12,6 @@
 #include "Animation.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
-#include "SpawnManger.h"
 #include "Core.h"
 Player::Player()
 	: m_pTex(nullptr)
@@ -67,17 +66,13 @@ Player::~Player()
 }
 void Player::Update()
 {
-	Vec2 vPos = GetPos();
-	if (GET_KEYDOWN(KEY_TYPE::Z))
-		GET_SINGLE(SpawnManger)->Spawn(vPos, 1);
 	PlayerMove();
-	/*if (GET_KEYDOWN(KEY_TYPE::SPACE))
-		CreateProjectile();*/
 
 	if (bIsIntro) {
-		SetPos({ GetPos().x +100 * _speed * fDT, GetPos().y });
-		GetComponent<Animator>()->PlayAnimation(L"HiroshiRight", true);
+		SetPos({ GetPos().x + 100 * _speed * fDT, GetPos().y });
 	}
+	/*if (GET_KEYDOWN(KEY_TYPE::SPACE))
+		CreateProjectile();*/
 }
 
 void Player::Render(HDC _hdc)
@@ -173,6 +168,7 @@ void Player::SetIntro()
 {
 	bCanInput = false;
 	bIsIntro = true;
+	GetComponent<Animator>()->PlayAnimation(L"HiroshiRight", true);
 }
 
 void Player::Interact(Collider* other)
@@ -193,7 +189,7 @@ void Player::PlayerMove()
 {
 	if (!bCanInput)
 		return;
-
+	
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
 	Vec2 colliderSize = GetComponent<Collider>()->GetSize();
