@@ -8,9 +8,14 @@
 #include <string>
 #include "PlayerManager.h"
 #include "Collider.h"
+#include "TextBoxObject.h"
+#include "SceneManager.h"
+#include "Scene.h"
 Trigger::Trigger()
 	: _isEntering(false)
 	, nextSceneName(L"")
+	, needKeyType(KEY_TYPE::None)
+	, MyTextType(TEXT_TYPE::Scare)
 {
 	SetName(L"Door");
 	this->AddComponent<Collider>();
@@ -47,11 +52,15 @@ void Trigger::EnterCollision(Collider* other)
 		Player* pPlayer = 
 			dynamic_cast<Player*>(other->GetOwner());
 		GET_SINGLE(ResourceManager)->Play(L"Door");
-		if (pPlayer->keyCount > 0 || GetName() != L"Wall")
-		{
+		if (GetName() != L"Wall"
+			&& GET_SINGLE(PlayerManager)->GetPlayerKey(needKeyType)) {
 			//MessageBox(NULL, L"abc", nextSceneName.c_str(), MB_OK);
-			GET_SINGLE(PlayerManager)->SetPlayerSpawnPos(pPlayerSpawnVec2);
 			GET_SINGLE(SceneManager)->LoadScene(nextSceneName);
+			if (GET_SINGLE(PlayerManager)->MissingScene && MyTextType == TEXT_TYPE::Guys) {
+				GET_SINGLE(PlayerManager)->SetPlayerSpawnPos(pPlayerSpawnVec2);
+				UpText();
+				GET_SINGLE(PlayerManager)->MissingScene = false;
+			}
 		}
 		else
 		{
@@ -80,9 +89,10 @@ void Trigger::SetNextMap(MAP_TYPE nextTileMap)
 	case MAP_TYPE::MainHole_1FScene:
 		nextSceneName = L"MainHole_1FScene";
 		break;
-	case MAP_TYPE::MainHoleRightCorridor_1F:
+	case MAP_TYPE::MainHoleRightCorridor_1F: {
 		nextSceneName = L"MainHoleRightCorridor_1F";
 		break;
+	}
 	case MAP_TYPE::Kitchen_1F:
 		nextSceneName = L"Kitchen_1FScene";
 		break;
@@ -94,11 +104,11 @@ void Trigger::SetNextMap(MAP_TYPE nextTileMap)
 	}
 }
 
-void Trigger::SetColliderSize(Vec2 newVec)
-{
+void Trigger::SetColliderSize(Vec2 newVec) {
 	GetComponent<Collider>()->SetSize(newVec);
 }
 
-void Trigger::NeedKeyType(KEY_TYPE newKeyType)
+void Trigger::UpText()
 {
+	SpawnTextBox(MyTextType);
 }

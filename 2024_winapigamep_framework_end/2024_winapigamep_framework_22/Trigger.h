@@ -18,9 +18,14 @@ public:
     void SetNextMap(MAP_TYPE nextTileMap);
     void SetPlayerSpawnPoint(Vec2 newVec) { pPlayerSpawnVec2 = newVec; }
     void SetColliderSize(Vec2 newVec);
+    void SetNeedKeyType(KEY_TYPE newKeyType) { needKeyType = newKeyType; }
+    void SetText(TEXT_TYPE newTextType) { MyTextType = newTextType; }
 private:
+    void UpText();
+private:
+    KEY_TYPE needKeyType;
     bool _isEntering = false;
-    void NeedKeyType(KEY_TYPE newKeyType);
     wstring nextSceneName;
     Vec2 pPlayerSpawnVec2;
+    TEXT_TYPE MyTextType;
 };

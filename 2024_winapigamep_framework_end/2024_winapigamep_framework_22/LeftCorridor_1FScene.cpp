@@ -3,6 +3,8 @@
 #include "Tile.h"
 #include "Player.h"
 #include "Trigger.h"
+#include "PlayerManager.h"
+
 
 void LeftCorridor_1FScene::Init()
 {

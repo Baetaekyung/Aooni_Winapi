@@ -5,8 +5,10 @@
 #include "PlayerManager.h"
 #include "Trigger.h"
 #include "Key.h"
+#include "ResourceManager.h"
 void MainHoleRightCorridor_1F::Init()
 {
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	std::cout << "\nHelloWrold\n";
 	Tile* tile = new Tile;
 	tile->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
@@ -32,6 +34,8 @@ void MainHoleRightCorridor_1F::Init()
 		door->SetPos({ 445, 380 });
 		door->SetColliderSize({ 20, 100 });
 		door->SetPlayerSpawnPoint({ 732, 446 });
+		door->SetNeedKeyType(KEY_TYPE::Glass);
+		door->SetText(TEXT_TYPE::Guys);
 		door->SetNextMap(MAP_TYPE::MainHole_1FScene);
 		AddObject(door, LAYER::INTERACTABLE);
 	}

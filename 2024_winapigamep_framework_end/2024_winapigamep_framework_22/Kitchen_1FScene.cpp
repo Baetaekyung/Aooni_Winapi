@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Trigger.h"
 #include "Key.h"
+#include "PlayerManager.h"
 void Kitchen_1FScene::Init()
 {
 	std::cout << "\nHelloWrold\n";
@@ -21,6 +22,8 @@ void Kitchen_1FScene::Init()
 		Key * key = new Key;
 		key->SetPos({ 635, 225 });
 		key->SetSize({ 20, 20 });
+		key->SetKeyType(KEY_TYPE::Glass);
+		key->SetTextType(TEXT_TYPE::GetGlass);
 		AddObject(key, LAYER::INTERACTABLE);
 	}
 
