@@ -14,4 +14,3 @@ private:
 	wstring m_strRelativePath; // °æ·Î
 	wstring m_strKey; // Å°
 };
-
