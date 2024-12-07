@@ -70,23 +70,18 @@ void Enemy::Update()
 	if (_wallcast->GetWallCast())
 	{
 		Vec2 vPos = GetPos();
-		HDC hdc = GET_SINGLE(Core)->GetMainDC();
 		switch (_enemeyLastDir)
 		{
 		case Direction::LEFT:
-			color = GetPixel(hdc, vPos.x - blockdistance.x, vPos.y + 40);
 			vPos.x -= 100 * _speed * fDT;
 			break;
 		case Direction::RIGHT:
-			color = GetPixel(hdc, vPos.x + blockdistance.x, vPos.y + 40);
 			vPos.x += 100 * _speed * fDT;
 			break;
 		case Direction::UP:
-			color = GetPixel(hdc, vPos.x, vPos.y + 40 - blockdistance.y);
 			vPos.y -= 100 * _speed * fDT;
 			break;
 		case Direction::DOWN:
-			color = GetPixel(hdc, vPos.x, vPos.y + 40 + blockdistance.y);
 			vPos.y += 100 * _speed * fDT;
 			break;
 		}
@@ -98,8 +93,8 @@ void Enemy::Update()
 			GetComponent<Animator>()->PlayAnimation(animation[_enemeyLastDir], true);
 			currentAnimation = animation[_enemeyLastDir];
 		}
+			SetPos(vPos);
 
-		SetPos(vPos);
 	}
 	else if (_isWallCafe)
 	{
@@ -114,8 +109,6 @@ void Enemy::Update()
 		}
 		else
 			_time += fDT;
-
-
 
 		switch (_enemeyLastDir)
 		{

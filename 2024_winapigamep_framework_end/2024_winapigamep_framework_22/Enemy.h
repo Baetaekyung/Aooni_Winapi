@@ -39,7 +39,7 @@ private:
 	wstring currentAnimation;
 	std::unordered_map<Direction, wstring> animation;
 	bool _isWallCafe;
-	Vec2 blockdistance = { 20, 30 };
+	Vec2 blockdistance = { 20, 23 };
 	float _time;
 	COLORREF color;
 };
