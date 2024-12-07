@@ -10,13 +10,13 @@ void SpawnManger::Spawn(Vec2 spawnPos, int spawnCnt)
 {
 	//cout << 1 << endl;
 	Object* pEnemy = new Enemy;
-	pEnemy->SetPos({ spawnPos.x,spawnPos.y });
+	pEnemy->SetPos({ spawnPos.x,spawnPos.y - 40 });
 	pEnemy->SetSize({ 100.f,500.f });
 	pEnemy->SetName(L"Enemy");
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pEnemy, LAYER::ENEMY);
 
 	Object* pEnemyCast = new EnemyWallCast;
-	pEnemyCast->SetPos({ spawnPos.x,spawnPos.y });
+	pEnemyCast->SetPos({ spawnPos.x,spawnPos.y -40});
 	pEnemyCast->SetSize({ 100.f,500.f });
 	pEnemyCast->SetName(L"EnemyCast");
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pEnemyCast, LAYER::ENEMYCAST);
