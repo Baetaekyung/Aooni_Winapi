@@ -96,7 +96,7 @@ void Enemy::Update()
 			SetPos(vPos);
 
 	}
-	else if (_isWallCafe)
+	else if (_isQuoinEscape)
 	{
 		HDC hdc = GET_SINGLE(Core)->GetMainDC();
 		Vec2 vPos = GetPos();
@@ -104,7 +104,7 @@ void Enemy::Update()
 
 		if (_time >= 1.5f)
 		{
-			_isWallCafe = false;
+			_isQuoinEscape = false;
 			_time = 0;
 		}
 		else
@@ -208,7 +208,7 @@ void Enemy::Move()
 	else
 	{
 		WallDirection();
-		_isWallCafe = true;
+		_isQuoinEscape = true;
 	}
 
 	//DeleteDC(_hdc);

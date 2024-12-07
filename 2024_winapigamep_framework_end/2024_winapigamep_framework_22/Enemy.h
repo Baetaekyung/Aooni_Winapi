@@ -25,20 +25,20 @@ public:
 	}
 	Direction GetLastDirection()
 	{
-		return _enemeyLastDir;
+		return _wallEscapeDir;
 	}
 private:
 	Texture* _m_pTex;
 	Player* _player;
 	EnemyWallCast* _wallcast;
 	Direction _enemeyCurrentDir;
-	Direction _enemeyLastDir;
+	Direction _wallEscapeDir;
 	bool _isWallBumpInto;
 	int _speed;
 	//Direction _playerDir;
 	wstring currentAnimation;
 	std::unordered_map<Direction, wstring> animation;
-	bool _isWallCafe;
+	bool _isQuoinEscape;
 	Vec2 blockdistance = { 20, 23 };
 	float _time;
 	COLORREF color;
