@@ -29,7 +29,6 @@ void LeftCorridor_1FScene::Init()
 		Trigger * trigger = new Trigger;
 		trigger->SetPos({ 625, 310 });
 		trigger->SetColliderSize({500, 40});
-		trigger->SetNeedKey(true);
 		trigger->SetName(L"Wall");
 		AddObject(trigger, LAYER::INTERACTABLE);
 	}

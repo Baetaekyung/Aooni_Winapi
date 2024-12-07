@@ -40,7 +40,6 @@ void Kitchen_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 670, 330 });
 		door->SetColliderSize({ 100, 150 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}
@@ -49,7 +48,6 @@ void Kitchen_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 650, 140 });
 		door->SetColliderSize({ 240, 80 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}
@@ -58,7 +56,6 @@ void Kitchen_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 720, 240 });
 		door->SetColliderSize({ 120, 30 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}
@@ -68,7 +65,6 @@ void Kitchen_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 710, 520 });
 		door->SetColliderSize({ 30, 60 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}
@@ -77,7 +73,6 @@ void Kitchen_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 620, 590 });
 		door->SetColliderSize({ 60, 30 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}
@@ -86,7 +81,6 @@ void Kitchen_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 510, 360 });
 		door->SetColliderSize({ 30, 30 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}

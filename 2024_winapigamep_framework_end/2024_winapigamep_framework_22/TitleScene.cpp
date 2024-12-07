@@ -23,7 +23,7 @@ void TitleScene::Init()
 
 void TitleScene::Update() {
     Scene::Update();
-    if (GET_KEYDOWN(KEY_TYPE::SPACE))
+    if (GET_KEYDOWN(KEYBOARD_TYPE::SPACE))
         GET_SINGLE(SceneManager)->LoadScene(L"IntroScene");
 }
 

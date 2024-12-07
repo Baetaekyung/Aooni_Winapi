@@ -16,12 +16,11 @@ public:
     virtual void ExitCollision(Collider* other);
 public:
     void SetNextMap(MAP_TYPE nextTileMap);
-    void SetNeedKey(bool newbool) { NoNeedKey = newbool; };
     void SetPlayerSpawnPoint(Vec2 newVec) { pPlayerSpawnVec2 = newVec; }
     void SetColliderSize(Vec2 newVec);
 private:
     bool _isEntering = false;
-    bool NoNeedKey = false;
+    void NeedKeyType(KEY_TYPE newKeyType);
     wstring nextSceneName;
     Vec2 pPlayerSpawnVec2;
 };

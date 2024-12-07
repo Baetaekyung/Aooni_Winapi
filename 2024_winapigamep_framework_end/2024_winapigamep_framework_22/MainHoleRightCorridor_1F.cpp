@@ -31,7 +31,6 @@ void MainHoleRightCorridor_1F::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 445, 380 });
 		door->SetColliderSize({ 20, 100 });
-		door->SetNeedKey(true);
 		door->SetPlayerSpawnPoint({ 732, 446 });
 		door->SetNextMap(MAP_TYPE::MainHole_1FScene);
 		AddObject(door, LAYER::INTERACTABLE);
@@ -41,7 +40,6 @@ void MainHoleRightCorridor_1F::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 650, 310 });
 		door->SetColliderSize({ 420, 50 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}

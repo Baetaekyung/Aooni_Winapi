@@ -43,7 +43,6 @@ void MainHole_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 540, 310 });
 		door->SetColliderSize({ 50, 70 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}
@@ -52,7 +51,6 @@ void MainHole_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 670, 275 });
 		door->SetColliderSize({ 30, 70 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}
@@ -61,7 +59,6 @@ void MainHole_1FScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 600, 175 });
 		door->SetColliderSize({ 150, 70 });
-		door->SetNeedKey(true);
 		door->SetName(L"Wall");
 		AddObject(door, LAYER::INTERACTABLE);
 	}

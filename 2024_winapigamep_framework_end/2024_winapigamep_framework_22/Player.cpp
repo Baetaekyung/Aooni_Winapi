@@ -198,7 +198,7 @@ void Player::PlayerMove()
 
 	if (!canMove) return;
 
-	if (GET_KEY(KEY_TYPE::A))
+	if (GET_KEY(KEYBOARD_TYPE::A))
 	{
 		color = GetPixel(_hdc, vPos.x - blockdistance.x, vPos.y);
 		if (_playerDir != Direction::LEFT)
@@ -211,7 +211,7 @@ void Player::PlayerMove()
 			vPos.x -= 100.f * fDT * _speed;
 		}
 	}
-	else if (GET_KEY(KEY_TYPE::D))
+	else if (GET_KEY(KEYBOARD_TYPE::D))
 	{
 		color = GetPixel(_hdc, vPos.x + blockdistance.x, vPos.y);
 		if (_playerDir != Direction::RIGHT)
@@ -223,7 +223,7 @@ void Player::PlayerMove()
 		if (canGoRightword)
 			vPos.x += 100.f * fDT * _speed;
 	}
-	else if (GET_KEY(KEY_TYPE::S))
+	else if (GET_KEY(KEYBOARD_TYPE::S))
 	{
 		color = GetPixel(_hdc, vPos.x, vPos.y + blockdistance.y);
 		if (_playerDir != Direction::DOWN)
@@ -235,7 +235,7 @@ void Player::PlayerMove()
 		if (canGoDownward)
 			vPos.y += 100.f * fDT * _speed;
 	}
-	else if (GET_KEY(KEY_TYPE::W))
+	else if (GET_KEY(KEYBOARD_TYPE::W))
 	{
 		color = GetPixel(_hdc, vPos.x, vPos.y - blockdistance.y);
 		if (_playerDir != Direction::UP)
