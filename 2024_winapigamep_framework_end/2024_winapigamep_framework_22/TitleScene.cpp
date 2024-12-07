@@ -19,6 +19,8 @@ void TitleScene::Init()
     title->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
     title->SetSize({ 1000, 562 });
     AddObject(title, LAYER::BACKGROUND);
+
+    delete initTexture;
 }
 
 void TitleScene::Update() {
