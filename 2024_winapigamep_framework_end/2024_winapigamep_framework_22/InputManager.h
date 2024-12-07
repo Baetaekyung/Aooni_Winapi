@@ -1,5 +1,5 @@
 #pragma once
-enum class KEY_TYPE
+enum class KEYBOARD_TYPE
 {
 	LEFT, RIGHT, UP, DOWN,
 	Q, W, E, R, T, Y, U, I, O, P,
@@ -29,7 +29,7 @@ class InputManager
 public:
 	void Init();
 	void Update();
-	const KEY_STATE& GetKey(KEY_TYPE _eKey) const
+	const KEY_STATE& GetKey(KEYBOARD_TYPE _eKey) const
 	{
 		return m_vecKey[(int)_eKey].eState;
 	}
@@ -37,7 +37,7 @@ public:
 private:
 	POINT			 m_ptMouse = {};
 	vector<tKeyInfo> m_vecKey;
-	int				 m_arrVKKey[(int)KEY_TYPE::LAST] =
+	int				 m_arrVKKey[(int)KEYBOARD_TYPE::LAST] =
 	{ VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN, 'Q','W','E','R',
 	'T','Y','U','I','O','P',
 	'A','S','D','F','G','H','J','K','L',

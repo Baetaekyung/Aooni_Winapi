@@ -35,7 +35,7 @@ IntroObject::IntroObject() :
 
 void IntroObject::Update()
 {
-    if (GET_KEYDOWN(KEY_TYPE::SPACE)) {
+    if (GET_KEYDOWN(KEYBOARD_TYPE::SPACE)) {
         NextIntro();
     }
 }

@@ -3,7 +3,7 @@
 #include "Core.h"
 void InputManager::Init()
 {
-	for (int i = 0; i < (int)KEY_TYPE::LAST; ++i)
+	for (int i = 0; i < (int)KEYBOARD_TYPE::LAST; ++i)
 		m_vecKey.push_back(tKeyInfo{KEY_STATE::NONE, false});
 }
 
@@ -14,14 +14,14 @@ void InputManager::Update()
 	HWND hWnd = GetFocus(); // Áö±Ý µü Æ÷Ä¿½ÌÇÑ°Å
 	if (hWnd == nullptr)
 	{
-		for (int i = 0; i < (int)KEY_TYPE::LAST; ++i)
+		for (int i = 0; i < (int)KEYBOARD_TYPE::LAST; ++i)
 		{
 			m_vecKey[i].IsPrevCheck = false;
 			m_vecKey[i].eState = KEY_STATE::NONE;
 		}
 		return;
 	 }
-	for (int i = 0; i < (int)KEY_TYPE::LAST; ++i)
+	for (int i = 0; i < (int)KEYBOARD_TYPE::LAST; ++i)
 	{
 		// Å°°¡ ´­·È´Ù.
 		if (GetAsyncKeyState(m_arrVKKey[i]))

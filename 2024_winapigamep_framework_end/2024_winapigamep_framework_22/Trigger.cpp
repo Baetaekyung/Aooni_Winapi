@@ -11,7 +11,6 @@
 Trigger::Trigger()
 	: _isEntering(false)
 	, nextSceneName(L"")
-	, NoNeedKey(false)
 {
 	SetName(L"Door");
 	this->AddComponent<Collider>();
@@ -48,7 +47,7 @@ void Trigger::EnterCollision(Collider* other)
 		Player* pPlayer = 
 			dynamic_cast<Player*>(other->GetOwner());
 		GET_SINGLE(ResourceManager)->Play(L"Door");
-		if (!NoNeedKey || pPlayer->keyCount > 0)
+		if (pPlayer->keyCount > 0 || GetName() != L"Wall")
 		{
 			//MessageBox(NULL, L"abc", nextSceneName.c_str(), MB_OK);
 			GET_SINGLE(PlayerManager)->SetPlayerSpawnPos(pPlayerSpawnVec2);
@@ -56,6 +55,7 @@ void Trigger::EnterCollision(Collider* other)
 		}
 		else
 		{
+			pPlayer->keyCount--;
 			cout << "You need key!!";
 		}
 	}
@@ -97,4 +97,8 @@ void Trigger::SetNextMap(MAP_TYPE nextTileMap)
 void Trigger::SetColliderSize(Vec2 newVec)
 {
 	GetComponent<Collider>()->SetSize(newVec);
+}
+
+void Trigger::NeedKeyType(KEY_TYPE newKeyType)
+{
 }

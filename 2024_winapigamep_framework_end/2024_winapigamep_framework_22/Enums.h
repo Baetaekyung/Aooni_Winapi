@@ -42,3 +42,9 @@ enum class MAP_TYPE
 	LeftCorridor_1FScene,
 	END
 };
+
+enum class KEY_TYPE
+{
+	None,
+	Glass
+};

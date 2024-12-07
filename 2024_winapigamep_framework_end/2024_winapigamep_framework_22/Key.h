@@ -17,5 +17,6 @@ public:
 private:
     BRUSH_TYPE currentBrushType;
     Texture* m_pTex;
+
 };
 
