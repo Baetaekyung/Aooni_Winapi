@@ -12,6 +12,7 @@
 #include "Animation.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "SpawnManger.h"
 #include "Core.h"
 Player::Player()
 	: m_pTex(nullptr)
@@ -66,8 +67,10 @@ Player::~Player()
 }
 void Player::Update()
 {
+	Vec2 vPos = GetPos();
+	if (GET_KEYDOWN(KEY_TYPE::Z))
+		GET_SINGLE(SpawnManger)->Spawn(vPos, 1);
 	PlayerMove();
-
 	/*if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		CreateProjectile();*/
 

@@ -1,9 +1,9 @@
 #pragma once
 //#include "Enemy.h"
 class Object;
-class EnemtSpawnManger
+class SpawnManger
 {
-	DECLARE_SINGLE(EnemtSpawnManger);
+	DECLARE_SINGLE(SpawnManger);
 public:
 	void Spawn(Vec2 spawnPos, int spawnCnt);
 	void Update();

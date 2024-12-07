@@ -78,7 +78,7 @@ void Core::MainUpdate()
 	GET_SINGLE(TimeManager)->Update();
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
-	GET_SINGLE(EnemtSpawnManger)->Update();
+	GET_SINGLE(SpawnManger)->Update();
 	GET_SINGLE(CollisionManager)->Update();
 
 }
