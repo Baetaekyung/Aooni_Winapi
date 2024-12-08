@@ -34,11 +34,16 @@ void Trigger::Render(HDC hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
-	GDISelector* pPen = new GDISelector(hdc, PEN_TYPE::BLUE);
-	GDISelector* pBrush = new GDISelector(hdc, BRUSH_TYPE::BLUE);
+	//PEN_TYPE ePen = PEN_TYPE::BLUE;
+	//PEN_TYPE eBrush = PEN_TYPE::BLUE;
+	//GDISelector* pPen = new GDISelector(hdc, ePen);
+	//GDISelector* pBrush = new GDISelector(hdc, eBrush);
 	RECT_RENDER(hdc, vPos.x, vPos.y, vSize.x, vSize.y);
-	pBrush->~GDISelector();
-	pPen->~GDISelector();
+	//pBrush->~GDISelector();
+	//pPen->~GDISelector();
+
+	//DeleteObject(pPen);
+	//DeleteObject(pBrush);
 
 	ComponentRender(hdc);
 }
@@ -55,12 +60,12 @@ void Trigger::EnterCollision(Collider* other)
 		if (GetName() != L"Wall"
 			&& GET_SINGLE(PlayerManager)->GetPlayerKey(needKeyType)) {
 			//MessageBox(NULL, L"abc", nextSceneName.c_str(), MB_OK);
-			GET_SINGLE(SceneManager)->LoadScene(nextSceneName);
 			if (GET_SINGLE(PlayerManager)->MissingScene && MyTextType == TEXT_TYPE::Guys) {
 				GET_SINGLE(PlayerManager)->SetPlayerSpawnPos(pPlayerSpawnVec2);
 				UpText();
 				GET_SINGLE(PlayerManager)->MissingScene = false;
 			}
+			GET_SINGLE(SceneManager)->LoadScene(nextSceneName);
 		}
 		else
 		{

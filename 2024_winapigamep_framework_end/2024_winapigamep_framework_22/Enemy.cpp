@@ -15,7 +15,7 @@
 #include "Core.h"
 
 Enemy::Enemy()
-	:_speed(1.5)
+	:_speed(1.7)
 	, _enemeyCurrentDir(Direction::DOWN)
 	, _wallEscapeDir(Direction::RIGHT)
 {
@@ -48,7 +48,7 @@ Enemy::Enemy()
 	const vector<Object*>& playerVec = pCurrentScene->GetLayerObjects(LAYER::PLAYER);
 	if (playerVec.size() > 0)
 		_player = dynamic_cast<Player*>(playerVec[0]);
-	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::ENEMYCAST, LAYER::INTERACTABLE);
+	//GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::ENEMYCAST, LAYER::INTERACTABLE);
 }
 
 Enemy::~Enemy()

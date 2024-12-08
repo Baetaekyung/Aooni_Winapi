@@ -57,6 +57,7 @@ Player::Player()
 #pragma endregion
 	//Collision Check
 	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::INTERACTABLE);
+	GET_SINGLE(CollisionManager)->GetInst()->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 	GetComponent<Collider>()->SetSize({20.f, 35.f});
 }
 

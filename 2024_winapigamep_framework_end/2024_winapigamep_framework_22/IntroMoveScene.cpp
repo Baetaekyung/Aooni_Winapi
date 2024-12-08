@@ -21,7 +21,7 @@ void IntroMoveScene::Init()
 		Trigger* door = new Trigger;
 		door->SetPos({ 850, 385 });
 		door->SetColliderSize({ 30, 150 });
-		door->SetPlayerSpawnPoint({ 470, 383 });
+  		door->SetPlayerSpawnPoint({ 470, 383 });
 		door->SetNextMap(MAP_TYPE::MainHoleRightCorridor_1F);
 		door->SetName(L"Door");
 		AddObject(door, LAYER::INTERACTABLE);

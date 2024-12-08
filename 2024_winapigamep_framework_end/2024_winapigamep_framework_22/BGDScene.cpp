@@ -5,6 +5,7 @@
 #include "Projectile.h"
 #include "EnemyWallCast.h"
 #include "CollisionManager.h"
+#include "SpawnManger.h"
 #include "Tile.h"
 
 void BGDScene::Init()
@@ -20,7 +21,7 @@ void BGDScene::Init()
 	//pEnemy->SetSize({ 100.f,500.f });
 	//pEnemy->SetName(L"Enemy");
 	//AddObject(pEnemy, LAYER::ENEMY);
-
+	GET_SINGLE(SpawnManger)->Spawn({ 100.f,0.f }, 1);
 	//Object* pEnemyCast = new EnemyWallCast;
 	//pEnemyCast->SetPos({ SCREEN_WIDTH / 2.f,150.f });
 	//pEnemyCast->SetSize({ 100.f,500.f });

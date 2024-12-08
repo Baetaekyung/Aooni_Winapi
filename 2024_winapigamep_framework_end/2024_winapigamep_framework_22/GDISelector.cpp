@@ -40,7 +40,7 @@ GDISelector::~GDISelector()
 	SelectObject(m_hDC, m_hDefaultPen);
 	SelectObject(m_hDC, m_hDefaultBrush);
 	SelectObject(m_hDC, m_hDefaultFont);
-	if (nullptr != m_hFont)
+	if (m_hFont != nullptr)
 		DeleteObject(m_hFont);
 }
 

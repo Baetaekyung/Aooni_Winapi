@@ -8,6 +8,8 @@
 
 void SpawnManger::Spawn(Vec2 spawnPos, int spawnCnt)
 {
+	if (_spawnCnt > 0)
+		_spawnCnt--;
 	//cout << 1 << endl;
 	Object* pEnemy = new Enemy;
 	pEnemy->SetPos({ spawnPos.x,spawnPos.y - 40 });

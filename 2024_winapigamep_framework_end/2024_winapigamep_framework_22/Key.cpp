@@ -8,6 +8,7 @@
 #include "PlayerManager.h"
 #include "TextBoxObject.h"
 #include "SceneManager.h"
+#include "SpawnManger.h"
 #include "Scene.h"
 Key::Key() :
 	MyKeyType(KEY_TYPE::None),
@@ -44,6 +45,7 @@ void Key::EnterCollision(Collider* other)
 {
 	if (other->GetOwner()->GetName() == L"Player")
 	{
+		GET_SINGLE(SpawnManger)->Spawn({ 520, 383 },5);
 		GET_SINGLE(EventManager)->DeleteObject(this);
 		GET_SINGLE(PlayerManager)->AddPlayerKey(MyKeyType);
 		UpTextBox();
