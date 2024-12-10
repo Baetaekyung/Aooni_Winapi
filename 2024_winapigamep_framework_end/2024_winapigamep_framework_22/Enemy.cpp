@@ -13,6 +13,7 @@
 #include "CollisionManager.h"
 #include "Scene.h"
 #include "Core.h"
+#include "SpawnManger.h"
 
 Enemy::Enemy()
 	:_speed(1.7)
@@ -57,6 +58,8 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	if (_player == nullptr)
+		return;
 	if (_wallcast == nullptr)
 	{
 		std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
@@ -236,6 +239,12 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
+	
+	//SetDead();
+	//_wallcast->GetIsDead();
+	GET_SINGLE(EventManager)->DeleteObject(this);
+	GET_SINGLE(EventManager)->DeleteObject(_wallcast);
+	GET_SINGLE(SpawnManger)->SpawnStop();
 	//cout << "EenmyEnter" << endl;
 
 }
@@ -253,9 +262,12 @@ void Enemy::ExitCollision(Collider* _other)
 
 void Enemy::WallDirection()
 {
-
+	if (GetIsDead())
+		return;
 	Vec2 vPos = GetPos();
 	Vec2 playerPos = _player->GetPos();
+	if (_wallcast == nullptr)
+		return;
 
 	if (_wallcast->GetWallCast())
 	{

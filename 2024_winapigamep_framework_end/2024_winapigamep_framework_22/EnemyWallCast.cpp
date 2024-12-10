@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "Enemy.h"
 #include "Core.h"
+#include "CollisionManager.h"
 
 EnemyWallCast::EnemyWallCast()
 {
@@ -17,7 +18,7 @@ EnemyWallCast::EnemyWallCast()
 	const vector<Object*>& enemyVec = pCurrentScene->GetLayerObjects(LAYER::ENEMY);
 	if (enemyVec.size() > 0)
 		_owner = dynamic_cast<Enemy*>(enemyVec[0]);
-
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMYCAST, LAYER::INTERACTABLE);
 }
 
 EnemyWallCast::~EnemyWallCast()
@@ -26,9 +27,14 @@ EnemyWallCast::~EnemyWallCast()
 
 void EnemyWallCast::Update()
 {
-	Vec2 vPos = _owner->GetPos(); 
+	if (GetIsDead())
+		return;  
 	if (_owner == nullptr)
+	{
 		return;
+	}
+	Vec2 vPos = _owner->GetPos(); 
+
 	if (enterCnt > 0)
 		_isWallCast = true;
 	else

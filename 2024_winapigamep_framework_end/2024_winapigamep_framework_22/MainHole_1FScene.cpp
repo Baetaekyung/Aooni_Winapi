@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Trigger.h"
 #include "PlayerManager.h"
+#include "SpawnManger.h"
 
 void MainHole_1FScene::Init()
 {
@@ -14,7 +15,7 @@ void MainHole_1FScene::Init()
 	AddObject(tile, LAYER::BACKGROUND);
 
 	SpawnPlayer
-
+		//GET_SINGLE(SpawnManger)->Spawn({ 700, 383 }, 2);
 
 	//µ¿ÂÊ ¹®
 	{

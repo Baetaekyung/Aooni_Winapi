@@ -8,8 +8,8 @@
 
 void SpawnManger::Spawn(Vec2 spawnPos, int spawnCnt)
 {
-	if (_spawnCnt > 0)
-		_spawnCnt--;
+	if (spawnCnt > 0)
+		spawnCnt--;
 	//cout << 1 << endl;
 	Object* pEnemy = new Enemy;
 	pEnemy->SetPos({ spawnPos.x,spawnPos.y - 40 });
@@ -28,6 +28,8 @@ void SpawnManger::Spawn(Vec2 spawnPos, int spawnCnt)
 
 void SpawnManger::Update()
 {
+	if (_isSpawnStop)
+		return;
 
 	if (_spawnCnt > 0
 		&& GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(LAYER::ENEMY).size() <= 0

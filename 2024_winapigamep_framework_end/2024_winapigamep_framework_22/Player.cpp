@@ -116,7 +116,8 @@ void Player::EnterCollision(Collider* other)
 	Interact(other);
 	if (other->GetOwner()->GetName() == L"Enemy")
 	{
-		//SetDead();
+		GET_SINGLE(EventManager)->DeleteObject(this);
+		// SetDead();
 		//GameOverScene Load
 	}
 	if (other->GetOwner()->GetName() == L"Wall")

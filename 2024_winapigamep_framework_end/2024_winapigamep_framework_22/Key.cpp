@@ -45,7 +45,7 @@ void Key::EnterCollision(Collider* other)
 {
 	if (other->GetOwner()->GetName() == L"Player")
 	{
-		GET_SINGLE(SpawnManger)->Spawn({ 520, 383 },5);
+		GET_SINGLE(SpawnManger)->Spawn({ 520, 383 },2);
 		GET_SINGLE(EventManager)->DeleteObject(this);
 		GET_SINGLE(PlayerManager)->AddPlayerKey(MyKeyType);
 		UpTextBox();
